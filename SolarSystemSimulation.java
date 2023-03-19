@@ -38,44 +38,19 @@ public class SolarSystemSimulation extends JPanel {
 
         // Draw the Sun
         g.setColor(Color.YELLOW);
-        g.fillOval((int) (system.Sun.getX1() + FRAME_WIDTH/2 - SUN_RADIUS), (int) (system.Sun.getX2() + FRAME_HEIGHT/2 - (int)SUN_RADIUS), (int)(2*SUN_RADIUS), (int)(2*SUN_RADIUS));
+        g.fillOval((int) (system.getCelestialBody()[0].getX()[0] + FRAME_WIDTH/2 - SUN_RADIUS), (int) (system.getCelestialBody()[0].getX()[1] + FRAME_HEIGHT/2 - (int)SUN_RADIUS), (int)(2*SUN_RADIUS), (int)(2*SUN_RADIUS));
 
-        // Draw the earth's orbit
+        // Draw the earth's orbit, OLD
 //        g.setColor(Color.WHITE);
 //        int earthOrbitSize = (int)EARTH_DISTANCE*2;
 //        g.drawOval(SUN_X - earthOrbitSize / 2, SUN_Y - earthOrbitSize / 2, earthOrbitSize, earthOrbitSize);
 
-        // Draw the Earth
+        // Draw the MERCURY NOT EARTH
 //        double velocityX =
-        double x = FRAME_WIDTH/2 + system.Earth.getX1()/1500000;
-        double y = FRAME_HEIGHT/2 + system.Earth.getX2()/1500000;
+        double x = FRAME_WIDTH/2 + system.getCelestialBody()[1].getX()[0]/300000;
+        double y = FRAME_HEIGHT/2 + system.getCelestialBody()[1].getX()[1]/300000;
         g.setColor(Color.BLUE);
         g.fillOval((int)x - (int)EARTH_RADIUS, (int)y - (int)EARTH_RADIUS, (int)(2*EARTH_RADIUS), (int)(2*EARTH_RADIUS));
-
-        // Draw the jupyter's orbit
-//        g.setColor(Color.WHITE);
-//        int jupyterOrbitSize = (int)JUPYTER_DISTANCE*2;
-//        g.drawOval(SUN_X - jupyterOrbitSize / 2, SUN_Y - jupyterOrbitSize / 2, jupyterOrbitSize, jupyterOrbitSize);
-
-        // Draw the Jupyter
-//        double jupiterX = FRAME_WIDTH/2 + system.Jupiter.getX1()/1500000;
-//        double jupyterY = FRAME_HEIGHT/2 + system.Jupiter.getX2()/1500000;
-//        g.setColor(Color.ORANGE);
-//        g.fillOval((int)jupiterX - (int)JUPYTER_RADIUS, (int)jupyterY - (int)JUPYTER_RADIUS, (int)(2*JUPYTER_RADIUS), (int)(2*JUPYTER_RADIUS));
-
-        // Draw the Titan's orbit
-//        g.setColor(Color.WHITE);
-//        int titanOrbitSize = (int)TITAN_DISTANCE_FROM_JUPYTER*2;
-//        g.drawOval((int)jupiterX - titanOrbitSize / 2, (int)jupyterY - titanOrbitSize / 2, titanOrbitSize, titanOrbitSize);
-
-
-        // Draw the Titan
-//        double titanX = jupiterX + TITAN_DISTANCE_FROM_JUPYTER*Math.cos(angleTitan);
-//        double titanY = jupyterY + TITAN_DISTANCE_FROM_JUPYTER*Math.sin(angleTitan);
-//        double titanX = FRAME_WIDTH/2 + system.Titan.getX1()/1500000;
-//        double titanY = FRAME_HEIGHT/2 + system.Titan.getX2()/1500000;
-//        g.setColor(Color.white);
-//        g.fillOval((int)titanX - (int)TITAN_RADIUS, (int)titanY - (int)TITAN_RADIUS, (int)(2*TITAN_RADIUS), (int)(2*TITAN_RADIUS));
 
         // Increment angle
 //        angle += ANGLE_INCREMENT;
