@@ -28,6 +28,7 @@ public class SolarSystemSimulation extends JPanel {
     private float angleTitan = 0;
 
     SolarSystem system = new SolarSystem();
+    double[][] positions = SolarSystem.positions;
 
     public void paintComponent(Graphics g) {
 
@@ -36,25 +37,30 @@ public class SolarSystemSimulation extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        // Draw the Sun
-        g.setColor(Color.YELLOW);
-        g.fillOval((int) (system.getCelestialBody()[0].getX()[0] + FRAME_WIDTH / 2 - SUN_RADIUS),
-                (int) (system.getCelestialBody()[0].getX()[1] + FRAME_HEIGHT / 2 - (int) SUN_RADIUS),
-                (int) (2 * SUN_RADIUS), (int) (2 * SUN_RADIUS));
+        g.setColor(Color.WHITE);
+        for (int i = 0; i < positions.length; i++) {
+            g.fillOval(((int)positions[i][0]/100000000)+(FRAME_WIDTH/2), ((int)positions[i][1]/100000000)+(FRAME_HEIGHT/2), 10, 10);
+        }
 
-        // Draw the earth's orbit, OLD
-        // g.setColor(Color.WHITE);
-        // int earthOrbitSize = (int)EARTH_DISTANCE*2;
-        // g.drawOval(SUN_X - earthOrbitSize / 2, SUN_Y - earthOrbitSize / 2,
-        // earthOrbitSize, earthOrbitSize);
+        // // Draw the Sun
+        // g.setColor(Color.YELLOW);
+        // g.fillOval((int) (system.getCelestialBody()[0].getX()[0] + FRAME_WIDTH / 2 - SUN_RADIUS),
+        //         (int) (system.getCelestialBody()[0].getX()[1] + FRAME_HEIGHT / 2 - (int) SUN_RADIUS),
+        //         (int) (2 * SUN_RADIUS), (int) (2 * SUN_RADIUS));
 
-        // Draw the MERCURY NOT EARTH
-        // double velocityX =
-        double x = FRAME_WIDTH / 2 + system.getCelestialBody()[1].getX()[0] / 300000;
-        double y = FRAME_HEIGHT / 2 + system.getCelestialBody()[1].getX()[1] / 300000;
-        g.setColor(Color.BLUE);
-        g.fillOval((int) x - (int) EARTH_RADIUS, (int) y - (int) EARTH_RADIUS, (int) (2 * EARTH_RADIUS),
-                (int) (2 * EARTH_RADIUS));
+        // // Draw the earth's orbit, OLD
+        // // g.setColor(Color.WHITE);
+        // // int earthOrbitSize = (int)EARTH_DISTANCE*2;
+        // // g.drawOval(SUN_X - earthOrbitSize / 2, SUN_Y - earthOrbitSize / 2,
+        // // earthOrbitSize, earthOrbitSize);
+
+        // // Draw the MERCURY NOT EARTH
+        // // double velocityX =
+        // double x = FRAME_WIDTH / 2 + system.getCelestialBody()[1].getX()[0] / 300000;
+        // double y = FRAME_HEIGHT / 2 + system.getCelestialBody()[1].getX()[1] / 300000;
+        // g.setColor(Color.BLUE);
+        // g.fillOval((int) x - (int) EARTH_RADIUS, (int) y - (int) EARTH_RADIUS, (int) (2 * EARTH_RADIUS),
+        //         (int) (2 * EARTH_RADIUS));
 
         // Increment angle
         // angle += ANGLE_INCREMENT;
