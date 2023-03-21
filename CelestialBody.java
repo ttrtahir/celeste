@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class CelestialBody {
     private double[] x;
     private double[] v;
@@ -6,10 +8,19 @@ public class CelestialBody {
     private double[] forces;
     private double[] acceleration;
 
-    public CelestialBody(double[] x, double[] v, double mass) {
+    // Animation variables
+    private int size;
+    private String name;
+    private Color color;
+
+    public CelestialBody(double[] x, double[] v, double mass, int size, String name, Color color) {
         this.x = x;
         this.v = v;
         this.mass = mass;
+
+        this.size = size;
+        this.name = name;
+        this.color = color;
     }
 
     public double[] getX() {
@@ -65,5 +76,18 @@ public class CelestialBody {
         x[0] += v[0] * timeStep;
         x[1] += v[1] * timeStep;
         x[2] += v[2] * timeStep;
+    }
+
+    // Animation methods
+    public int getSize() {
+        return size;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }
