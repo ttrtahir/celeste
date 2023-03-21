@@ -2,12 +2,27 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
-public class SolarSystemSimulation extends JPanel {
+public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        int notches = -e.getWheelRotation();
+        if (notches < 0) {
+            SCALE += 1000000;
+        } else {
+            SCALE -= 1000000;
+        }
+        SCALE = Math.max(1, SCALE);
+    }
 
     // JPanel
-    private static final int FRAME_WIDTH = 1980;
-    private static final int FRAME_HEIGHT = 1080;
+    private static final int FRAME_WIDTH = 1280;
+    private static final int FRAME_HEIGHT = 720;
 
     // Sun
     private static final double SUN_RADIUS = 50;
@@ -27,24 +42,32 @@ public class SolarSystemSimulation extends JPanel {
     private float angleJP = 0;
     private float angleTitan = 0;
 
-    static CelestialBody[] planets;
-
-    private int SCALE = 100000000;
+    private int SCALE = 10000000;
 
     SolarSystem system = new SolarSystem();
     double[][] positions = SolarSystem.positions;
 
     public void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Background
         super.paintComponent(g);
+        // Background
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, getWidth(), getHeight());
 
         g.setColor(Color.WHITE);
         for (int i = 0; i < positions.length; i++) {
-            g.fillOval(((int) planets[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2),
-                    ((int) planets[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2), 10, 10);
+            g.setColor(Color.white);
+
+            if (i == 4) {
+                // set color
+                g.setColor(Color.BLUE);
+            }
+            g.fillOval(((int) system.celestialBody[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2),
+                    ((int) system.celestialBody[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2), 10, 10);
+
         }
     }
 
@@ -54,19 +77,19 @@ public class SolarSystemSimulation extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
         frame.add(panel);
+        frame.addMouseWheelListener(panel);
         frame.setVisible(true);
-
-        planets = new CelestialBody[11];
-
-        for (int i = 0; i < SolarSystem.positions.length; i++) {
-            planets[i] = new CelestialBody(SolarSystem.positions[i], SolarSystem.velocity[i], SolarSystem.mass[i][0]);
-        }
 
         // Repaint the panel every 10 milliseconds
         while (true) {
-            panel.repaint();
+            panel.system.calculateForce();
+
+            panel.system.updateAcceleration();
+            panel.system.updatePosition();
+            // panel.system.updateVelocity();
+            frame.repaint();
             try {
-                Thread.sleep(10);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

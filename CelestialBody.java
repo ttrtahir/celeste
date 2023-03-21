@@ -6,7 +6,7 @@ public class CelestialBody {
     private double[] forces;
     private double[] acceleration;
 
-    public CelestialBody(double[] x, double[] v, double mass){
+    public CelestialBody(double[] x, double[] v, double mass) {
         this.x = x;
         this.v = v;
         this.mass = mass;
@@ -18,6 +18,11 @@ public class CelestialBody {
 
     public void setX(double[] x) {
         this.x = x;
+    }
+
+    public void setX(double x, double y) {
+        this.x[0] = x;
+        this.x[1] = y;
     }
 
     public double[] getV() {
@@ -56,4 +61,9 @@ public class CelestialBody {
         return mass;
     }
 
+    public void updatePosition(double timeStep) {
+        x[0] += v[0] * timeStep;
+        x[1] += v[1] * timeStep;
+        x[2] += v[2] * timeStep;
+    }
 }
