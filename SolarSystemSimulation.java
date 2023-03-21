@@ -6,6 +6,9 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.net.URL;
 
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
 
@@ -73,6 +76,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         for (int i = 0; i < positions.length; i++) {
             g.setColor(Color.WHITE);
             // render name
+            g.setFont(new Font("Metropolis", Font.BOLD, 16));
             g.drawString(NAMES[i], ((int) (system.celestialBody[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2) - 10,
                     ((int) system.celestialBody[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - 5);
 
@@ -86,6 +90,16 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     }
 
     public static void main(String[] args) {
+        // load font from file
+        try {
+            URL url = SolarSystemSimulation.class.getResource("Metropolis-Bold.otf");
+            Font font = Font.createFont(Font.TRUETYPE_FONT, url.openStream());
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(font);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         JFrame frame = new JFrame("Solar System Simulation");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
