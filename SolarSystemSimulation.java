@@ -9,6 +9,10 @@ import java.awt.RenderingHints;
 
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
 
+    // color array hex
+    private static final Color[] COLORS = { new Color(0x000000), new Color(0x0000FF), new Color(0xFF0000),
+            new Color(0x00FF00), new Color(0xFFFF00), new Color(0xFF00FF), new Color(0x00FFFF), new Color(0xFFFFFF) };
+
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = -e.getWheelRotation();
