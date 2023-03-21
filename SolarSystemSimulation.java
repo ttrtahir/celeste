@@ -11,7 +11,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
     // color array hex
     private static final Color[] COLORS = { new Color(0xffde3b), new Color(0x009973), new Color(0xffad33),
-            new Color(0x6fa8dc), new Color(0xa1a2a9), new Color(0xcc7a00), new Color(0x00FFFF),
+            new Color(0x6fa8dc), new Color(0xa1a2a9), new Color(0xcc7a00), new Color(0xbcafb2),
              new Color(0x99ccff),new Color(0xa1a2a9),new Color(0x0000ff), new Color(0x99d6ff) };
 
     // size array
