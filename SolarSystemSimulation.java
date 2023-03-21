@@ -10,8 +10,9 @@ import java.awt.RenderingHints;
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
 
     // color array hex
-    private static final Color[] COLORS = { new Color(0x000000), new Color(0x0000FF), new Color(0xFF0000),
-            new Color(0x00FF00), new Color(0xFFFF00), new Color(0xFF00FF), new Color(0x00FFFF), new Color(0xFFFFFF) };
+    private static final Color[] COLORS = { new Color(0xffde3b), new Color(0x009973), new Color(0xffad33),
+            new Color(0x6fa8dc), new Color(0xa1a2a9), new Color(0xcc7a00), new Color(0x00FFFF),
+             new Color(0x99ccff),new Color(0xa1a2a9),new Color(0x0000ff), new Color(0x99d6ff) };
 
     // size array
     private static final int[] SIZES = { 50, 3, 6, 7, 1, 4, 43, 36, 1, 16, 15 };
