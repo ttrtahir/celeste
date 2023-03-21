@@ -13,6 +13,13 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     private static final Color[] COLORS = { new Color(0x000000), new Color(0x0000FF), new Color(0xFF0000),
             new Color(0x00FF00), new Color(0xFFFF00), new Color(0xFF00FF), new Color(0x00FFFF), new Color(0xFFFFFF) };
 
+    // size array
+    private static final int[] SIZES = { 50, 3, 6, 7, 1, 4, 43, 36, 1, 16, 15 };
+
+    // names
+    private static final String[] NAMES = { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn",
+            "Titan", "Uranus", "Neptune" };
+
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = -e.getWheelRotation();
@@ -63,14 +70,16 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         g.setColor(Color.WHITE);
         for (int i = 0; i < positions.length; i++) {
-            g.setColor(Color.white);
+            g.setColor(Color.WHITE);
+            // render name
+            g.drawString(NAMES[i], ((int) (system.celestialBody[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2) - 10,
+                    ((int) system.celestialBody[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - 5);
 
-            if (i == 4) {
-                // set color
-                g.setColor(Color.BLUE);
-            }
+            if (i < COLORS.length)
+                g.setColor(COLORS[i]);
+
             g.fillOval(((int) system.celestialBody[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2),
-                    ((int) system.celestialBody[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2), 10, 10);
+                    ((int) system.celestialBody[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2), SIZES[i], SIZES[i]);
 
         }
     }
