@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.Graphics2D;
@@ -9,12 +12,16 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
 import java.awt.geom.Ellipse2D;
+import javax.swing.JComboBox;
 
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
 
     // JPanel
     private static final int FRAME_WIDTH = 1280;
     private static final int FRAME_HEIGHT = 720;
+
+    private int rocketX = 50;
+    private int rocketY = 50;
 
     private boolean pause = false;
 
@@ -49,6 +56,10 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
 
         for (int i = 0; i < system.celestialBody.length; i++) {
+            int bodyPositionX = ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2)
+                    + (int) (focusScale[0] / SCALE);
+            int bodyPositionY = ((int) (planetsSortedByZ[i].getX()[1]) / SCALE) + (FRAME_HEIGHT / 2)
+                    + (int) (focusScale[1] / SCALE);
             int size = planetsSortedByZ[i].getSize();
 
             g.setColor(Color.WHITE);
@@ -57,7 +68,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             g.drawString(planetsSortedByZ[i].getName(),
                     ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2)
                             - planetsSortedByZ[i].getName().length() * 3,
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - size / 2 - 4);
+                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - size / 2 - 5);
 
             g.setColor(planetsSortedByZ[i].getColor());
 
@@ -89,6 +100,14 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
     }
 
+    private static double[] focusScale = new double[2];
+
+    public void changeFocus(JComboBox<String> planetList) {
+        int index = planetList.getSelectedIndex();
+        focusScale = system.celestialBody[index].getX();
+        System.out.println(focusScale[0]);
+    }
+
     public static void main(String[] args) {
         // load font from file
         try {
@@ -104,6 +123,16 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
+        final JComboBox<String> planetsList = new JComboBox<String>(Values.NAMES);
+        planetsList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                panel.changeFocus(planetsList);
+            }
+        });
+        panel.add(planetsList);
+        Rocket rocket = new Rocket(-500, -500, 16, 20);
+        rocket.setBounds(0, 0, 2000, 2000);
+        frame.add(rocket);
         frame.add(panel);
         frame.addMouseWheelListener(panel);
         frame.addKeyListener(
@@ -119,6 +148,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                         }
                     }
                 });
+
         frame.setVisible(true);
 
         // Repaint the panel every 10 milliseconds
@@ -135,6 +165,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             // } catch (InterruptedException e) {
             // e.printStackTrace();
             // }
+
         }
     }
 
