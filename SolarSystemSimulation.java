@@ -72,8 +72,11 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
             g.setColor(planetsSortedByZ[i].getColor());
 
-            g.fillOval((((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)) - size / 2,
-                    (((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)) - size / 2,
+            g.fillOval(
+                    (((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)) - size / 2
+                            + (int) (SCALE / 500000) / 2,
+                    (((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)) - size / 2
+                            + (int) (SCALE / 500000) / 2,
                     size - (int) (SCALE / 500000),
                     size - (int) (SCALE / 500000));
 
