@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.Graphics2D;
@@ -9,6 +12,7 @@ import java.awt.RenderingHints;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
+import javax.swing.JComboBox;
 
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
 
@@ -82,18 +86,23 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
 
         for (int i = 0; i < system.celestialBody.length; i++) {
+            int bodyPositionX = ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2) + (int) (focusScale[0] / SCALE);
+            int bodyPositionY = ((int) (planetsSortedByZ[i].getX()[1]) / SCALE) + (FRAME_HEIGHT / 2) + (int) (focusScale[1] / SCALE);
+
             g.setColor(Color.WHITE);
             // render name
             g.setFont(new Font("Metropolis", Font.BOLD, 16));
-            g.drawString(planetsSortedByZ[i].getName(),
-                    ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2) - 10,
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - 5);
+            g.drawString(
+                    planetsSortedByZ[i].getName(),
+                    bodyPositionX - 10,
+                    bodyPositionY - 5);
 
             g.setColor(planetsSortedByZ[i].getColor());
 
             int size = planetsSortedByZ[i].getSize();
-            g.fillOval(((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2),
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2),
+            g.fillOval(
+                    bodyPositionX,
+                    bodyPositionY,
                     size,
                     size);
 
@@ -103,12 +112,20 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             // Convert int to scientific notation
             String shorterNumber = String.format("%.2e", planetsSortedByZ[i].getX()[2]);
             g.drawString(shorterNumber,
-                    ((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)
+                            bodyPositionX
                             + planetsSortedByZ[i].getSize() / 2
                             - ((planetsSortedByZ[i].getX()[2] + "").length() / 2 * 4),
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)
+                            bodyPositionY
                             + planetsSortedByZ[i].getSize() + 10);
         }
+    }
+
+    private static double[] focusScale = new double[2];
+
+    public void changeFocus(JComboBox<String> planetList) {
+        int index = planetList.getSelectedIndex();
+        focusScale = system.celestialBody[index].getX();
+        System.out.println(focusScale[0]);
     }
 
     public static void main(String[] args) {
@@ -126,6 +143,13 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
+        final JComboBox<String> planetsList = new JComboBox<String>(Values.NAMES);
+        planetsList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                panel.changeFocus(planetsList);
+            }
+        });
+        panel.add(planetsList);
         frame.add(panel);
         frame.addMouseWheelListener(panel);
         frame.addKeyListener(
@@ -141,6 +165,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                         }
                     }
                 });
+        
         frame.setVisible(true);
 
         // Repaint the panel every 10 milliseconds
@@ -159,5 +184,4 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 //            }
         }
     }
-
 }
