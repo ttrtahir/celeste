@@ -5,14 +5,15 @@ public class DrawFunctions {
     static Graphics2D g2;
 
     static int STAR_COUNT = 500;
-    static int STAR_SIZE = 3;
+    static int[] STAR_SIZES = new int[500];
     static int[][] starPositions = new int[STAR_COUNT][3];
     static {
         for (int i = 0; i < STAR_COUNT; i++) {
             starPositions[i][0] = (int) (Math.random() * 2000);
             starPositions[i][1] = (int) (Math.random() * 1200);
-            // random opacity on position 2
-            starPositions[i][2] = (int) (Math.random() * 255);
+            starPositions[i][2] = (int) (Math.random() * 200);
+
+            STAR_SIZES[i] = (int) (Math.random() * 2 + 1 + starPositions[i][2] / 255 * 2);
         }
     }
 
@@ -37,7 +38,7 @@ public class DrawFunctions {
         // set HEX color
         for (int i = 0; i < STAR_COUNT; i++) {
             g.setColor(new Color(255, 255, 255, starPositions[i][2]));
-            g.fillOval(starPositions[i][0], starPositions[i][1], STAR_SIZE, STAR_SIZE);
+            g.fillOval(starPositions[i][0], starPositions[i][1], STAR_SIZES[i], STAR_SIZES[i]);
         }
     }
 }

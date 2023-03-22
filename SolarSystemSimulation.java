@@ -8,24 +8,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
+import java.awt.geom.Ellipse2D;
 import javax.swing.JComboBox;
 
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
-
-    @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        int notches = -e.getWheelRotation();
-        if (notches < 0) {
-            SCALE += 500000;
-        } else {
-            SCALE -= 500000;
-        }
-        SCALE = Math.max(1, SCALE);
-    }
 
     // JPanel
     private static final int FRAME_WIDTH = 1280;
@@ -71,35 +60,43 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                     + (int) (focusScale[0] / SCALE);
             int bodyPositionY = ((int) (planetsSortedByZ[i].getX()[1]) / SCALE) + (FRAME_HEIGHT / 2)
                     + (int) (focusScale[1] / SCALE);
+            int size = planetsSortedByZ[i].getSize();
 
             g.setColor(Color.WHITE);
             // render name
-            g.setFont(new Font("Metropolis", Font.BOLD, 16));
-            g.drawString(
-                    planetsSortedByZ[i].getName(),
-                    bodyPositionX - 10,
-                    bodyPositionY - 5);
+            g.setFont(new Font("Metropolis", Font.BOLD, 10 + (int) (SCALE / 6000000)));
+            g.drawString(planetsSortedByZ[i].getName(),
+                    ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2)
+                            - planetsSortedByZ[i].getName().length() * 3,
+                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - size / 2 - 5);
 
             g.setColor(planetsSortedByZ[i].getColor());
 
-            int size = planetsSortedByZ[i].getSize();
-            g.fillOval(
-                    bodyPositionX,
-                    bodyPositionY,
-                    size,
-                    size);
+            Ellipse2D.Double planet = new Ellipse2D.Double(
+                    (((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)) - size / 2
+                            + (int) (SCALE / 500000) / 2,
+                    (((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)) - size / 2
+                            + (int) (SCALE / 500000) / 2,
+                    size - (int) (SCALE / 500000),
+                    size - (int) (SCALE / 500000));
+            // draw only border
+            ((Graphics2D) g).draw(planet);
+            g.setColor(Color.BLACK);
+            ((Graphics2D) g).fill(planet);
 
             // draw string in the middle of the oval
             g.setColor(Color.WHITE);
             g.setFont(new Font("Metropolis", Font.BOLD, 6));
             // Convert int to scientific notation
-            String shorterNumber = String.format("%.2e", planetsSortedByZ[i].getX()[2]);
-            g.drawString(shorterNumber,
-                    bodyPositionX
-                            + planetsSortedByZ[i].getSize() / 2
-                            - ((planetsSortedByZ[i].getX()[2] + "").length() / 2 * 4),
-                    bodyPositionY
-                            + planetsSortedByZ[i].getSize() + 10);
+            /*
+             * String shorterNumber = String.format("%.2e", planetsSortedByZ[i].getX()[2]);
+             * g.drawString(shorterNumber,
+             * ((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)
+             * + planetsSortedByZ[i].getSize() / 2
+             * - ((planetsSortedByZ[i].getX()[2] + "").length() / 2 * 4),
+             * ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) + size / 2
+             * + 5);
+             */
         }
     }
 
@@ -170,6 +167,17 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             // }
 
         }
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        int notches = -e.getWheelRotation();
+        if (notches < 0) {
+            SCALE += 300000;
+        } else {
+            SCALE -= 300000;
+        }
+        SCALE = Math.max(1, SCALE);
     }
 
     public static int updateRocketPosition(int z) {
