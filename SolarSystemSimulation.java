@@ -66,17 +66,20 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             // render name
             g.setFont(new Font("Metropolis", Font.BOLD, 10 + (int) (SCALE / 6000000)));
             g.drawString(planetsSortedByZ[i].getName(),
-                    ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2)
-                            - planetsSortedByZ[i].getName().length() * 3,
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - size / 2 - 5);
+                    bodyPositionX
+                    - planetsSortedByZ[i].getName().length() * 3,
+                    bodyPositionY
+                    - size / 2 - 5);
 
             g.setColor(planetsSortedByZ[i].getColor());
 
             Ellipse2D.Double planet = new Ellipse2D.Double(
-                    (((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)) - size / 2
-                            + (int) (SCALE / 500000) / 2,
-                    (((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)) - size / 2
-                            + (int) (SCALE / 500000) / 2,
+                    bodyPositionX
+                    - size / 2
+                    + (int) (SCALE / 500000) / 2,
+                    bodyPositionY
+                    - size / 2
+                    + (int) (SCALE / 500000) / 2,
                     size - (int) (SCALE / 500000),
                     size - (int) (SCALE / 500000));
             // draw only border
