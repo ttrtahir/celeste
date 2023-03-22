@@ -8,14 +8,13 @@ public class SolarSystem {
     public SolarSystem() {
 
         // Amount of celestial entities in a solar system (including space probes)
-        this.celestialBodyCount = Values.positions.length +1; //+ 1 for space probe
+        this.celestialBodyCount = Values.positions.length;// for space probe
         this.celestialBody = new CelestialBody[celestialBodyCount];
         this.timeStep = 0.5;
 
         // Without probe
-        for (int i = 0; i < celestialBodyCount-1; i++)
+        for (int i = 0; i < celestialBodyCount; i++)
             this.celestialBody[i] = new CelestialBody(Values.positions[i], Values.velocity[i], Values.mass[i][0], Values.SIZES[i], Values.NAMES[i], Values.COLORS[i]);
-        this.celestialBody[11] = new Missile(50000, 10, celestialBody[3], celestialBody[8]);
     }
 
     /**
