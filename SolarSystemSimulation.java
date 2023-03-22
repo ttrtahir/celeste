@@ -78,7 +78,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             }
         }
         for (CelestialBody planet : planetsSortedByZ) {
-            System.out.println(planet.getX()[2]);
+//            System.out.println(planet.getX()[2]);
         }
 
         for (int i = 0; i < system.celestialBody.length; i++) {
@@ -147,17 +147,16 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         while (true) {
             if (!panel.pause) {
                 panel.system.calculateForce();
-
                 panel.system.updateAcceleration();
                 panel.system.updatePosition();
+                panel.system.updateVelocity();
             }
-            // panel.system.updateVelocity();
             frame.repaint();
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
     }
 
