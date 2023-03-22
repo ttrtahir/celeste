@@ -57,9 +57,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         for (int i = 0; i < system.celestialBody.length; i++) {
             int bodyPositionX = ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2)
-                    + (int) (focusScale[0] / SCALE);
+                    - (int) (focusScale[0] / SCALE);
             int bodyPositionY = ((int) (planetsSortedByZ[i].getX()[1]) / SCALE) + (FRAME_HEIGHT / 2)
-                    + (int) (focusScale[1] / SCALE);
+                    - (int) (focusScale[1] / SCALE);
             int size = planetsSortedByZ[i].getSize();
 
             g.setColor(Color.WHITE);
