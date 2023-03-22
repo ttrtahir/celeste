@@ -10,17 +10,12 @@ public class SolarSystem {
         // Amount of celestial entities in a solar system (including space probes)
         this.celestialBodyCount = Values.positions.length;
         this.celestialBody = new CelestialBody[celestialBodyCount];
-        this.timeStep = 10000;
+        this.timeStep = 0.5;
 
         // Without probe
         for (int i = 0; i < celestialBodyCount; i++)
             this.celestialBody[i] = new CelestialBody(Values.positions[i], Values.velocity[i], Values.mass[i][0],
                     Values.SIZES[i], Values.NAMES[i], Values.COLORS[i]);
-
-        // calculateForce();
-        // updateAcceleration();
-        // updateVelocity();
-        // updatePosition();
     }
 
     /**
@@ -39,17 +34,13 @@ public class SolarSystem {
                 if (j == i)
                     continue;
                 distance = calculateDistanceBetweenCelestials(i, j);
-                totalForceOnIth += -(GRAVITATIONAL_CONSTANT * celestialBody[i].getMass() * (celestialBody[j].getMass())
-                        / (distance * distance));
                 for (int k = 0; k < 3; k++) {
-                    tempF[k] = totalForceOnIth * (celestialBody[j].getX()[k] - celestialBody[i].getX()[k]) / distance;
+                    tempF[k] += (celestialBody[j].getX()[k]  - celestialBody[i].getX()[k]) * (GRAVITATIONAL_CONSTANT * celestialBody[i].getMass() * (celestialBody[j].getMass())
+                            / (distance * distance * distance )) ;
                 }
             }
             celestialBody[i].setTotalForce(totalForceOnIth);
             celestialBody[i].setForces(tempF);
-            // System.out.println("Total Force on "+ i + " is : " + totalForceOnIth + " with
-            // distance : " +distance + " acceleration: " + totalForceOnIth /
-            // celestialBody[i].getMass());
         }
     }
 
@@ -64,7 +55,7 @@ public class SolarSystem {
         double totalNeedsSquared = 0;
 
         for (int k = 0; k <= 2; k++)
-            totalNeedsSquared = Math.pow((x1[k] - x2[k]), 2);
+            totalNeedsSquared += Math.pow((x1[k] - x2[k]), 2);
 
         return Math.sqrt(totalNeedsSquared);
     }
