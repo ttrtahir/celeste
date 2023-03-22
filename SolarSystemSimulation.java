@@ -29,7 +29,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
     private boolean pause = false;
 
-    private int SCALE = 10000000;
+    private int SCALE = 2500000;
 
     SolarSystem system = new SolarSystem();
 
@@ -60,32 +60,33 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
 
         for (int i = 0; i < system.celestialBody.length; i++) {
+            int size = planetsSortedByZ[i].getSize();
+
             g.setColor(Color.WHITE);
             // render name
-            g.setFont(new Font("Metropolis", Font.BOLD, 16));
+            g.setFont(new Font("Metropolis", Font.BOLD, 10 + (int) (SCALE / 6000000)));
             g.drawString(planetsSortedByZ[i].getName(),
-                    ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2) - 10,
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - 5);
+                    ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2)
+                            - planetsSortedByZ[i].getName().length() * 3,
+                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - size / 2 - 5);
 
             g.setColor(planetsSortedByZ[i].getColor());
 
-            int size = planetsSortedByZ[i].getSize();
-            g.fillOval(((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2) - size / 2,
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - size / 2,
-                    size,
-                    size);
+            g.fillOval((((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)) - size / 2,
+                    (((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)) - size / 2,
+                    size - (int) (SCALE / 500000),
+                    size - (int) (SCALE / 500000));
 
             // draw string in the middle of the oval
             g.setColor(Color.WHITE);
-            g.setFont(new Font("Metropolis", Font.BOLD, 12));
+            g.setFont(new Font("Metropolis", Font.BOLD, 6));
             // Convert int to scientific notation
             String shorterNumber = String.format("%.2e", planetsSortedByZ[i].getX()[2]);
             g.drawString(shorterNumber,
                     ((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)
                             + planetsSortedByZ[i].getSize() / 2
                             - ((planetsSortedByZ[i].getX()[2] + "").length() / 2 * 4),
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)
-                            + planetsSortedByZ[i].getSize() + 10);
+                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) + size / 2 + 5);
         }
     }
 
