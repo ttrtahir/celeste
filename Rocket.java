@@ -2,9 +2,10 @@ public class Rocket implements EulerInterface {
     double[] rocketPosition = new double[3];
     double[] rocketVelocity = new double[3];
     double rocketMass = 0;
-    double totalForce;
-    double[] forces;
-    double[] acceleration;
+    double rocketTotalForce;
+    double[] rocketForces;
+    double[] rocketAcceleration;
+    CelestialBody[] celestialBody = SolarSystem.celestialBody;
 
     @Override
     public void calculateForce() {
@@ -23,15 +24,13 @@ public class Rocket implements EulerInterface {
                             / (distance * distance * distance )) ;
                 }
             }
-            celestialBody[i].setTotalForce(totalForceOnIth);
-            celestialBody[i].setForces(tempF);
+            rocketTotalForce = totalForceOnIth;
+            rocketForces = tempF;
         }
     }
 
     @Override
     public double calculateDistanceBetweenCelestials(double[] x1, double[] x2) {
-        double x1[] = rocketPosition;
-        double x2[] = getCelestialBody()[j].getX();
         double totalNeedsSquared = 0;
 
         for (int k = 0; k <= 2; k++)
