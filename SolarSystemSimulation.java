@@ -27,6 +27,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     private static final int FRAME_WIDTH = 1280;
     private static final int FRAME_HEIGHT = 720;
 
+    private int rocketX = 50;
+    private int rocketY = 50;
+
     private boolean pause = false;
 
     private int SCALE = 2500000;
@@ -105,9 +108,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
-        Rocket panel2 = new Rocket(50, 50, 16, 20);
-        panel2.setBounds(200, 50, 200, 400);
-        frame.add(panel2);
+        Rocket rocket = new Rocket(-500, -500, 16, 20);
+        rocket.setBounds(0, 0, 2000, 2000);
+        frame.add(rocket);
         frame.add(panel);
         frame.addMouseWheelListener(panel);
         frame.addKeyListener(
@@ -139,7 +142,14 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             // } catch (InterruptedException e) {
             // e.printStackTrace();
             // }
+
         }
+    }
+
+    public static int updateRocketPosition(int z) {
+        z -= 2;
+
+        return z;
     }
 
 }

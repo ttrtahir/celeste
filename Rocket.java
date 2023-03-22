@@ -20,9 +20,11 @@ public class Rocket extends JPanel {
 	}
 
 	public void paintComponent(Graphics g) {
+		yCoordinate = SolarSystemSimulation.updateRocketPosition(yCoordinate);
 
 		Color darkRed = new Color(180, 0, 0);
 		Graphics2D g2 = (Graphics2D) g;
+		g2.rotate(Math.toRadians(145));
 		g2.scale(0.3, 0.3);
 
 		// Top
@@ -67,6 +69,9 @@ public class Rocket extends JPanel {
 		g.fillRect(xCoordinate - 10, yCoordinate + 130, width + 20, height + 10);
 	}
 
+	private static int x = 200;
+	private static int y = 50;
+
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setSize(500, 500);
@@ -76,13 +81,17 @@ public class Rocket extends JPanel {
 		frame.setLayout(null);
 		// frame.setResizable(false);
 		// frame.setVisible(true);
-		Rocket panel = new Rocket(50, 50, 16, 20);
+		Rocket panel = new Rocket(0, 0, 16, 20);
 		frame.add(panel);
 		// Rocket panel2 = new Rocket(50, 50, 15, 20);
-		panel.setBounds(200, 50, 200, 400);
+		panel.setBounds(0, 0, 2000, 2000);
 		// frame.add(panel2);
 
 		frame.setVisible(true);
+
+		while (true) {
+			frame.repaint();
+		}
 
 	}
 }
