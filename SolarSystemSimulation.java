@@ -172,4 +172,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
     }
 
+    public static int updateRocketPosition(int z) {
+        z -= 2;
+        return z;
+    }
+
 }
