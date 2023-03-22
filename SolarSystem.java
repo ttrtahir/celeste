@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 public class SolarSystem {
 
     private static double[][] positions = { { 0, 0, 0 },
@@ -27,6 +28,11 @@ public class SolarSystem {
             { 189818722e19 }, { 5.6834e26 }, { 13455e19 }, { 102.409e24 }, { 86.813e24 } };
 
     private CelestialBody[] celestialBody;
+=======
+
+public class SolarSystem implements EulerInterface{
+    public CelestialBody[] celestialBody;
+>>>>>>> Stashed changes
     private int celestialBodyCount;
     private final double GRAVITATIONAL_CONSTANT = 6.6743E-11; // km^3/(kg s^2)
     private double timeStep;
@@ -63,9 +69,15 @@ public class SolarSystem {
             for (int j = 0; j < celestialBodyCount; j++) {
                 if (j == i)
                     continue;
+<<<<<<< Updated upstream
                 distance = calculateDistanceBetweenCelestials(i, j);
                 totalForceOnIth += -(GRAVITATIONAL_CONSTANT * celestialBody[i].getMass() * (celestialBody[j].getMass())
                         / (distance * distance));
+=======
+                double x1[] = getCelestialBody()[i].getX();
+                double x2[] = getCelestialBody()[j].getX();
+                distance = calculateDistanceBetweenCelestials(x1, x2);
+>>>>>>> Stashed changes
                 for (int k = 0; k < 3; k++) {
                     tempF[k] = totalForceOnIth * (celestialBody[j].getX()[k] - celestialBody[i].getX()[k]) / distance;
                 }
@@ -83,9 +95,13 @@ public class SolarSystem {
      * between celestials with this formula:<br>
      * ||u - v|| = sqrt((u1 - v1)^2 + (u2 - v2)^2 + (u3 - v3)^2)
      */
+<<<<<<< Updated upstream
     private double calculateDistanceBetweenCelestials(int i, int j) {
         double x1[] = getCelestialBody()[i].getX();
         double x2[] = getCelestialBody()[j].getX();
+=======
+    public double calculateDistanceBetweenCelestials(double[] x1, double[] x2) {
+>>>>>>> Stashed changes
         double totalNeedsSquared = 0;
 
         for (int k = 0; k <= 2; k++)
