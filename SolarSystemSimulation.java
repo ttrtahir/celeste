@@ -105,6 +105,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
+        Rocket panel2 = new Rocket(50, 50, 16, 20);
+        panel2.setBounds(200, 50, 200, 400);
+        frame.add(panel2);
         frame.add(panel);
         frame.addMouseWheelListener(panel);
         frame.addKeyListener(
