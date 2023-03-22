@@ -1,97 +1,65 @@
-import java.awt.Graphics;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.GroupLayout.Group;
+public class Rocket implements EulerInterface {
+    double[] rocketPosition = new double[3];
+    double[] rocketVelocity = new double[3];
+    double rocketMass = 0;
+    double totalForce;
+    double[] forces;
+    double[] acceleration;
 
-import java.awt.*;
+    @Override
+    public void calculateForce() {
+        for (int i = 1; i < celestialBodyCount; i++) {
+            double totalForceOnIth = 0;
+            double distance = 0;
+            double[] tempF = new double[3];
+            for (int j = 0; j < celestialBodyCount; j++) {
+                if (j == i)
+                    continue;
+                double x1[] = rocketPosition;
+                double x2[] = getCelestialBody()[j].getX();
+                distance = calculateDistanceBetweenCelestials(x1, x2);
+                for (int k = 0; k < 3; k++) {
+                    tempF[k] += (celestialBody[j].getX()[k]  - celestialBody[i].getX()[k]) * (GRAVITATIONAL_CONSTANT * celestialBody[i].getMass() * (celestialBody[j].getMass())
+                            / (distance * distance * distance )) ;
+                }
+            }
+            celestialBody[i].setTotalForce(totalForceOnIth);
+            celestialBody[i].setForces(tempF);
+        }
+    }
 
-public class Rocket extends JPanel {
+    @Override
+    public double calculateDistanceBetweenCelestials(double[] x1, double[] x2) {
+        double x1[] = rocketPosition;
+        double x2[] = getCelestialBody()[j].getX();
+        double totalNeedsSquared = 0;
 
-	private int xCoordinate;
-	private int yCoordinate;
-	private int width;
-	private int height;
+        for (int k = 0; k <= 2; k++)
+            totalNeedsSquared += Math.pow((x1[k] - x2[k]), 2);
 
-	public Rocket(int xCoordinate, int yCoordinate, int width, int height) {
-		this.xCoordinate = xCoordinate;
-		this.yCoordinate = yCoordinate;
-		this.width = width;
-		this.height = height;
-	}
+        return Math.sqrt(totalNeedsSquared);
+    }
 
-	public void paintComponent(Graphics g) {
-		yCoordinate = SolarSystemSimulation.updateRocketPosition(yCoordinate);
+    @Override
+    public void updateAcceleration() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateAcceleration'");
+    }
 
-		Color darkRed = new Color(180, 0, 0);
-		Graphics2D g2 = (Graphics2D) g;
-		g2.rotate(Math.toRadians(145));
-		g2.scale(0.3, 0.3);
+    @Override
+    public void updatePosition() {
 
-		// Top
-		g.setColor(Color.WHITE);
-		g.fillPolygon(new int[] { xCoordinate - 3, xCoordinate + 5, xCoordinate + 13 },
-				new int[] { yCoordinate, yCoordinate - 25, yCoordinate }, 3);
+    }
 
-		// first block
-		g.setColor(darkRed);
-		g.fillRect(xCoordinate, yCoordinate, width, height);
+    @Override
+    public void updateVelocity() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateVelocity'");
+    }
 
-		// second block
-		g.setColor(Color.WHITE);
-		g.fillRect(xCoordinate, yCoordinate + 20, width, height - 10);
-
-		// third block
-		g.setColor(darkRed);
-		g.fillRect(xCoordinate, yCoordinate + 30, width, height);
-
-		// middelpart
-		g.setColor(Color.WHITE);
-		g.fillPolygon(new int[] { xCoordinate - 13, xCoordinate - 3, xCoordinate - 3 },
-				new int[] { yCoordinate + 70, yCoordinate + 50, yCoordinate + 70 }, 3);
-		g.fillPolygon(new int[] { xCoordinate + 23, xCoordinate + 13, xCoordinate + 13 },
-				new int[] { yCoordinate + 70, yCoordinate + 50, yCoordinate + 70 }, 3);
-		g.fillRect(xCoordinate, yCoordinate + 50, width, height);
-
-		// block
-		g.setColor(darkRed);
-		g.fillRect(xCoordinate - 10, yCoordinate + 70, width + 18, height + 10);
-
-		// block
-		g.setColor(Color.WHITE);
-		g.fillRect(xCoordinate - 10, yCoordinate + 100, width + 18, height + 10);
-
-		// last part
-		g.setColor(darkRed);
-		g.fillPolygon(new int[] { xCoordinate - 20, xCoordinate - 10, xCoordinate - 10 },
-				new int[] { yCoordinate + 160, yCoordinate + 130, yCoordinate + 160 }, 3);
-		g.fillPolygon(new int[] { xCoordinate + 35, xCoordinate + 25, xCoordinate + 25 },
-				new int[] { yCoordinate + 160, yCoordinate + 130, yCoordinate + 160 }, 3);
-		g.fillRect(xCoordinate - 10, yCoordinate + 130, width + 20, height + 10);
-	}
-
-	private static int x = 200;
-	private static int y = 50;
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setSize(500, 500);
-		frame.setSize(1000, 500);
-		frame.setTitle("Rocket");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(null);
-		// frame.setResizable(false);
-		// frame.setVisible(true);
-		Rocket panel = new Rocket(0, 0, 16, 20);
-		frame.add(panel);
-		// Rocket panel2 = new Rocket(50, 50, 15, 20);
-		panel.setBounds(0, 0, 2000, 2000);
-		// frame.add(panel2);
-
-		frame.setVisible(true);
-
-		while (true) {
-			frame.repaint();
-		}
-
-	}
+    @Override
+    public CelestialBody[] getCelestialBody() {
+        return SolarSystem.celestialBody;
+    }
+    
 }

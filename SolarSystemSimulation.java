@@ -133,9 +133,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             }
         });
         panel.add(planetsList);
-        Rocket rocket = new Rocket(-500, -500, 16, 20);
-        rocket.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-        frame.add(rocket);
         frame.add(panel);
         frame.addMouseWheelListener(panel);
         frame.addKeyListener(

@@ -33,7 +33,9 @@ public class SolarSystem {
             for (int j = 0; j < celestialBodyCount; j++) {
                 if (j == i)
                     continue;
-                distance = calculateDistanceBetweenCelestials(i, j);
+                double x1[] = getCelestialBody()[i].getX();
+                double x2[] = getCelestialBody()[j].getX();
+                distance = calculateDistanceBetweenCelestials(x1, x2);
                 for (int k = 0; k < 3; k++) {
                     tempF[k] += (celestialBody[j].getX()[k]  - celestialBody[i].getX()[k]) * (GRAVITATIONAL_CONSTANT * celestialBody[i].getMass() * (celestialBody[j].getMass())
                             / (distance * distance * distance )) ;
@@ -49,9 +51,7 @@ public class SolarSystem {
      * between celestials with this formula:<br>
      * ||u - v|| = sqrt((u1 - v1)^2 + (u2 - v2)^2 + (u3 - v3)^2)
      */
-    public double calculateDistanceBetweenCelestials(int i, int j) {
-        double x1[] = getCelestialBody()[i].getX();
-        double x2[] = getCelestialBody()[j].getX();
+    public double calculateDistanceBetweenCelestials(double[] x1, double[] x2) {
         double totalNeedsSquared = 0;
 
         for (int k = 0; k <= 2; k++)
