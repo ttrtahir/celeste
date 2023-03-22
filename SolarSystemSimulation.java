@@ -16,9 +16,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = -e.getWheelRotation();
         if (notches < 0) {
-            SCALE += 1000000;
+            SCALE += 100000;
         } else {
-            SCALE -= 1000000;
+            SCALE -= 100000;
         }
         SCALE = Math.max(1, SCALE);
     }
