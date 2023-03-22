@@ -42,7 +42,7 @@ public class Values {
                         new Color(0x6fa8dc), new Color(0xa1a2a9), new Color(0xcc7a00), new Color(0xbcafb2),
                         new Color(0x99ccff), new Color(0xa1a2a9), new Color(0x0000ff), new Color(0x99d6ff) };
 
-        public static final int[] SIZES = { 50, 12, 24, 28, 4, 16, 43, 36, 4, 16, 15 };
+        public static final int[] SIZES = { 30, 12, 18, 20, 4, 16, 43, 36, 4, 34, 28 };
 
         public static final String[] NAMES = { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn",
                         "Titan", "Uranus", "Neptune" };
