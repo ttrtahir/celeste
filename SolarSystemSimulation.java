@@ -16,9 +16,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = -e.getWheelRotation();
         if (notches < 0) {
-            SCALE += 1000000;
+            SCALE += 500000;
         } else {
-            SCALE -= 1000000;
+            SCALE -= 500000;
         }
         SCALE = Math.max(1, SCALE);
     }
@@ -27,39 +27,20 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     private static final int FRAME_WIDTH = 1280;
     private static final int FRAME_HEIGHT = 720;
 
-    // Sun
-    private static final double SUN_RADIUS = 50;
-    private static final int SUN_X = FRAME_WIDTH / 2;
-    private static final int SUN_Y = FRAME_HEIGHT / 2;
-
-    // Planets
-    private static final float EARTH_RADIUS = 10;
-    private static final float EARTH_DISTANCE = 100;
-    private static final float JUPYTER_RADIUS = 30;
-    private static final float JUPYTER_DISTANCE = 250;
-    private static final float TITAN_RADIUS = 5;
-    private static final float TITAN_DISTANCE_FROM_JUPYTER = 50;
-    private static final float ANGLE_INCREMENT = 0.01f;
-
-    private float angle = 0;
-    private float angleJP = 0;
-    private float angleTitan = 0;
-
     private boolean pause = false;
 
-    private int SCALE = 10000000;
+    private int SCALE = 2500000;
 
     SolarSystem system = new SolarSystem();
 
     public void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-
         super.paintComponent(g);
-        // Background
-        g.setColor(Color.BLACK);
-        g.fillRect(0, 0, getWidth(), getHeight());
+
+        DrawFunctions.setG(g);
+
+        DrawFunctions.drawBackground();
+
+        DrawFunctions.drawBackgroundStars();
 
         g.setColor(Color.WHITE);
 
@@ -77,37 +58,35 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 }
             }
         }
-        for (CelestialBody planet : planetsSortedByZ) {
-//            System.out.println(planet.getX()[2]);
-        }
 
         for (int i = 0; i < system.celestialBody.length; i++) {
+            int size = planetsSortedByZ[i].getSize();
+
             g.setColor(Color.WHITE);
             // render name
-            g.setFont(new Font("Metropolis", Font.BOLD, 16));
+            g.setFont(new Font("Metropolis", Font.BOLD, 10 + (int) (SCALE / 6000000)));
             g.drawString(planetsSortedByZ[i].getName(),
-                    ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2) - 10,
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - 5);
+                    ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2)
+                            - planetsSortedByZ[i].getName().length() * 3,
+                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) - size / 2 - 5);
 
             g.setColor(planetsSortedByZ[i].getColor());
 
-            int size = planetsSortedByZ[i].getSize();
-            g.fillOval(((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2),
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2),
-                    size,
-                    size);
+            g.fillOval((((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)) - size / 2,
+                    (((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)) - size / 2,
+                    size - (int) (SCALE / 500000),
+                    size - (int) (SCALE / 500000));
 
             // draw string in the middle of the oval
             g.setColor(Color.WHITE);
-            g.setFont(new Font("Metropolis", Font.BOLD, 12));
+            g.setFont(new Font("Metropolis", Font.BOLD, 6));
             // Convert int to scientific notation
             String shorterNumber = String.format("%.2e", planetsSortedByZ[i].getX()[2]);
             g.drawString(shorterNumber,
                     ((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)
                             + planetsSortedByZ[i].getSize() / 2
                             - ((planetsSortedByZ[i].getX()[2] + "").length() / 2 * 4),
-                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2)
-                            + planetsSortedByZ[i].getSize() + 10);
+                    ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) + size / 2 + 5);
         }
     }
 
@@ -152,11 +131,11 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 panel.system.updateVelocity();
             }
             frame.repaint();
-//            try {
-//                Thread.sleep(100);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            // try {
+            // Thread.sleep(100);
+            // } catch (InterruptedException e) {
+            // e.printStackTrace();
+            // }
         }
     }
 
