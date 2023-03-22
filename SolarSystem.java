@@ -30,7 +30,7 @@ public class SolarSystem {
             double distance = 0;
             double[] tempF = new double[3];
             for (int j = 0; j < celestialBodyCount; j++) {
-                if (j == i)
+                if (j == i || j == 11 )
                     continue;
                 distance = calculateDistanceBetweenCelestials(i, j);
                 for (int k = 0; k < 3; k++) {
