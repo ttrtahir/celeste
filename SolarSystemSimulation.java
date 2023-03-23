@@ -208,6 +208,16 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 + (int) relativeVelocity[2] + " }";
         g.drawString(velocityRelativeEarth, 10, 65);
 
+        double[] titanPosition = system.celestialBody[8].getX();
+        relativePosition = new double[3];
+        for (int i = 0; i < 3; i++) {
+            relativePosition[i] = probePosition[i] - titanPosition[i];
+        }
+        String positionRelativeTitan = "{ " + (int) relativePosition[0] + " ; " + (int) relativePosition[1] + " ; "
+                + (int) relativePosition[2] + " }";
+        g.drawString("Missile Position Relative to Titan", 10, 80);
+        g.drawString(positionRelativeTitan, 10, 95);
+
         g.drawString("Calculations since start:", FRAME_WIDTH - 200, 25);
         g.drawString("" + calculationsSinceStart, FRAME_WIDTH - 200, 45);
 
