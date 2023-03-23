@@ -13,7 +13,7 @@ public class DrawFunctions {
             starPositions[i][1] = (int) (Math.random() * 1200);
             starPositions[i][2] = (int) (Math.random() * 200);
 
-            STAR_SIZES[i] = (int) (Math.random() * 2 + 1 + starPositions[i][2] / 255 * 2);
+            STAR_SIZES[i] = (int) (Math.random() * 2 + 2 + starPositions[i][2] / 255 * 2);
         }
     }
 
