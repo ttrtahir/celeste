@@ -15,6 +15,7 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JComboBox;
 
 import java.net.URL;
@@ -215,8 +216,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         try {
             for (int g = 0; g < Values.ORBIT_NAMES.length; g++) {
                 panel.celestialPositions.add(new ArrayList<double[]>());
-
-                String fileName = Values.ORBIT_NAMES[g];
+                String fileName = Values.ORBIT_NAMES[g]+".txt";
                 File myObj = new File(fileName);
                 Scanner myReader = new Scanner(myObj);
                 int index = 0;
