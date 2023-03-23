@@ -20,6 +20,8 @@ import javax.swing.JComboBox;
 import java.awt.RenderingHints;
 
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
+    double lastTime = 0;
+    int fps = 0;
 
     // JPanel
     private static final int FRAME_WIDTH = 1280;
@@ -159,6 +161,8 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         g.drawString("Calculations since start:", FRAME_WIDTH - 200, 15);
         g.drawString(""+calculationsSinceStart, FRAME_WIDTH - 200, 30);
+
+        g.drawString("Frame rate: " + fps, 10, FRAME_HEIGHT - 65);
     }
 
     private static double[] focusScale = new double[2];
@@ -254,12 +258,13 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 panel.system.updateAcceleration();
                 panel.system.updatePosition();
                 panel.system.updateVelocity();
-
+                panel.counter++;
                 panel.daysSinceStart = (int) (panel.counter * panel.system.timeStep / 86400);
                 panel.calculationsSinceStart++;
             }
-            panel.counter++;
             frame.repaint();
+            panel.fps = (int) (1000000.0 / (System.nanoTime() - panel.lastTime));
+            panel.lastTime = System.nanoTime();
         }
     }
 
