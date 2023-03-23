@@ -34,7 +34,11 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     double lastTime = 0;
     int fps = 0;
 
+<<<<<<< HEAD
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+=======
+    private CelestialBody rocket;
+>>>>>>> effac43c7acead3ba968ddfeee49f715eb11e2ab
     // JPanel
     private static final int FRAME_WIDTH = (int) screenSize.getWidth();
     private static final int FRAME_HEIGHT = (int) screenSize.getHeight();
@@ -235,8 +239,11 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         JFrame frame = new JFrame("Solar System Simulation");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+<<<<<<< HEAD
+=======
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+>>>>>>> effac43c7acead3ba968ddfeee49f715eb11e2ab
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
         final JComboBox<String> planetsList = new JComboBox<String>(Values.NAMES);
