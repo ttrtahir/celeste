@@ -47,8 +47,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
     int calculationsSinceStart = 0;
 
-    private static String focusName = Values.focusNames[0];
-
     private static int focusIndex = Values.focusIndex[0];
 
     private static int focusTrack = 0;
@@ -330,7 +328,10 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
 
         frame.setVisible(true);
+        double min = 1e9;
+        double distanceProbeTitan;
         panel.rocket = panel.system.celestialBody[panel.system.celestialBody.length-1];
+
         while (true) {
             if (!panel.pause) {
                 panel.system.calculateForce();
@@ -342,6 +343,18 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 daysSinceStart = (int) (panel.counter * panel.system.timeStep / 86400);
                 panel.calculationsSinceStart++;
                 panel.counter++;
+
+                if(panel.system.celestialBody[11].getX()[2] < -40309613.8378104) {
+                    distanceProbeTitan = panel.system.calculateDistanceBetweenCelestials(panel.system.getCelestialBody()[11].getX(), panel.system.getCelestialBody()[8].getX());
+                    if (min > distanceProbeTitan) min = distanceProbeTitan;
+                    else{
+                        panel.pause = true;
+                        System.out.println(min + " in " + panel.counter*panel.system.timeStep/86400);
+                        for(int k = 0 ; k < 3 ; k++){
+                            System.out.println(k + " axis spacecraft: " + panel.system.celestialBody[11].getX()[k] + k + " axis titan: " + panel.system.celestialBody[8].getX()[k]);
+                        }
+                    }
+                }
             }
             frame.repaint();
             panel.fps = (int) (1000000.0 / (System.nanoTime() - panel.lastTime));
