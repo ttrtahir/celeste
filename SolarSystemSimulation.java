@@ -35,6 +35,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     int fps = 0;
 
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private CelestialBody rocket;
     // JPanel
     private static final int FRAME_WIDTH = (int) screenSize.getWidth();
     private static final int FRAME_HEIGHT = (int) screenSize.getHeight();
@@ -103,7 +104,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                     (int) ((rocketPositions.get(i + 1)[1] / SCALE) + FRAME_HEIGHT / 2
                             - (focusScale[1] / SCALE)));
         }
-
 
         CelestialBody[] planetsSortedByZ = new CelestialBody[system.celestialBody.length];
         // sort planets by z
