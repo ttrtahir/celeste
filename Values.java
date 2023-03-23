@@ -1,6 +1,7 @@
 import java.awt.Color;
 
 public class Values {
+
         public static double[][] positions = {
                         { 0, 0, 0 }, // 1
                         { 7833268.43923962, 44885949.3703908, 2867693.20054382 }, // 2
@@ -12,7 +13,9 @@ public class Values {
                         { 1253801723.95465, -760453007.810989, -36697431.1565206 }, // 8
                         { 1254501624.95946, -761340299.067828, -36309613.8378104 }, // 9
                         { 4454487339.09447, -397895128.763904, -94464151.3421107 }, // 10
-                        { 1958732435.99338, 2191808553.21893, -17235283.8321992 } }; // 11
+                        { 1958732435.99338, 2191808553.21893, -17235283.8321992 }, // 11
+                        { -148186906.893642, -27814158.5715694, 33746.8987977113 } }; // 12
+
         public static double[][] velocity = {
                         { 0, 0, 0 }, // 1
                         { -57.4967480139828, 11.52095127176, 6.21695374334136 }, // 2
@@ -24,7 +27,8 @@ public class Values {
                         { 4.46781341335014, 8.23989540475628, -0.320745376969732 }, // 8
                         { 8.99593229549645, 11.1085713608453, -2.25130986174761 }, // 9
                         { 0.447991656952326, 5.44610697514907, -0.122638125365954 }, // 10
-                        { -5.12766216337626, 4.22055347264457, 0.0821190336403063 } }; // 11
+                        { -5.12766216337626, 4.22055347264457, 0.0821190336403063 }, // 11
+                        { 47, -43.49, -3.3 }, }; // 12
         public static double[][] mass = {
                         { 1.9885e30 }, // 1
                         { 3.302e23 }, // 2
@@ -36,20 +40,13 @@ public class Values {
                         { 5.6834e26 }, // 8
                         { 13455e19 }, // 9
                         { 102.409e24 },
-                        { 86.813e24 } };
+                        { 86.813e24 },
+                        { 50000 } };
 
-        public static final Color[] COLORS = {
-                        new Color(0xffde3b),
-                        new Color(0x009973),
-                        new Color(0xffad33),
-                        new Color(0x6fa8dc),
-                        new Color(0xa1a2a9),
-                        new Color(0xcc7a00),
-                        new Color(0xbcafb2),
-                        new Color(0x99ccff),
-                        new Color(0xa1a2a9),
-                        new Color(0x0000ff),
-                        new Color(0x99d6ff) };
+        public static final Color[] COLORS = { new Color(0xffde3b), new Color(0x009973), new Color(0xffad33),
+                        new Color(0x6fa8dc), new Color(0xa1a2a9), new Color(0xcc7a00), new Color(0xbcafb2),
+                        new Color(0x99ccff), new Color(0xa1a2a9), new Color(0x0000ff), new Color(0x99d6ff),
+                        new Color(0xFF0000) };
 
         public static final int[] SIZES = {
                         30,
@@ -62,20 +59,11 @@ public class Values {
                         36,
                         4,
                         34,
-                        28 };
+                        28,
+                        12 };
 
-        public static final String[] NAMES = {
-                        "Sun",
-                        "Mercury",
-                        "Venus",
-                        "Earth",
-                        "Moon",
-                        "Mars",
-                        "Jupiter",
-                        "Saturn",
-                        "Titan",
-                        "Uranus",
-                        "Neptune" };
+        public static final String[] NAMES = { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn",
+                        "Titan", "Uranus", "Neptune", "Missile" };
 
         public static final String[] MONTHS = {
                         "January",
@@ -119,4 +107,5 @@ public class Values {
                 3,
                 8
         };
+
 }

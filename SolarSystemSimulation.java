@@ -221,6 +221,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 });
 
         frame.setVisible(true);
+        double min = 1e9;
+        double distanceProbeTitan;
+        double counter = 0;
 
         while (true) {
             if (!panel.pause) {

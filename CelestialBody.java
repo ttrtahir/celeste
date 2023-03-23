@@ -1,18 +1,21 @@
 import java.awt.Color;
 
 public class CelestialBody {
-    private double[] x;
-    private double[] v;
-    private double mass;
+    public double[] x;
+    public double[] v;
+    public double mass;
     private double totalForce;
     private double[] forces;
     private double[] acceleration;
 
     // Animation variables
-    private int size;
-    private String name;
-    private Color color;
+    public int size;
+    public String name;
+    public Color color;
 
+    public CelestialBody(){
+
+    }
     public CelestialBody(double[] x, double[] v, double mass, int size, String name, Color color) {
         this.x = x;
         this.v = v;
