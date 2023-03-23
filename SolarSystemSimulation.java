@@ -159,7 +159,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         String velocityRelativeEarth = "{ " +  + (int) relativeVelocity[0] + " ; " + (int) relativeVelocity[1] + " ; " + (int) relativeVelocity[2] + " }";
         g.drawString(velocityRelativeEarth, 10, 45);
 
-        calculationsSinceStart++;
+        if (!pause) {
+            calculationsSinceStart++;
+        }
         g.drawString("Calculations since start:", FRAME_WIDTH - 200, 15);
         g.drawString(""+calculationsSinceStart, FRAME_WIDTH - 200, 30);
     }
