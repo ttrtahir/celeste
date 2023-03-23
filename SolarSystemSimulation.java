@@ -31,7 +31,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     SolarSystem system = new SolarSystem();
 
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private CelestialBody rocket;
     // JPanel
     private static final int FRAME_WIDTH = (int) screenSize.getWidth();
     private static final int FRAME_HEIGHT = (int) screenSize.getHeight();
@@ -54,6 +53,8 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     private static int focusIndex = Values.focusIndex[0];
     private static int focusTrack = 0;
     private static double[] focusScale = new double[2];
+
+    private double[] relativeVelocity = new double[3];
 
     private int counter = 0;
     private double lastTime = 0;
@@ -132,25 +133,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             curPosition[1] = panel.rocket.getX()[1];
             rocketPositions.add(curPosition);
         }
-        String velocityRelativeEarth = "{ " + +(int) relativeVelocity[0] + " ; " + (int) relativeVelocity[1] + " ; "
-                + (int) relativeVelocity[2] + " }";
-        g.drawString(velocityRelativeEarth, 10, 65);
-
-        double[] titanPosition = system.celestialBody[8].getX();
-        relativePosition = new double[3];
-        for (int i = 0; i < 3; i++) {
-            relativePosition[i] = probePosition[i] - titanPosition[i];
-        }
-        String positionRelativeTitan = "{ " + (int) relativePosition[0] + " ; " + (int) relativePosition[1] + " ; "
-                + (int) relativePosition[2] + " }";
-        g.drawString("Missile Position Relative to Titan", 10, 80);
-        g.drawString(positionRelativeTitan, 10, 95);
-
-        g.drawString("Calculations since start:", FRAME_WIDTH - 200, 25);
-        g.drawString("" + calculationsSinceStart, FRAME_WIDTH - 200, 45);
-
-        g.drawString("Frame rate: " + fps, FRAME_WIDTH - 200, 65);
-
     }
 
     private int[] updateCurrentDate(int daysSinceStart, int[] currentDate) {
