@@ -34,9 +34,10 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     double lastTime = 0;
     int fps = 0;
 
+    private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     // JPanel
-    private static final int FRAME_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    private static final int FRAME_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+    private static final int FRAME_WIDTH = (int) screenSize.getWidth();
+    private static final int FRAME_HEIGHT = (int) screenSize.getHeight();
 
     private boolean pause = false;
 
@@ -45,8 +46,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     public static int daysSinceStart = 0;
 
     int calculationsSinceStart = 0;
-
-    private static String focusName = Values.focusNames[0];
 
     private static int focusIndex = Values.focusIndex[0];
 
@@ -221,11 +220,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
 
         JFrame frame = new JFrame("Solar System Simulation");
-        // set frame size to full screen initially
-
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        // frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
         final JComboBox<String> planetsList = new JComboBox<String>(Values.NAMES);
