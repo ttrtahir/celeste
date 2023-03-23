@@ -15,7 +15,7 @@ public class SolarSystem {
         // Without probe
         for (int i = 0; i < celestialBodyCount; i++)
             this.celestialBody[i] = new CelestialBody(Values.positions[i], Values.velocity[i], Values.mass[i][0],
-                    Values.SIZES[i], Values.NAMES[i], Values.COLORS[i]);
+                    Values.SIZES[i], Values.NAMES[i], Values.COLORS[i], Values.YEAR_LENGTHS[i]);
     }
 
     /**

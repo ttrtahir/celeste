@@ -65,6 +65,10 @@ public class Values {
         public static final String[] NAMES = { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn",
                         "Titan", "Uranus", "Neptune", "Missile" };
 
+        public static final String[] ORBIT_NAMES = {
+                        "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn"
+        };
+
         public static final String[] MONTHS = {
                         "January",
                         "February",
@@ -96,17 +100,31 @@ public class Values {
         };
 
         public static final String[] focusNames = {
-                "Sun",
-                "Earth",
-                "Titan",
-                "Missile"
+                        "Sun",
+                        "Earth",
+                        "Titan",
+                        "Missile"
         };
 
         public static final int[] focusIndex = {
-                0,
-                3,
-                8,
-                11
+                        0,
+                        3,
+                        8,
+                        11
         };
 
+        public static final int[] YEAR_LENGTHS = {
+                        -1,
+                        88,
+                        225,
+                        366,
+                        -1,
+                        688,
+                        4340,
+                        10782,
+                        -1,
+                        30685,
+                        60190,
+                        -1
+        };
 }

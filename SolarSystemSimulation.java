@@ -9,11 +9,15 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.Graphics2D;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.geom.Ellipse2D;
+import java.beans.VetoableChangeListenerProxy;
+
 import javax.swing.JComboBox;
 import java.awt.RenderingHints;
 // import Path2D
@@ -31,7 +35,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
     private int SCALE = 2500000;
 
-    private int daysSinceStart = 0;
+    public static int daysSinceStart = 0;
+
+    int calculationsSinceStart = 0;
 
     private static String focusName = Values.focusNames[0];
 
@@ -42,7 +48,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     // April 1st 2023
     private final int[] START_DATE = { 1, 4, 2023 };
 
-    private double[][] earthPositions = new double[84][3];
+    private ArrayList<ArrayList<double[]>> celestialPositions = new ArrayList<>();
 
     // curent date
     private int[] currentDate = START_DATE;
@@ -119,16 +125,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         }
         Graphics2D g2 = (Graphics2D) g;
-
-        // draw a line using Path2D
-        g2.setColor(Color.WHITE);
         g2.setStroke(new java.awt.BasicStroke(1));
-        Path2D.Double arrow = new Path2D.Double();
-        arrow.moveTo(0, 0);
-        // curve the line
-        arrow.curveTo(187, 62, 250, 250, 250, 250);
-        arrow.curveTo(375, 125, 500, 500, 500, 500);
-        g2.draw(arrow);
 
         currentDate = updateCurrentDate(daysSinceStart, currentDate);
         // set color #ccc
@@ -149,16 +146,50 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         String simulationSpeed = "Simulation speed: " + system.timeStep;
         g.drawString(simulationSpeed,
                 10, FRAME_HEIGHT - 50);
-        g.drawString("Focus on: " + focusName, 0, 0);
+
+        String focus = "Focus on: " + focusName;
+        g.drawString(focus, FRAME_WIDTH - 150, FRAME_HEIGHT - 50);
+
+        g.drawString("Missile Position and Velocity Relative to Earth", 10, 15);
+
+        double[] probePosition = system.celestialBody[11].getX();
+        double[] earthPosition = system.celestialBody[4].getX();
+        double[] relativePosition = new double[3];
+        for (int i = 0; i < 3; i++) {
+            relativePosition[i] = probePosition[i] - earthPosition[i];
+        }
+        String positionRelativeEarth = "{ " + (int) relativePosition[0] + " ; " + (int) relativePosition[1] + " ; "
+                + (int) relativePosition[2] + " }";
+        g.drawString(positionRelativeEarth, 10, 30);
+
+        double[] probeVelocity = system.celestialBody[11].getV();
+        double[] earthVelocity = system.celestialBody[4].getV();
+        double[] relativeVelocity = new double[3];
+        for (int i = 0; i < 3; i++) {
+            relativeVelocity[i] = probeVelocity[i] - earthVelocity[i];
+        }
+        String velocityRelativeEarth = "{ " + +(int) relativeVelocity[0] + " ; " + (int) relativeVelocity[1] + " ; "
+                + (int) relativeVelocity[2] + " }";
+        g.drawString(velocityRelativeEarth, 10, 45);
+
+        g.drawString("Calculations since start:", FRAME_WIDTH - 200, 15);
+        g.drawString("" + calculationsSinceStart, FRAME_WIDTH - 200, 30);
 
         // Draw line
         g.setColor(Color.WHITE);
 
-        for (int i = 0; i < earthPositions.length - 1; i++) {
-            g.drawLine((int) ((earthPositions[i][0] / SCALE) + FRAME_WIDTH / 2 - (focusScale[0] / SCALE)),
-                    (int) ((earthPositions[i][1] / SCALE) + FRAME_HEIGHT / 2 - (focusScale[1] / SCALE)),
-                    (int) ((earthPositions[i + 1][0] / SCALE) + FRAME_WIDTH / 2 - (focusScale[0] / SCALE)),
-                    (int) ((earthPositions[i + 1][1] / SCALE) + FRAME_HEIGHT / 2 - (focusScale[1] / SCALE)));
+        for (int h = 0; h < celestialPositions.size(); h++) {
+            for (int i = 0; i < celestialPositions.get(h).size() - 1; i++) {
+                g.drawLine(
+                        (int) ((celestialPositions.get(h).get(i)[0] / SCALE) + FRAME_WIDTH / 2
+                                - (focusScale[0] / SCALE)),
+                        (int) ((celestialPositions.get(h).get(i)[1] / SCALE) + FRAME_HEIGHT / 2
+                                - (focusScale[1] / SCALE)),
+                        (int) ((celestialPositions.get(h).get(i + 1)[0] / SCALE) + FRAME_WIDTH / 2
+                                - (focusScale[0] / SCALE)),
+                        (int) ((celestialPositions.get(h).get(i + 1)[1] / SCALE) + FRAME_HEIGHT / 2
+                                - (focusScale[1] / SCALE)));
+            }
         }
 
     }
@@ -250,21 +281,28 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 });
 
         try {
-            File myObj = new File("Earth");
-            Scanner myReader = new Scanner(myObj);
-            int index = 0;
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                String[] splitData = data.split(";");
-                for (int i = 0; i < splitData.length; i++) {
-                    if (splitData[i].length() == 0) {
-                        continue;
+            for (int g = 0; g < Values.ORBIT_NAMES.length; g++) {
+                panel.celestialPositions.add(new ArrayList<double[]>());
+                System.out.println(panel.celestialPositions.size());
+
+                String fileName = Values.ORBIT_NAMES[g];
+                File myObj = new File(fileName);
+                Scanner myReader = new Scanner(myObj);
+                int index = 0;
+                while (myReader.hasNextLine()) {
+                    String data = myReader.nextLine();
+                    String[] splitData = data.split(";");
+                    for (int i = 0; i < splitData.length; i++) {
+                        if (splitData[i].length() == 0) {
+                            continue;
+                        }
+                        panel.celestialPositions.get(g).add(new double[3]);
+                        panel.celestialPositions.get(g).get(index)[i] = Double.parseDouble(splitData[i]);
                     }
-                    panel.earthPositions[index][i] = Double.parseDouble(splitData[i]);
+                    index++;
                 }
-                index++;
+                myReader.close();
             }
-            myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -282,7 +320,8 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 panel.system.updatePosition();
                 panel.system.updateVelocity();
 
-                panel.daysSinceStart = (int) (panel.counter * panel.system.timeStep / 86400);
+                daysSinceStart = (int) (panel.counter * panel.system.timeStep / 86400);
+                panel.calculationsSinceStart++;
                 panel.counter++;
             }
             frame.repaint();
