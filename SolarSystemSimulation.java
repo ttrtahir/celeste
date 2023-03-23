@@ -177,6 +177,8 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         g.drawString("Calculations since start:", FRAME_WIDTH - 200, 15);
         g.drawString(""+calculationsSinceStart, FRAME_WIDTH - 200, 30);
 
+        g.drawString("Frame rate: " + fps, FRAME_WIDTH - 200, 45);
+
         // Draw line
         g.setColor(Color.WHITE);
 
