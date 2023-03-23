@@ -13,6 +13,8 @@ import java.awt.GraphicsEnvironment;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.awt.geom.Ellipse2D;
+import java.beans.VetoableChangeListenerProxy;
+
 import javax.swing.JComboBox;
 import java.awt.RenderingHints;
 
@@ -130,7 +132,27 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         String simulationSpeed = "Simulation speed: " + system.timeStep;
         g.drawString(simulationSpeed,
                 10, FRAME_HEIGHT - 50);
-        g.drawString("Focus on: " + focusName, 10, 15);
+        
+        String focus = "Focus on: " + focusName;
+        g.drawString(focus, 10, 15);
+
+        double[] probePosition = system.celestialBody[11].getX();
+        double[] earthPosition = system.celestialBody[4].getX();
+        double[] relativePosition = new double[3];
+        for (int i = 0; i < 3; i++) {
+            relativePosition[i] = probePosition[i] - earthPosition[i];
+        }
+        String positionRelativeEarth = "{ " + (int) relativePosition[0] + " ; " + (int) relativePosition[1] + " ; " + (int) relativePosition[2] + " }";
+        g.drawString(positionRelativeEarth, 10, 30);
+
+        double[] probeVelocity = system.celestialBody[11].getV();
+        double[] earthVelocity = system.celestialBody[4].getV();
+        double[] relativeVelocity = new double[3];
+        for (int i = 0; i < 3; i++) {
+            relativeVelocity[i] = probeVelocity[i] - earthVelocity[i];
+        }
+        String velocityRelativeEarth = "{ " +  + (int) relativeVelocity[0] + " ; " + (int) relativeVelocity[1] + " ; " + (int) relativeVelocity[2] + " }";
+        g.drawString(velocityRelativeEarth, 10, 45);
     }
 
     private static double[] focusScale = new double[2];
