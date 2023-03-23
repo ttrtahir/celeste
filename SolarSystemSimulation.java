@@ -31,6 +31,8 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
     private int daysSinceStart = 0;
 
+    int calculationsSinceStart = 0;
+
     private static String focusName = Values.focusNames[0];
     
     private static int focusIndex = Values.focusIndex[0];
@@ -156,6 +158,10 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
         String velocityRelativeEarth = "{ " +  + (int) relativeVelocity[0] + " ; " + (int) relativeVelocity[1] + " ; " + (int) relativeVelocity[2] + " }";
         g.drawString(velocityRelativeEarth, 10, 45);
+
+        calculationsSinceStart++;
+        g.drawString("Calculations since start:", FRAME_WIDTH - 200, 15);
+        g.drawString(""+calculationsSinceStart, FRAME_WIDTH - 200, 30);
     }
 
     private static double[] focusScale = new double[2];
