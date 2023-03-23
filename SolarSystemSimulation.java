@@ -191,6 +191,8 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                                 - (focusScale[0] / SCALE)),
                         (int) ((celestialPositions.get(h).get(i + 1)[1] / SCALE) + FRAME_HEIGHT / 2
                                 - (focusScale[1] / SCALE)));
+            }
+        }          
     }
 
     private static double[] focusScale = new double[2];
