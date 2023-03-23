@@ -28,6 +28,12 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
     private int daysSinceStart = 0;
 
+    private static String focusName = Values.focusNames[0];
+    
+    private static int focusIndex = Values.focusIndex[0];
+
+    private static int focusTrack = 0;
+
     // April 1st 2023
     private final int[] START_DATE = { 1, 4, 2023 };
 
@@ -124,6 +130,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         String simulationSpeed = "Simulation speed: " + system.timeStep;
         g.drawString(simulationSpeed,
                 10, FRAME_HEIGHT - 50);
+        g.drawString("Focus on: " + focusName, 0, 0);
     }
 
     private static double[] focusScale = new double[2];
@@ -131,7 +138,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     public void changeFocus(JComboBox<String> planetList) {
         int index = planetList.getSelectedIndex();
         focusScale = system.celestialBody[index].getX();
-        System.out.println(focusScale[0]);
     }
 
     public static void main(String[] args) {
@@ -155,7 +161,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 panel.changeFocus(planetsList);
             }
         });
-        // panel.add(planetsList);
         frame.add(panel);
         frame.addMouseWheelListener(panel);
         frame.addKeyListener(
@@ -172,6 +177,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
                         double increaseStep = 0.5;
 
+                        // arrows
                         DecimalFormat df = new DecimalFormat("#.#");
                         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
                             panel.system.timeStep += increaseStep;
@@ -189,6 +195,28 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                             panel.counter = (int) ((panel.counter * (panel.system.timeStep + increaseStep))
                                     / (panel.system.timeStep));
                         }
+
+                        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT) {
+                            if (focusTrack > 0) {
+                                focusTrack--;
+                                focusName = Values.focusNames[focusTrack];
+                                focusIndex = Values.focusIndex[focusTrack];
+                            }
+                            focusScale = panel.system.celestialBody[focusIndex].getX();
+                            System.out.println(focusTrack);
+                        }
+                        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_RIGHT) {
+                            if (focusTrack < Values.focusIndex.length) {
+                                focusTrack++;
+                                focusName = Values.focusNames[focusTrack];
+                                focusIndex = Values.focusIndex[focusTrack];
+                            }
+                            focusScale = panel.system.celestialBody[focusIndex].getX();
+                            System.out.println(Values.focusIndex.length);
+                            System.out.println(focusTrack);
+                        }
+
+
                     }
                 });
 

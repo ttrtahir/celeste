@@ -6,6 +6,7 @@ public class Rocket implements EulerInterface {
     double[] rocketForces;
     double[] rocketAcceleration;
     CelestialBody[] celestialBody = SolarSystem.celestialBody;
+    
 
     @Override
     public void calculateForce() {

@@ -106,4 +106,17 @@ public class Values {
                         30,
                         31
         };
+
+        public static final String[] focusNames = {
+                "Sun",
+                "Earth",
+                "Titan",
+                "Missile"
+        };
+
+        public static final int[] focusIndex = {
+                0,
+                3,
+                8
+        };
 }
