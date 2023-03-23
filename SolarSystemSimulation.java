@@ -25,13 +25,18 @@ import java.awt.geom.Path2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+// import Toolkit
+import java.awt.Toolkit;
+// import Dimension
+import java.awt.Dimension;
+
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
     double lastTime = 0;
     int fps = 0;
 
     // JPanel
-    private static final int FRAME_WIDTH = 1280;
-    private static final int FRAME_HEIGHT = 720;
+    private static final int FRAME_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    private static final int FRAME_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
     private boolean pause = false;
 
@@ -217,7 +222,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         JFrame frame = new JFrame("Solar System Simulation");
         // set frame size to full screen initially
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        // frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
