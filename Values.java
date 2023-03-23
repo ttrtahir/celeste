@@ -105,7 +105,8 @@ public class Values {
         public static final int[] focusIndex = {
                 0,
                 3,
-                8
+                8,
+                11
         };
 
 }
