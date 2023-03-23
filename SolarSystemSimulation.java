@@ -69,6 +69,24 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         g.setColor(Color.WHITE);
 
+        g.setColor(new Color(75, 75, 75));
+        for (int h = 0; h < celestialPositions.size(); h++) {
+            for (int i = 0; i < celestialPositions.get(h).size() - 1; i++) {
+                if (celestialPositions.get(h).get(i + 1)[0] == 0 && celestialPositions.get(h).get(i + 1)[1] == 0)
+                    continue;
+
+                g.drawLine(
+                        (int) ((celestialPositions.get(h).get(i)[0] / SCALE) + FRAME_WIDTH / 2
+                                - (focusScale[0] / SCALE)),
+                        (int) ((celestialPositions.get(h).get(i)[1] / SCALE) + FRAME_HEIGHT / 2
+                                - (focusScale[1] / SCALE)),
+                        (int) ((celestialPositions.get(h).get(i + 1)[0] / SCALE) + FRAME_WIDTH / 2
+                                - (focusScale[0] / SCALE)),
+                        (int) ((celestialPositions.get(h).get(i + 1)[1] / SCALE) + FRAME_HEIGHT / 2
+                                - (focusScale[1] / SCALE)));
+            }
+        }
+
         CelestialBody[] planetsSortedByZ = new CelestialBody[system.celestialBody.length];
         // sort planets by z
         for (int i = 0; i < system.celestialBody.length; i++) {
@@ -115,11 +133,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setStroke(new java.awt.BasicStroke(5));
+            g2.setStroke(new java.awt.BasicStroke(3));
 
             g2.draw(planet);
-            g.setColor(Color.BLACK);
-            g2.fill(planet);
 
             // draw string in the middle of the oval
             g.setColor(Color.WHITE);
@@ -179,25 +195,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         g.drawString("Frame rate: " + fps, FRAME_WIDTH - 200, 45);
 
-        // Draw line
-        g.setColor(Color.WHITE);
-
-        for (int h = 0; h < celestialPositions.size(); h++) {
-            for (int i = 0; i < celestialPositions.get(h).size() - 1; i++) {
-                if (celestialPositions.get(h).get(i + 1)[0] == 0 && celestialPositions.get(h).get(i + 1)[1] == 0)
-                    continue;
-
-                g.drawLine(
-                        (int) ((celestialPositions.get(h).get(i)[0] / SCALE) + FRAME_WIDTH / 2
-                                - (focusScale[0] / SCALE)),
-                        (int) ((celestialPositions.get(h).get(i)[1] / SCALE) + FRAME_HEIGHT / 2
-                                - (focusScale[1] / SCALE)),
-                        (int) ((celestialPositions.get(h).get(i + 1)[0] / SCALE) + FRAME_WIDTH / 2
-                                - (focusScale[0] / SCALE)),
-                        (int) ((celestialPositions.get(h).get(i + 1)[1] / SCALE) + FRAME_HEIGHT / 2
-                                - (focusScale[1] / SCALE)));
-            }
-        }
     }
 
     private static double[] focusScale = new double[2];
@@ -219,7 +216,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
 
         JFrame frame = new JFrame("Solar System Simulation");
-        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        // set frame size to full screen initially
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
         final JComboBox<String> planetsList = new JComboBox<String>(Values.NAMES);
@@ -309,9 +308,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
 
         frame.setVisible(true);
-        double min = 1e9;
-        double distanceProbeTitan;
-        double counter = 0;
 
         while (true) {
             if (!panel.pause) {
