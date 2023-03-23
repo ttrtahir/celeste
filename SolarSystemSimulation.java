@@ -12,9 +12,14 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 import java.awt.geom.Ellipse2D;
 import javax.swing.JComboBox;
 import java.awt.RenderingHints;
+// import Path2D
+import java.awt.geom.Path2D;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
 
@@ -29,13 +34,15 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     private int daysSinceStart = 0;
 
     private static String focusName = Values.focusNames[0];
-    
+
     private static int focusIndex = Values.focusIndex[0];
 
     private static int focusTrack = 0;
 
     // April 1st 2023
     private final int[] START_DATE = { 1, 4, 2023 };
+
+    private double[][] earthPositions = new double[84][3];
 
     // curent date
     private int[] currentDate = START_DATE;
@@ -109,7 +116,19 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             // draw string in the middle of the oval
             g.setColor(Color.WHITE);
             g.setFont(new Font("Metropolis", Font.BOLD, 6));
+
         }
+        Graphics2D g2 = (Graphics2D) g;
+
+        // draw a line using Path2D
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new java.awt.BasicStroke(1));
+        Path2D.Double arrow = new Path2D.Double();
+        arrow.moveTo(0, 0);
+        // curve the line
+        arrow.curveTo(187, 62, 250, 250, 250, 250);
+        arrow.curveTo(375, 125, 500, 500, 500, 500);
+        g2.draw(arrow);
 
         currentDate = updateCurrentDate(daysSinceStart, currentDate);
         // set color #ccc
@@ -131,6 +150,17 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         g.drawString(simulationSpeed,
                 10, FRAME_HEIGHT - 50);
         g.drawString("Focus on: " + focusName, 0, 0);
+
+        // Draw line
+        g.setColor(Color.WHITE);
+
+        for (int i = 0; i < earthPositions.length - 1; i++) {
+            g.drawLine((int) ((earthPositions[i][0] / SCALE) + FRAME_WIDTH / 2 - (focusScale[0] / SCALE)),
+                    (int) ((earthPositions[i][1] / SCALE) + FRAME_HEIGHT / 2 - (focusScale[1] / SCALE)),
+                    (int) ((earthPositions[i + 1][0] / SCALE) + FRAME_WIDTH / 2 - (focusScale[0] / SCALE)),
+                    (int) ((earthPositions[i + 1][1] / SCALE) + FRAME_HEIGHT / 2 - (focusScale[1] / SCALE)));
+        }
+
     }
 
     private static double[] focusScale = new double[2];
@@ -216,9 +246,29 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                             System.out.println(focusTrack);
                         }
 
-
                     }
                 });
+
+        try {
+            File myObj = new File("Earth");
+            Scanner myReader = new Scanner(myObj);
+            int index = 0;
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] splitData = data.split(";");
+                for (int i = 0; i < splitData.length; i++) {
+                    if (splitData[i].length() == 0) {
+                        continue;
+                    }
+                    panel.earthPositions[index][i] = Double.parseDouble(splitData[i]);
+                }
+                index++;
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
         frame.setVisible(true);
         double min = 1e9;
@@ -233,8 +283,8 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 panel.system.updateVelocity();
 
                 panel.daysSinceStart = (int) (panel.counter * panel.system.timeStep / 86400);
+                panel.counter++;
             }
-            panel.counter++;
             frame.repaint();
         }
     }
