@@ -3,14 +3,14 @@ public class SolarSystem {
     public CelestialBody[] celestialBody;
     private int celestialBodyCount;
     private final double GRAVITATIONAL_CONSTANT = 6.6743E-20; // km^3/(kg s^2)
-    private double timeStep;
+    public double timeStep;
 
     public SolarSystem() {
 
         // Amount of celestial entities in a solar system (including space probes)
         this.celestialBodyCount = Values.positions.length;
         this.celestialBody = new CelestialBody[celestialBodyCount];
-        this.timeStep = 0.5;
+        this.timeStep = 1;
 
         // Without probe
         for (int i = 0; i < celestialBodyCount; i++)
@@ -37,8 +37,9 @@ public class SolarSystem {
                 double x2[] = getCelestialBody()[j].getX();
                 distance = calculateDistanceBetweenCelestials(x1, x2);
                 for (int k = 0; k < 3; k++) {
-                    tempF[k] += (celestialBody[j].getX()[k]  - celestialBody[i].getX()[k]) * (GRAVITATIONAL_CONSTANT * celestialBody[i].getMass() * (celestialBody[j].getMass())
-                            / (distance * distance * distance )) ;
+                    tempF[k] += (celestialBody[j].getX()[k] - celestialBody[i].getX()[k])
+                            * (GRAVITATIONAL_CONSTANT * celestialBody[i].getMass() * (celestialBody[j].getMass())
+                                    / (distance * distance * distance));
                 }
             }
             celestialBody[i].setTotalForce(totalForceOnIth);

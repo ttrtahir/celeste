@@ -11,8 +11,10 @@ import java.awt.Graphics2D;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.awt.geom.Ellipse2D;
 import javax.swing.JComboBox;
+import java.awt.RenderingHints;
 
 public class SolarSystemSimulation extends JPanel implements MouseWheelListener {
 
@@ -20,12 +22,18 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     private static final int FRAME_WIDTH = 1280;
     private static final int FRAME_HEIGHT = 720;
 
-    private int rocketX = 50;
-    private int rocketY = 50;
-
     private boolean pause = false;
 
     private int SCALE = 2500000;
+
+    private int daysSinceStart = 0;
+
+    // April 1st 2023
+    private final int[] START_DATE = { 1, 4, 2023 };
+
+    // curent date
+    private int[] currentDate = START_DATE;
+    private int counter = 0;
 
     SolarSystem system = new SolarSystem();
 
@@ -67,40 +75,55 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
             g.setFont(new Font("Metropolis", Font.BOLD, 10 + (int) (SCALE / 6000000)));
             g.drawString(planetsSortedByZ[i].getName(),
                     bodyPositionX
-                    - planetsSortedByZ[i].getName().length() * 3,
+                            - planetsSortedByZ[i].getName().length() * 3,
                     bodyPositionY
-                    - size / 2 - 5);
+                            - size / 2 - 5);
 
             g.setColor(planetsSortedByZ[i].getColor());
 
             Ellipse2D.Double planet = new Ellipse2D.Double(
                     bodyPositionX
-                    - size / 2
-                    + (int) (SCALE / 500000) / 2,
+                            - size / 2
+                            + (int) (SCALE / 500000) / 2,
                     bodyPositionY
-                    - size / 2
-                    + (int) (SCALE / 500000) / 2,
+                            - size / 2
+                            + (int) (SCALE / 500000) / 2,
                     size - (int) (SCALE / 500000),
                     size - (int) (SCALE / 500000));
             // draw only border
-            ((Graphics2D) g).draw(planet);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setStroke(new java.awt.BasicStroke(5));
+
+            g2.draw(planet);
             g.setColor(Color.BLACK);
-            ((Graphics2D) g).fill(planet);
+            g2.fill(planet);
 
             // draw string in the middle of the oval
             g.setColor(Color.WHITE);
             g.setFont(new Font("Metropolis", Font.BOLD, 6));
-            // Convert int to scientific notation
-            /*
-             * String shorterNumber = String.format("%.2e", planetsSortedByZ[i].getX()[2]);
-             * g.drawString(shorterNumber,
-             * ((int) planetsSortedByZ[i].getX()[0] / SCALE) + (FRAME_WIDTH / 2)
-             * + planetsSortedByZ[i].getSize() / 2
-             * - ((planetsSortedByZ[i].getX()[2] + "").length() / 2 * 4),
-             * ((int) planetsSortedByZ[i].getX()[1] / SCALE) + (FRAME_HEIGHT / 2) + size / 2
-             * + 5);
-             */
         }
+
+        currentDate = updateCurrentDate(daysSinceStart, currentDate);
+        // set color #ccc
+        g.setColor(new Color(204, 204, 204));
+        g.setFont(new Font("Metropolis", Font.PLAIN, 24));
+
+        String displayDate = Values.MONTHS[currentDate[1] - 1] + " " + currentDate[0] + ", " + currentDate[2];
+        g.drawString(displayDate,
+                FRAME_WIDTH / 2 - displayDate.length() * 6, 50);
+
+        g.setColor(new Color(175, 175, 175));
+        g.setFont(new Font("Metropolis", Font.PLAIN, 15));
+
+        String daysSinceString = "Days since liftoff: " + daysSinceStart;
+        g.drawString(daysSinceString,
+                FRAME_WIDTH / 2 - (daysSinceString).length() * 3 - 5, 75);
+
+        String simulationSpeed = "Simulation speed: " + system.timeStep;
+        g.drawString(simulationSpeed,
+                10, FRAME_HEIGHT - 50);
     }
 
     private static double[] focusScale = new double[2];
@@ -132,7 +155,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 panel.changeFocus(planetsList);
             }
         });
-        panel.add(planetsList);
+        // panel.add(planetsList);
         frame.add(panel);
         frame.addMouseWheelListener(panel);
         frame.addKeyListener(
@@ -146,27 +169,62 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
                             System.exit(0);
                         }
+
+                        double increaseStep = 0.5;
+
+                        DecimalFormat df = new DecimalFormat("#.#");
+                        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+                            panel.system.timeStep += increaseStep;
+                            panel.system.timeStep = Double.parseDouble(df.format(panel.system.timeStep));
+
+                            panel.counter = (int) ((panel.counter * (panel.system.timeStep - increaseStep))
+                                    / (panel.system.timeStep));
+                        }
+                        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN) {
+                            if (panel.system.timeStep <= increaseStep)
+                                return;
+                            panel.system.timeStep -= increaseStep;
+                            panel.system.timeStep = Double.parseDouble(df.format(panel.system.timeStep));
+
+                            panel.counter = (int) ((panel.counter * (panel.system.timeStep + increaseStep))
+                                    / (panel.system.timeStep));
+                        }
                     }
                 });
 
         frame.setVisible(true);
 
-        // Repaint the panel every 10 milliseconds
         while (true) {
             if (!panel.pause) {
                 panel.system.calculateForce();
                 panel.system.updateAcceleration();
                 panel.system.updatePosition();
                 panel.system.updateVelocity();
-            }
-            frame.repaint();
-            // try {
-            // Thread.sleep(100);
-            // } catch (InterruptedException e) {
-            // e.printStackTrace();
-            // }
 
+                panel.daysSinceStart = (int) (panel.counter * panel.system.timeStep / 86400);
+            }
+            panel.counter++;
+            frame.repaint();
         }
+    }
+
+    private int[] updateCurrentDate(int daysSinceStart, int[] currentDate) {
+        int[] newDate = new int[3];
+        newDate[0] = START_DATE[0] + daysSinceStart;
+        newDate[1] = START_DATE[1];
+        newDate[2] = START_DATE[2];
+
+        while (newDate[0] > Values.DAYS_IN_MONTH[newDate[1] - 1]) {
+            newDate[0] -= Values.DAYS_IN_MONTH[newDate[1] - 1];
+
+            newDate[1]++;
+            if (newDate[1] > 12) {
+                newDate[1] = 1;
+                newDate[2]++;
+            }
+        }
+
+        return newDate;
     }
 
     @Override
