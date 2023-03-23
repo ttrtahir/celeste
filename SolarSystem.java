@@ -14,7 +14,8 @@ public class SolarSystem {
 
         // Without probe
         for (int i = 0; i < celestialBodyCount; i++)
-            this.celestialBody[i] = new CelestialBody(Values.positions[i], Values.velocity[i], Values.mass[i][0], Values.SIZES[i], Values.NAMES[i], Values.COLORS[i]);
+            this.celestialBody[i] = new CelestialBody(Values.positions[i], Values.velocity[i], Values.mass[i][0],
+                    Values.SIZES[i], Values.NAMES[i], Values.COLORS[i], Values.YEAR_LENGTHS[i]);
     }
 
     /**
@@ -30,7 +31,7 @@ public class SolarSystem {
             double distance = 0;
             double[] tempF = new double[3];
             for (int j = 0; j < celestialBodyCount; j++) {
-                if (j == i || j == 11 )
+                if (j == i || j == 11)
                     continue;
                 double x1[] = getCelestialBody()[i].getX();
                 double x2[] = getCelestialBody()[j].getX();
