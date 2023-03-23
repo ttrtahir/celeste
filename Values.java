@@ -63,7 +63,7 @@ public class Values {
                         12 };
 
         public static final String[] NAMES = { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn",
-                        "Titan", "Uranus", "Neptune", "Missile" };
+                        "Titan", "Uranus", "Neptune", "TSAR Nuclear Missile" };
 
         public static final String[] ORBIT_NAMES = {
                         "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn"
@@ -97,13 +97,6 @@ public class Values {
                         31,
                         30,
                         31
-        };
-
-        public static final String[] focusNames = {
-                        "Sun",
-                        "Earth",
-                        "Titan",
-                        "Missile"
         };
 
         public static final int[] focusIndex = {
