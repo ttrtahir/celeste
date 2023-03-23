@@ -34,11 +34,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
     double lastTime = 0;
     int fps = 0;
 
-<<<<<<< HEAD
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-=======
-    private CelestialBody rocket;
->>>>>>> effac43c7acead3ba968ddfeee49f715eb11e2ab
     // JPanel
     private static final int FRAME_WIDTH = (int) screenSize.getWidth();
     private static final int FRAME_HEIGHT = (int) screenSize.getHeight();
@@ -94,20 +90,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                                 - (focusScale[1] / SCALE)));
             }
         }
-
-        g.setColor(Color.white);
-        for (int i = 0; i < rocketPositions.size() - 1; i++) {
-            g.drawLine(
-                    (int) ((rocketPositions.get(i)[0] / SCALE) + FRAME_WIDTH / 2
-                            - (focusScale[0] / SCALE)),
-                    (int) ((rocketPositions.get(i)[1] / SCALE) + FRAME_HEIGHT / 2
-                            - (focusScale[1] / SCALE)),
-                    (int) ((rocketPositions.get(i + 1)[0] / SCALE) + FRAME_WIDTH / 2
-                            - (focusScale[0] / SCALE)),
-                    (int) ((rocketPositions.get(i + 1)[1] / SCALE) + FRAME_HEIGHT / 2
-                            - (focusScale[1] / SCALE)));
-        }
-
 
         CelestialBody[] planetsSortedByZ = new CelestialBody[system.celestialBody.length];
         // sort planets by z
@@ -183,14 +165,14 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         g.drawString(daysSinceString,
                 FRAME_WIDTH / 2 - (daysSinceString).length() * 3 - 5, 75);
 
-        String simulationSpeed = "Simulation speed: " + system.timeStep + "x";
+        String simulationSpeed = "Simulation speed: " + system.timeStep;
         g.drawString(simulationSpeed,
-                10, FRAME_HEIGHT - 80);
+                10, FRAME_HEIGHT - 50);
 
         String focus = "Focus on: " + Values.NAMES[focusIndex];
-        g.drawString(focus, FRAME_WIDTH - 150, FRAME_HEIGHT - 80);
+        g.drawString(focus, FRAME_WIDTH - 150, FRAME_HEIGHT - 50);
 
-        g.drawString("Missile Position and Velocity Relative to Earth", 10, 25);
+        g.drawString("Missile Position and Velocity Relative to Earth", 10, 15);
 
         double[] probePosition = system.celestialBody[11].getX();
         double[] earthPosition = system.celestialBody[4].getX();
@@ -200,7 +182,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
         String positionRelativeEarth = "{ " + (int) relativePosition[0] + " ; " + (int) relativePosition[1] + " ; "
                 + (int) relativePosition[2] + " }";
-        g.drawString(positionRelativeEarth, 10, 45);
+        g.drawString(positionRelativeEarth, 10, 30);
 
         double[] probeVelocity = system.celestialBody[11].getV();
         double[] earthVelocity = system.celestialBody[4].getV();
@@ -210,12 +192,12 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
         String velocityRelativeEarth = "{ " + +(int) relativeVelocity[0] + " ; " + (int) relativeVelocity[1] + " ; "
                 + (int) relativeVelocity[2] + " }";
-        g.drawString(velocityRelativeEarth, 10, 65);
+        g.drawString(velocityRelativeEarth, 10, 45);
 
-        g.drawString("Calculations since start:", FRAME_WIDTH - 200, 25);
-        g.drawString("" + calculationsSinceStart, FRAME_WIDTH - 200, 45);
+        g.drawString("Calculations since start:", FRAME_WIDTH - 200, 15);
+        g.drawString("" + calculationsSinceStart, FRAME_WIDTH - 200, 30);
 
-        g.drawString("Frame rate: " + fps, FRAME_WIDTH - 200, 65);
+        g.drawString("Frame rate: " + fps, FRAME_WIDTH - 200, 45);
 
     }
 
@@ -239,11 +221,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
 
         JFrame frame = new JFrame("Solar System Simulation");
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-<<<<<<< HEAD
-=======
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
->>>>>>> effac43c7acead3ba968ddfeee49f715eb11e2ab
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         SolarSystemSimulation panel = new SolarSystemSimulation();
         final JComboBox<String> planetsList = new JComboBox<String>(Values.NAMES);
@@ -333,9 +310,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         }
 
         frame.setVisible(true);
-        double min = 1e39;
-        double distanceProbeTitan;
-        panel.rocket = panel.system.celestialBody[panel.system.celestialBody.length-1];
 
         while (true) {
             if (!panel.pause) {
@@ -343,42 +317,14 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 panel.system.updateAcceleration();
                 panel.system.updatePosition();
                 panel.system.updateVelocity();
-                panel.recordRocketPositions(panel);
 
                 daysSinceStart = (int) (panel.counter * panel.system.timeStep / 86400);
                 panel.calculationsSinceStart++;
                 panel.counter++;
-
-                    distanceProbeTitan = panel.system.calculateDistanceBetweenCelestials(panel.system.getCelestialBody()[11].getX(), panel.system.getCelestialBody()[8].getX());
-                    if (min > distanceProbeTitan) min = distanceProbeTitan;
-                    else{
-                        panel.pause = true;
-                        System.out.println(min + " in " + panel.counter*panel.system.timeStep/86400);
-                        for(int k = 0 ; k < 3 ; k++){
-                            System.out.println(k + " axis spacecraft: " + panel.system.celestialBody[11].getX()[k] + k + " axis titan: " + panel.system.celestialBody[8].getX()[k]);
-                    }
-                }
             }
             frame.repaint();
             panel.fps = (int) (1000000.0 / (System.nanoTime() - panel.lastTime));
             panel.lastTime = System.nanoTime();
-        }
-    }
-
-    private ArrayList<double[]> rocketPositions = new ArrayList<>();
-    private final int RECORD_EVERY_ROCKET = 100000;
-    private int recordRocketPos = RECORD_EVERY_ROCKET;
-
-    private void recordRocketPositions(SolarSystemSimulation panel) {
-        recordRocketPos--;
-
-        if (recordRocketPos == 0) {
-            recordRocketPos = RECORD_EVERY_ROCKET;
-
-            double[] curPosition = new double[2];
-            curPosition[0] = panel.rocket.getX()[0];
-            curPosition[1] = panel.rocket.getX()[1];
-            rocketPositions.add(curPosition);
         }
     }
 
