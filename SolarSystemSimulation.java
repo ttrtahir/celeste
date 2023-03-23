@@ -130,7 +130,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         String simulationSpeed = "Simulation speed: " + system.timeStep;
         g.drawString(simulationSpeed,
                 10, FRAME_HEIGHT - 50);
-        g.drawString("Focus on: " + focusName, 0, 0);
+        g.drawString("Focus on: " + focusName, 10, 15);
     }
 
     private static double[] focusScale = new double[2];
