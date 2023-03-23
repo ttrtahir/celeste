@@ -142,6 +142,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                     }
                 });
         frame.setVisible(true);
+        double min = 1e9;
+        double distanceProbeTitan;
+        double counter = 0;
 
         // Repaint the panel every 10 milliseconds
         while (true) {
@@ -150,6 +153,18 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 panel.system.updateAcceleration();
                 panel.system.updatePosition();
                 panel.system.updateVelocity();
+                counter ++ ;
+                if(panel.system.celestialBody[11].getX()[2] < -40309613.8378104) {
+                    distanceProbeTitan = panel.system.calculateDistanceBetweenCelestials(11, 8);
+                    if (min > distanceProbeTitan) min = distanceProbeTitan;
+                    else{
+                        panel.pause = true;
+                        System.out.println(min + " in " + counter*panel.system.timeStep/86400);
+                        for(int k = 0 ; k < 3 ; k++){
+                            System.out.println("k axis spacecraft: " + panel.system.celestialBody[11].getX()[k] + "k axis titan: " + panel.system.celestialBody[8].getX()[k]);
+                        }
+                    }
+                }
             }
             frame.repaint();
 //            try {
