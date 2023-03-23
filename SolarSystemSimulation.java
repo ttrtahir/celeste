@@ -147,7 +147,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         g.drawString(simulationSpeed,
                 10, FRAME_HEIGHT - 50);
 
-        String focus = "Focus on: " + focusName;
+        String focus = "Focus on: " + Values.NAMES[focusIndex];
         g.drawString(focus, FRAME_WIDTH - 150, FRAME_HEIGHT - 50);
 
         g.drawString("Missile Position and Velocity Relative to Earth", 10, 15);
@@ -260,21 +260,16 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT) {
                             if (focusTrack > 0) {
                                 focusTrack--;
-                                focusName = Values.focusNames[focusTrack];
                                 focusIndex = Values.focusIndex[focusTrack];
                             }
                             focusScale = panel.system.celestialBody[focusIndex].getX();
-                            System.out.println(focusTrack);
                         }
                         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_RIGHT) {
                             if (focusTrack < Values.focusIndex.length) {
                                 focusTrack++;
-                                focusName = Values.focusNames[focusTrack];
                                 focusIndex = Values.focusIndex[focusTrack];
                             }
                             focusScale = panel.system.celestialBody[focusIndex].getX();
-                            System.out.println(Values.focusIndex.length);
-                            System.out.println(focusTrack);
                         }
 
                     }
