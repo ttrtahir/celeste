@@ -175,13 +175,16 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         g.drawString(velocityRelativeEarth, 10, 45);
 
         g.drawString("Calculations since start:", FRAME_WIDTH - 200, 15);
-        g.drawString(""+calculationsSinceStart, FRAME_WIDTH - 200, 30);
+        g.drawString("" + calculationsSinceStart, FRAME_WIDTH - 200, 30);
 
         // Draw line
         g.setColor(Color.WHITE);
 
         for (int h = 0; h < celestialPositions.size(); h++) {
             for (int i = 0; i < celestialPositions.get(h).size() - 1; i++) {
+                if (celestialPositions.get(h).get(i + 1)[0] == 0 && celestialPositions.get(h).get(i + 1)[1] == 0)
+                    continue;
+
                 g.drawLine(
                         (int) ((celestialPositions.get(h).get(i)[0] / SCALE) + FRAME_WIDTH / 2
                                 - (focusScale[0] / SCALE)),
@@ -192,7 +195,7 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                         (int) ((celestialPositions.get(h).get(i + 1)[1] / SCALE) + FRAME_HEIGHT / 2
                                 - (focusScale[1] / SCALE)));
             }
-        }          
+        }
     }
 
     private static double[] focusScale = new double[2];
