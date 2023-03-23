@@ -9,6 +9,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.Graphics2D;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -134,7 +135,9 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
                 10, FRAME_HEIGHT - 50);
         
         String focus = "Focus on: " + focusName;
-        g.drawString(focus, 10, 15);
+        g.drawString(focus, FRAME_WIDTH - 150, FRAME_HEIGHT - 50);
+
+        g.drawString("Missile Position and Velocity Relative to Earth", 10, 15);
 
         double[] probePosition = system.celestialBody[11].getX();
         double[] earthPosition = system.celestialBody[4].getX();
