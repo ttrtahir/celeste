@@ -278,7 +278,6 @@ public class SolarSystemSimulation extends JPanel implements MouseWheelListener 
         try {
             for (int g = 0; g < Values.ORBIT_NAMES.length; g++) {
                 panel.celestialPositions.add(new ArrayList<double[]>());
-                System.out.println(panel.celestialPositions.size());
 
                 String fileName = Values.ORBIT_NAMES[g];
                 File myObj = new File(fileName);

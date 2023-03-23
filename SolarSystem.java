@@ -10,7 +10,7 @@ public class SolarSystem {
         // Amount of celestial entities in a solar system (including space probes)
         this.celestialBodyCount = Values.positions.length;// for space probe
         this.celestialBody = new CelestialBody[celestialBodyCount];
-        this.timeStep = 4;
+        this.timeStep = 1;
 
         // Without probe
         for (int i = 0; i < celestialBodyCount; i++)
