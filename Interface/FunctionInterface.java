@@ -10,5 +10,11 @@ public interface FunctionInterface {
      *         v(t)
      * */
     //x¨ = d^2x/dt^2 is its second derivative = acceleration a(t)
+
+    /**
+     * @param t at the time t of using function
+     * @param y at the state of using function
+     * @return motion of each planet
+     * */
     public AccelerationInterface motion(double t, StateInterface y);
 }

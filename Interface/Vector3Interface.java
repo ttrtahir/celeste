@@ -12,6 +12,7 @@ public interface Vector3Interface {
     public Vector3Interface subtract(Vector3Interface anotherVector);
     public Vector3Interface multiply(double scalar);
 
+    //Euclidean distance between two vectors
     public double euclideanDist(Vector3Interface anotherVector);
 
     /**

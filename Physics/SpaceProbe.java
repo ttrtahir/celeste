@@ -13,13 +13,14 @@ public class SpaceProbe implements SpaceProbeInterface {
     @Override
     public Vector3Interface[] trajectory(Vector3Interface p0, Vector3Interface v0, double timefinal, double h) {
 
-        return new Vector3Interface[0];
+        return trajectory;
     }
 
     @Override
     public Vector3Interface[] trajectory(Vector3Interface p0, Vector3Interface v0, double[] timestep) {
-        CelestialBody.celestialBodies[11].posVec = p0;
-        CelestialBody.celestialBodies[11].veloVec = v0;
+        //remember to change the index to get the probe
+        CelestialBody.celestialBodies[0].posVec = p0;
+        CelestialBody.celestialBodies[0].veloVec = v0;
 
         y0 = new State();
         y0.inputState();

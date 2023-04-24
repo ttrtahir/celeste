@@ -3,6 +3,9 @@ package Physics;
 import Interface.Vector3Interface;
 
 public class Vector3 implements Vector3Interface {
+    /**
+     * 3d Vector data structure
+     * */
     double x;
     double y;
     double z;

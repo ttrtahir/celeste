@@ -3,6 +3,10 @@ package Physics;
 import Interface.AccelerationInterface;
 
 public class Acceleration implements AccelerationInterface {
+    /**
+     * class to store the acceleration rate for all celestial bodies in the system
+     * update the state of the system
+     * */
     public Vector3[] accRate;
 
     public Acceleration(){
