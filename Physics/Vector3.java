@@ -1,21 +1,22 @@
 package Physics;
 
-import Interface.Vector3Interface;
+import Interface.IVector3;
 
-public class Vector3 implements Vector3Interface {
+public class Vector3 implements IVector3 {
     /**
      * 3d Vector data structure
-     * */
+     */
     double x;
     double y;
     double z;
 
-    public Vector3(double x, double y, double z){
+    public Vector3(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
-    public Vector3(){
+
+    public Vector3() {
         this.x = 0;
         this.y = 0;
         this.z = 0;
@@ -52,25 +53,25 @@ public class Vector3 implements Vector3Interface {
     }
 
     @Override
-    public Vector3Interface add(Vector3Interface another) {
+    public IVector3 add(IVector3 another) {
         Vector3 sum = new Vector3();
         sum.setX(this.x + another.getX());
-        sum.setY(this.y+ another.getY());
+        sum.setY(this.y + another.getY());
         sum.setZ(this.z + another.getZ());
         return sum;
     }
 
     @Override
-    public Vector3Interface subtract(Vector3Interface another) {
+    public IVector3 subtract(IVector3 another) {
         Vector3 sum = new Vector3();
         sum.setX(this.x - another.getX());
         sum.setY(this.y - another.getY());
-        sum.setZ(this.z - another.getZ()) ;
+        sum.setZ(this.z - another.getZ());
         return sum;
     }
 
     @Override
-    public Vector3Interface multiply(double scalar) {
+    public IVector3 multiply(double scalar) {
         Vector3 product = new Vector3();
         product.setX(this.x * scalar);
         product.setY(this.y * scalar);
@@ -79,18 +80,19 @@ public class Vector3 implements Vector3Interface {
     }
 
     @Override
-    public double euclideanDist(Vector3Interface another) {
-        double d = Math.sqrt((Math.pow((this.x - another.getX()), 2) + Math.pow((this.y - another.getY()),2) +Math.pow(this.z - another.getZ(),2)));
+    public double euclideanDist(IVector3 another) {
+        double d = Math.sqrt((Math.pow((this.x - another.getX()), 2) + Math.pow((this.y - another.getY()), 2)
+                + Math.pow(this.z - another.getZ(), 2)));
         return d;
     }
 
     @Override
-    public Vector3Interface addmultiply(double scalar, Vector3Interface anotherVector) {
+    public IVector3 addmultiply(double scalar, IVector3 anotherVector) {
         return null;
     }
 
     @Override
-    public String toString(){
-        return "Coordinate of this vector: x = "+ x + ", y= "+ y + ", z= "+z;
+    public String toString() {
+        return "Coordinate of this vector: x = " + x + ", y= " + y + ", z= " + z;
     }
 }

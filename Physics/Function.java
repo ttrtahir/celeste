@@ -1,11 +1,11 @@
 package Physics;
 
-import Interface.AccelerationInterface;
-import Interface.FunctionInterface;
-import Interface.StateInterface;
+import Interface.IAcceleration;
+import Interface.IFunction;
+import Interface.IState;
 
-public class Function implements FunctionInterface {
-    //Gravitational constant
+public class Function implements IFunction {
+    // Gravitational constant
     public static final double G = 6.6743E-20;
     public Acceleration acceleration = new Acceleration();
 
@@ -18,24 +18,25 @@ public class Function implements FunctionInterface {
      */
 
     @Override
-    public AccelerationInterface motion(double t, StateInterface y) {
+    public IAcceleration motion(double t, IState y) {
         acceleration.initialize(CelestialBody.celestialBodies.length);
-        System.out.println("acceleration before update "+ acceleration.toString());
-        //traverse all celestial bodies
-        for(int i = 0; i < CelestialBody.celestialBodies.length; i++){
+        System.out.println("acceleration before update " + acceleration.toString());
+        // traverse all celestial bodies
+        for (int i = 0; i < CelestialBody.celestialBodies.length; i++) {
             double distance = 0;
-            for (int j = 0; j < CelestialBody.celestialBodies.length; j++){
-                if(i != j){
-                    //calculate the distance
+            for (int j = 0; j < CelestialBody.celestialBodies.length; j++) {
+                if (i != j) {
+                    // calculate the distance
                     distance = Math.pow(((State) y).getPosition(i).euclideanDist(((State) y).getPosition(j)), 3);
-                    Vector3 tempAcc = (Vector3) (((State) y).getPosition(j).subtract( ((State) y).getPosition(i))).multiply(1/distance);
-                    //add the temporary acceleration to total acceleration of a planet
+                    Vector3 tempAcc = (Vector3) (((State) y).getPosition(j).subtract(((State) y).getPosition(i)))
+                            .multiply(1 / distance);
+                    // add the temporary acceleration to total acceleration of a planet
                     acceleration.add(i, tempAcc);
                 }
             }
         }
         System.out.println("Acceleration after update " + acceleration.toString());
-        return  acceleration;
+        return acceleration;
     }
 
 }

@@ -2,7 +2,7 @@ package Interface;
 
 /**
  * acceleration rate of state of a system
- * */
-public interface AccelerationInterface {
+ */
+public interface IAcceleration {
 
 }

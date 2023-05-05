@@ -1,6 +1,6 @@
 package Physics;
 
-import Interface.Vector3Interface;
+import Interface.IVector3;
 
 public class CelestialBody {
     public String name;
@@ -10,33 +10,30 @@ public class CelestialBody {
     public double size;
     public double gravity;
 
-    //velocity
+    // velocity
     public double veloX;
     public double veloY;
     public double veloZ;
 
-
-    //position
+    // position
     public double posX;
     public double posY;
     public double posZ;
 
-
-    //array to store all celestial bodies
+    // array to store all celestial bodies
     public static CelestialBody[] celestialBodies;
 
-    //vectors
-    public Vector3Interface posVec;
-    public Vector3Interface veloVec;
-    public Vector3Interface accelVec;
+    // vectors
+    public IVector3 posVec;
+    public IVector3 veloVec;
+    public IVector3 accelVec;
 
-
-    public CelestialBody(String celestialName){
+    public CelestialBody(String celestialName) {
         name = celestialName;
         step = 0;
     }
 
-    public void createVectors(){
+    public void createVectors() {
         posVec = new Vector3(posX, posY, posZ);
         veloVec = new Vector3(veloX, veloY, veloZ);
         accelVec = new Vector3(0, 0, 0);

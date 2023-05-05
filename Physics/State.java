@@ -1,52 +1,57 @@
 package Physics;
 
-import Interface.AccelerationInterface;
-import Interface.StateInterface;
-import Interface.Vector3Interface;
+import Interface.IAcceleration;
+import Interface.IState;
+import Interface.IVector3;
 
-public class State implements StateInterface {
+public class State implements IState {
     public int size;
-    public Vector3Interface[][] state;
+    public IVector3[][] state;
 
-    public State(){
+    public State() {
         state = new Vector3[CelestialBody.celestialBodies.length][2];
         this.size = state.length;
     }
 
-    public void inputState(){
-        for(int i = 0; i < state.length; i++){
+    public void inputState() {
+        for (int i = 0; i < state.length; i++) {
             state[i][0] = CelestialBody.celestialBodies[i].veloVec; //
             state[i][1] = CelestialBody.celestialBodies[i].posVec;
         }
     }
 
     @Override
-    public StateInterface addmultiply(double step, AccelerationInterface accRate) {
+    public IState addmultiply(double step, IAcceleration accRate) {
         State newState = new State();
 
-        for(int i = 0; i< state.length; i++){
-            //update velocity
+        for (int i = 0; i < state.length; i++) {
+            // update velocity
             newState.addVelocity(i, state[i][0].addmultiply(step, ((Acceleration) accRate).get(i)));
-            //update position
+            // update position
             newState.addPosition(i, state[i][1].addmultiply(step, newState.getVelocity(i)));
         }
 
         int i = 11;
-        System.out.println("position after update " + CelestialBody.celestialBodies[i].name +" " + newState.getPosition(i));
-        System.out.println("velocity after update" + CelestialBody.celestialBodies[i].name + " " + newState.getVelocity(i));
+        System.out.println(
+                "position after update " + CelestialBody.celestialBodies[i].name + " " + newState.getPosition(i));
+        System.out.println(
+                "velocity after update" + CelestialBody.celestialBodies[i].name + " " + newState.getVelocity(i));
         return newState;
     }
 
-    public void addPosition(int i, Vector3Interface position){
+    public void addPosition(int i, IVector3 position) {
         state[i][1] = position;
     }
-    public void addVelocity(int i, Vector3Interface velocity){
+
+    public void addVelocity(int i, IVector3 velocity) {
         state[i][0] = velocity;
     }
-    public Vector3Interface getPosition(int i){
+
+    public IVector3 getPosition(int i) {
         return state[i][1];
     }
-    public Vector3Interface getVelocity(int i){
+
+    public IVector3 getVelocity(int i) {
         return state[i][0];
     }
 }
