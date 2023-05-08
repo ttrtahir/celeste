@@ -1,4 +1,4 @@
-package Physics;
+package Simulator;
 
 import Interface.ISpaceProbe;
 import Interface.IVector3;
@@ -8,8 +8,8 @@ public class SpaceProbe implements ISpaceProbe {
     public Vector3[] trajectory;
     public State[] states;
 
-    public Calculation calculator;
-    public Function f;
+    public ODESolver calculator;
+    public ODEFunction f;
 
     @Override
     public IVector3[] trajectory(IVector3 p0, IVector3 v0, double timefinal, double h) {
@@ -26,8 +26,8 @@ public class SpaceProbe implements ISpaceProbe {
         y0 = new State();
         y0.inputState();
 
-        calculator = new Calculation();
-        f = new Function();
+        calculator = new ODESolver();
+        f = new ODEFunction();
         states = (State[]) calculator.solve(f, y0, timestep);
 
         trajectory = new Vector3[timestep.length];

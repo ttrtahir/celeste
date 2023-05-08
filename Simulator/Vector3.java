@@ -1,4 +1,4 @@
-package Physics;
+package Simulator;
 
 import Interface.IVector3;
 

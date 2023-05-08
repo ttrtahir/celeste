@@ -1,13 +1,14 @@
-package Physics;
+package Simulator;
 
-import Interface.IAcceleration;
-import Interface.IFunction;
+import Interface.IAccelerationRate;
+import Interface.IODEFunction;
 import Interface.IState;
 
-public class Function implements IFunction {
+public class ODEFunction implements IODEFunction {
     // Gravitational constant
     public static final double G = 6.6743E-20;
-    public Acceleration acceleration = new Acceleration();
+    public static int nBodies = CelestialBody.celestialBodies.length;
+    public AccelerationRate acceleration = new AccelerationRate();
 
     /**
      * F = G* mi *mj * (pos_i - pos_j)/|pos_i - pos_j|^3
@@ -18,13 +19,13 @@ public class Function implements IFunction {
      */
 
     @Override
-    public IAcceleration motion(double t, IState y) {
-        acceleration.initialize(CelestialBody.celestialBodies.length);
+    public IAccelerationRate motion(double t, IState y) {
+        acceleration.initialize(nBodies);
         System.out.println("acceleration before update " + acceleration.toString());
         // traverse all celestial bodies
-        for (int i = 0; i < CelestialBody.celestialBodies.length; i++) {
+        for (int i = 0; i < nBodies; i++) {
             double distance = 0;
-            for (int j = 0; j < CelestialBody.celestialBodies.length; j++) {
+            for (int j = 0; j < nBodies; j++) {
                 if (i != j) {
                     // calculate the distance
                     distance = Math.pow(((State) y).getPosition(i).euclideanDist(((State) y).getPosition(j)), 3);

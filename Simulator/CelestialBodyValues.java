@@ -1,4 +1,4 @@
-package Physics;
+package Simulator;
 
 public class CelestialBodyValues {
     public CelestialBody[] celestialBodies;

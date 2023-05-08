@@ -1,6 +1,6 @@
-package Physics;
+package Simulator;
 
-import Interface.IAcceleration;
+import Interface.IAccelerationRate;
 import Interface.IState;
 import Interface.IVector3;
 
@@ -15,20 +15,24 @@ public class State implements IState {
 
     public void inputState() {
         for (int i = 0; i < state.length; i++) {
-            state[i][0] = CelestialBody.celestialBodies[i].veloVec; //
-            state[i][1] = CelestialBody.celestialBodies[i].posVec;
-        }
-    }
+            state[i][0] = CelestialBody.celestialBodies[i].posVec;
+            state[i][1] = CelestialBody.celestialBodies[i].veloVec;
 
+            System.out.println("Initial position of " + CelestialBody.celestialBodies[i].name + " " + state[i][0]);
+            System.out.println("Initial velocity of " + CelestialBody.celestialBodies[i].name + " " + state[i][1]);
+        }
+
+    }
+    //update position and velocity
     @Override
-    public IState addmultiply(double step, IAcceleration accRate) {
+    public IState addmultiply(double step, IAccelerationRate accRate) {
         State newState = new State();
 
         for (int i = 0; i < state.length; i++) {
             // update velocity
-            newState.addVelocity(i, state[i][0].addmultiply(step, ((Acceleration) accRate).get(i)));
+            newState.addPosition(i, state[i][0].addmultiply(step, ((AccelerationRate) accRate).getVelocity(i)));
             // update position
-            newState.addPosition(i, state[i][1].addmultiply(step, newState.getVelocity(i)));
+            newState.addVelocity(i, state[i][1].addmultiply(step, ((AccelerationRate) accRate).getAcceleration(i)));
         }
 
         int i = 11;
@@ -39,19 +43,23 @@ public class State implements IState {
         return newState;
     }
 
+    //public State updatePosition(double step, IRate newRate)
+
+    //public State updateVelocity(doubl step, IRate newRate)
+
     public void addPosition(int i, IVector3 position) {
-        state[i][1] = position;
+        state[i][0] = position;
     }
 
     public void addVelocity(int i, IVector3 velocity) {
-        state[i][0] = velocity;
+        state[i][1] = velocity;
     }
 
     public IVector3 getPosition(int i) {
-        return state[i][1];
+        return state[i][0];
     }
 
     public IVector3 getVelocity(int i) {
-        return state[i][0];
+        return state[i][1];
     }
 }

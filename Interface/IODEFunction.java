@@ -1,6 +1,6 @@
 package Interface;
 
-public interface IFunction {
+public interface IODEFunction {
     // function f represents the differential equation dy/dt = f(t,y)
     // implement this function to represent calculation of acceleration
 
@@ -17,5 +17,5 @@ public interface IFunction {
      * @param y at the state of using function
      * @return motion of each planet
      */
-    public IAcceleration motion(double t, IState y);
+    public IAccelerationRate motion(double t, IState y);
 }

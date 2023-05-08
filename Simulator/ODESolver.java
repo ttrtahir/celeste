@@ -1,15 +1,16 @@
-package Physics;
+package Simulator;
 
 import Interface.ICalculation;
-import Interface.IFunction;
+import Interface.IODEFunction;
+import Interface.IODESolver;
 import Interface.IState;
 
-public class Calculation implements ICalculation {
+public class ODESolver implements IODESolver {
     /* class implements EULER's method */
     public State[] states;
 
     @Override
-    public IState[] solve(IFunction f, IState y0, double[] timestep) {
+    public IState[] solve(IODEFunction f, IState y0, double[] timestep) {
         /**
          * Euler's method
          * 
@@ -30,7 +31,7 @@ public class Calculation implements ICalculation {
     }
 
     @Override
-    public IState[] solve(IFunction f, IState y0, double h, double timefinal) {
+    public IState[] solve(IODEFunction f, IState y0, double h, double timefinal) {
         /**
          * Euler's method
          *
@@ -69,7 +70,7 @@ public class Calculation implements ICalculation {
      */
 
     @Override
-    public IState step(IFunction f, double t, IState y, double h) {
+    public IState step(IODEFunction f, double t, IState y, double h) {
         State newState = (State) y.addmultiply(h, f.motion(h, y));
 
         return newState;

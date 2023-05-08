@@ -9,5 +9,5 @@ public interface IState {
      * @param step    time step of update
      * @param accRate acceleration rate over time-step
      */
-    public IState addmultiply(double step, IAcceleration accRate);
+    public IState addmultiply(double step, IAccelerationRate accRate);
 }
