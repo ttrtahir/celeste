@@ -18,4 +18,8 @@ public class SolarSystem {
     public State[] getStates() {
         return states;
     }
+
+    public CelestialBody[] getCelestialBodies() {
+        return CelestialBody.celestialBodies;
+    }
 }

@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import Simulator.CelestialBody;
+import Simulator.SolarSystem;
+
 public class Main extends JPanel {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Solar System Simulation");
@@ -15,28 +18,17 @@ public class Main extends JPanel {
 
         ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 
-        /* TODO: Will be replaced by reading from a file */
+        /* TODO: Finish */
+        SolarSystem solarSystem = new SolarSystem();
 
-        PlanetStats sunStats = new PlanetStats();
-        sunStats.name = "Sun";
-        sunStats.size = 200;
-        sunStats.color = java.awt.Color.YELLOW;
-
-        Drawable sunDrawable = new Planet(, sunStats);
-
-        PlanetStats earthStats = new PlanetStats();
-        earthStats.name = "Earth";
-        earthStats.size = 100;
-        earthStats.color = java.awt.Color.BLUE;
-
-        Drawable earthDrawable = new Planet(earth, earthStats);
+        for (CelestialBody celestialBody : solarSystem.getCelestialBodies()) {
+            Drawable temp = new Planet(celestialBody);
+            drawables.add(temp);
+        }
 
         Drawable bg = new Background();
-        /* End TODO: */
 
         drawables.add(bg);
-        drawables.add(sunDrawable);
-        drawables.add(earthDrawable);
 
         JLayeredPane layeredPane = new JLayeredPane();
 

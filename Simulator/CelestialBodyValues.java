@@ -1,11 +1,9 @@
 package Simulator;
 
 public class CelestialBodyValues {
-    public CelestialBody[] celestialBodies;
+    public CelestialBody[] celestialBodies = new CelestialBody[12];
 
     public CelestialBodyValues() {
-        celestialBodies = new CelestialBody[12];
-
         for (int i = 0; i < Values.positions.length; i++) {
             celestialBodies[i] = new CelestialBody(Values.NAMES[i]);
 
@@ -18,6 +16,10 @@ public class CelestialBodyValues {
             celestialBodies[i].veloX = Values.velocity[i][0];
             celestialBodies[i].veloY = Values.velocity[i][1];
             celestialBodies[i].veloZ = Values.velocity[i][2];
+
+            celestialBodies[i].color = Values.COLORS[i];
+            celestialBodies[i].size = Values.SIZES[i];
+            celestialBodies[i].name = Values.NAMES[i];
 
             celestialBodies[i].createVectors();
         }

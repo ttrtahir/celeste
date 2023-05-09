@@ -1,9 +1,14 @@
 package Simulator;
 
+import java.awt.Color;
+
 import Interface.IVector3;
 
 public class CelestialBody {
     public String name;
+    public Color color;
+    public int size;
+
     public int step;
 
     public double mass;
