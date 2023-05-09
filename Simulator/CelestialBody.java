@@ -7,7 +7,6 @@ public class CelestialBody {
     public int step;
 
     public double mass;
-    public double size;
     public double gravity;
 
     // velocity

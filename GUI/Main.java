@@ -17,21 +17,13 @@ public class Main extends JPanel {
 
         /* TODO: Will be replaced by reading from a file */
 
-        CelestialBody sun = new CelestialBody();
-        sun.posX = 0;
-        sun.posY = 0;
-        sun.posZ = 0;
         PlanetStats sunStats = new PlanetStats();
         sunStats.name = "Sun";
         sunStats.size = 200;
         sunStats.color = java.awt.Color.YELLOW;
 
-        Drawable sunDrawable = new Planet(sun, sunStats);
+        Drawable sunDrawable = new Planet(, sunStats);
 
-        CelestialBody earth = new CelestialBody();
-        earth.posX = 100;
-        earth.posY = 100;
-        earth.posZ = 1;
         PlanetStats earthStats = new PlanetStats();
         earthStats.name = "Earth";
         earthStats.size = 100;
@@ -68,7 +60,6 @@ public class Main extends JPanel {
         frame.addMouseWheelListener(new MouseEvents());
 
         while (true) {
-            sun.posX += 0.000001;
             frame.repaint();
         }
     }

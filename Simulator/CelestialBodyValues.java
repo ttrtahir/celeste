@@ -2,30 +2,24 @@ package Simulator;
 
 public class CelestialBodyValues {
     public CelestialBody[] celestialBodies;
-    public CelestialBodyValues(){
+
+    public CelestialBodyValues() {
         celestialBodies = new CelestialBody[12];
 
-        //sun
-        CelestialBody sun = new CelestialBody("Sun");
-        sun.mass = 1.9885e+30;
-        sun.size = 2;
-        sun.posX = 0;
-        sun.posY = 0;
-        sun.posZ = 0;
-        sun.veloX = 0;
-        sun.veloY = 0;
-        sun.veloZ = 0;
-        sun.createVectors();
-        celestialBodies[0] = sun;
+        for (int i = 0; i < Values.positions.length; i++) {
+            celestialBodies[i] = new CelestialBody(Values.NAMES[i]);
 
-        //mercury
+            celestialBodies[i].mass = Values.mass[i][0];
 
-        //venus
+            celestialBodies[i].posX = Values.positions[i][0];
+            celestialBodies[i].posY = Values.positions[i][1];
+            celestialBodies[i].posZ = Values.positions[i][2];
 
-        //earth
+            celestialBodies[i].veloX = Values.velocity[i][0];
+            celestialBodies[i].veloY = Values.velocity[i][1];
+            celestialBodies[i].veloZ = Values.velocity[i][2];
 
-        //moon
-
-        //
+            celestialBodies[i].createVectors();
+        }
     }
 }
