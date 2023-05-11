@@ -1,5 +1,7 @@
 package GUI;
-
+/*
+ * Contains a custom style
+ */
 import java.awt.Color;
 import java.awt.Font;
 

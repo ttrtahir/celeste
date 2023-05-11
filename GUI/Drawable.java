@@ -1,5 +1,7 @@
 package GUI;
-
+/*
+ * Interface class for drawing objects
+ */
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;

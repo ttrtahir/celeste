@@ -1,5 +1,7 @@
 package GUI;
-
+/*
+ * Contains methods required to draw the celestialBody
+ */
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
@@ -11,13 +13,13 @@ public class DrawFunctions {
         static int STAR_COUNT = 500;
         static int[] STAR_SIZES = new int[500];
         static int[][] starPositions = new int[STAR_COUNT][3];
-        static {
+        static { //Creates stars at specific positions
                 for (int i = 0; i < STAR_COUNT; i++) {
                         starPositions[i][0] = (int) (Math.random() * 2000);
                         starPositions[i][1] = (int) (Math.random() * 1200);
                         starPositions[i][2] = (int) (Math.random() * 200);
-
-                        STAR_SIZES[i] = (int) (Math.random() * 2 + 2 + starPositions[i][2] / 255 * 2);
+                        
+                        STAR_SIZES[i] = (int) (Math.random() * 2 + 2 + starPositions[i][2] / 255 * 2);//Randomise the size of the stars
                 }
         }
 
@@ -38,13 +40,13 @@ public class DrawFunctions {
                 DrawFunctions.focusScale = focusScale;
                 DrawFunctions.system = system;
         }
-
+        //Colors the background
         public static void drawBackground() {
                 // set HEX color
                 g.setColor(Color.decode("#000"));
                 g.fillRect(0, 0, 2000, 2000);
         }
-
+        //Colors the background stars
         public static void drawBackgroundStars() {
                 // set HEX color
                 for (int i = 0; i < STAR_COUNT; i++) {
@@ -52,7 +54,7 @@ public class DrawFunctions {
                         g.fillOval(starPositions[i][0], starPositions[i][1], STAR_SIZES[i], STAR_SIZES[i]);
                 }
         }
-
+        //Colors the Orbits
         public static void drawOrbits(ArrayList<ArrayList<double[]>> celestialPositions) {
                 g.setColor(new Color(140, 140, 140));
                 for (int h = 0; h < celestialPositions.size(); h++) {
@@ -75,7 +77,7 @@ public class DrawFunctions {
                         }
                 }
         }
-
+        //Creates a line that shows the Rocket's path
         public static void drawRocketPath(ArrayList<double[]> rocketPositions) {
                 g2.setStroke(new BasicStroke(3));
                 g.setColor(Color.red);
@@ -91,7 +93,7 @@ public class DrawFunctions {
                                                         - (focusScale[1] / SCALE)));
                 }
         }
-
+        //Creates the planets and sets their color
         public static void drawPlanets(CelestialBody[] planetsSortedByZ) {
                 for (int i = 0; i < system.celestialBody.length; i++) {
                         int bodyPositionX = (int) ((int) (planetsSortedByZ[i].getX()[0]) / SCALE) + (FRAME_WIDTH / 2)
@@ -125,7 +127,7 @@ public class DrawFunctions {
                         g2.draw(planet);
                 }
         }
-
+        // ?
         public static void drawStrings(int[] currentDate, int daysSinceStart, int focusIndex,
                         int calculationsSinceStart,
                         int fps) {

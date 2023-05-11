@@ -1,5 +1,7 @@
 package GUI;
-
+/*
+ * Contains methods for creating and coloring the Planet
+ */
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
@@ -19,11 +21,11 @@ public class Planet extends Drawable {
 
 	private int planetPositionX = 0;
 	private int planetPositionY = 0;
-
+	// Constructor for creating the celestialBody
 	public Planet(CelestialBody celestialBody) {
 		this.celestialBody = celestialBody;
 	}
-
+	//Method for creating the specific planet on specific position
 	public void draw(Graphics2D g2) {
 		g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
 				java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
@@ -35,7 +37,7 @@ public class Planet extends Drawable {
 		g2.setColor(celestialBody.color);
 		g2.draw(getPlanet());
 	}
-
+	//Calculates the position of the celestialBody
 	private void calculatePosition() {
 		this.planetPositionX = (int) (celestialBody.posX / GlobalState.SCALE
 				+ GlobalState.getCenter()[0]

@@ -1,5 +1,7 @@
 package GUI;
-
+/*
+ * Contains the variables that are used all across the files
+ */
 import java.awt.*;
 
 public class GlobalState {

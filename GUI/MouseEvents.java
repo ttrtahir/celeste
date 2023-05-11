@@ -1,5 +1,7 @@
 package GUI;
-
+/*
+ * Contains methods for the mouse events
+ */
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 

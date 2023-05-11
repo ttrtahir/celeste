@@ -1,5 +1,7 @@
 package GUI;
-
+/*
+ * Contains the main class for running and testing the project
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 
