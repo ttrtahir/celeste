@@ -19,7 +19,7 @@ public class ODEFunction implements IODEFunction {
      */
 
     @Override
-    public IAccelerationRate motion(double t, IState y) {
+    public IAccelerationRate call(double t, IState y) {
         acceleration.initialize(nBodies);
         System.out.println("acceleration before update " + acceleration.toString());
         // traverse all celestial bodies
@@ -32,7 +32,7 @@ public class ODEFunction implements IODEFunction {
                     Vector3 tempAcc = (Vector3) (((State) y).getPosition(j).subtract(((State) y).getPosition(i)))
                             .multiply(1 / distance);
                     // add the temporary acceleration to total acceleration of a planet
-                    acceleration.add(i, tempAcc);
+                    acceleration.addAcceleration(i, tempAcc);
                 }
             }
         }

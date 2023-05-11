@@ -88,7 +88,10 @@ public class Vector3 implements IVector3 {
 
     @Override
     public IVector3 addmultiply(double scalar, IVector3 anotherVector) {
-        return null;
+        double x = this.getX() + scalar * anotherVector.getX();
+        double y = this.getY() + scalar * anotherVector.getY();
+        double z = this.getZ() + scalar * anotherVector.getZ();
+        return (IVector3) new Vector3(x,y,z);
     }
 
     @Override

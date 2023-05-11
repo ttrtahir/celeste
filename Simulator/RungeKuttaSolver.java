@@ -75,10 +75,10 @@ public class RungeKuttaSolver implements IODESolver {
          * It might work or not
          * we not really sure because we don't know why it's working
          */
-        AccelerationRate k1 = (AccelerationRate) f.motion(t, y);
-        AccelerationRate k2 = (AccelerationRate) f.motion(t + (0.5 * h), y.addmultiply(0.5, k1));
-        AccelerationRate k3 = (AccelerationRate) f.motion(t + 0.5 * h, y.addmultiply(0.5, k2));
-        AccelerationRate k4 = (AccelerationRate) f.motion(t + 0.5 * h, y.addmultiply(1, k3));
+        AccelerationRate k1 = (AccelerationRate) f.call(t, y);
+        AccelerationRate k2 = (AccelerationRate) f.call(t + (0.5 * h), y.addmultiply(0.5, k1));
+        AccelerationRate k3 = (AccelerationRate) f.call(t + 0.5 * h, y.addmultiply(0.5, k2));
+        AccelerationRate k4 = (AccelerationRate) f.call(t + 0.5 * h, y.addmultiply(1, k3));
 
         IState newState = y.addmultiply(h / 6,
                 (AccelerationRate) ((IState) k1).addmultiply(2, k2).addmultiply(2, k3).addmultiply(1, k4));

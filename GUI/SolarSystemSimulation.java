@@ -1,24 +1,18 @@
 package GUI;
 
-import java.awt.Color;
+import Simulator.SolarSystem;
+
 import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.RenderingHints;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.Graphics2D;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import java.awt.geom.Ellipse2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JComboBox;
 
 import java.net.URL;
 

@@ -1,6 +1,5 @@
 package Simulator;
 
-import Interface.ICalculation;
 import Interface.IODEFunction;
 import Interface.IODESolver;
 import Interface.IState;
@@ -71,7 +70,7 @@ public class ODESolver implements IODESolver {
 
     @Override
     public IState step(IODEFunction f, double t, IState y, double h) {
-        State newState = (State) y.addmultiply(h, f.motion(h, y));
+        State newState = (State) y.addmultiply(h, f.call(h, y));
 
         return newState;
     }

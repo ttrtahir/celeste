@@ -28,4 +28,6 @@ public class CelestialBody extends JPanel {
     public void createVectors() {
 
     }
+
+
 }

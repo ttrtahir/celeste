@@ -17,5 +17,5 @@ public interface IODEFunction {
      * @param y at the state of using function
      * @return motion of each planet
      */
-    public IAccelerationRate motion(double t, IState y);
+    public IAccelerationRate call(double t, IState y);
 }

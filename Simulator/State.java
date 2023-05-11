@@ -28,11 +28,10 @@ public class State implements IState {
     public IState addmultiply(double step, IAccelerationRate accRate) {
         State newState = new State();
 
-        for (int i = 0; i < state.length; i++) {
-            // update velocity
-            newState.addPosition(i, state[i][0].addmultiply(step, ((AccelerationRate) accRate).getVelocity(i)));
-            // update position
-            newState.addVelocity(i, state[i][1].addmultiply(step, ((AccelerationRate) accRate).getAcceleration(i)));
+        for (int i = 0; i < this.state.length; i++) {
+
+            newState.addPosition(i, this.state[i][0].addmultiply(step, ((AccelerationRate) accRate).getVelocity(i)));
+            newState.addVelocity(i, this.state[i][1].addmultiply(step, ((AccelerationRate) accRate).getAcceleration(i)));
         }
 
         int i = 11;

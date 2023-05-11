@@ -1,8 +1,5 @@
 package GUI;
 
-/*
- * Contains the main class for running and testing the project
- */
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,7 +9,6 @@ import javax.swing.JPanel;
 
 import Simulator.CelestialBody;
 import Simulator.SolarSystem;
-import Simulator.State;
 
 public class Main extends JPanel {
     public static void main(String[] args) {
@@ -25,12 +21,9 @@ public class Main extends JPanel {
         /* TODO: Finish */
         SolarSystem solarSystem = new SolarSystem();
 
-        ArrayList<PlanetStats> planetStats = new ArrayList<PlanetStats>();
-
-        for (int i = 0; i < 11; i++) {
-            planetStats.add(new PlanetStats(Values.NAMES[i], 60, Values.COLORS[i]));
-
-            drawables.add(new Planet(planetStats.get(i)));
+        for (CelestialBody celestialBody : solarSystem.getCelestialBodies()) {
+            Drawable temp = new Planet(celestialBody);
+            drawables.add(temp);
         }
 
         Drawable bg = new Background();
@@ -39,14 +32,13 @@ public class Main extends JPanel {
 
         JLayeredPane layeredPane = new JLayeredPane();
 
+        /* For some reason in JLayeredPane the first rendered is the one in front */
+        Collections.reverse(drawables);
         for (Drawable drawable : drawables) {
             drawable.setOpaque(true);
             drawable.setBounds(0, 0, GlobalState.FRAME_WIDTH, GlobalState.FRAME_HEIGHT);
             layeredPane.add(drawable);
         }
-
-        /* For some reason in JLayeredPane the first rendered is the one in front */
-        Collections.reverse(drawables);
 
         frame.add(layeredPane);
 
@@ -59,19 +51,8 @@ public class Main extends JPanel {
          */
         frame.addMouseWheelListener(new MouseEvents());
 
-        int currStateIndex = 0;
-        State[] states = solarSystem.getStates();
         while (true) {
             frame.repaint();
-
-            /*
-             * for (int i = 0; i < 11; i++) {
-             * planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
-             * (int) states[currStateIndex].state[i][0].getX());
-             * }
-             */
-
-            currStateIndex++;
         }
     }
 }
