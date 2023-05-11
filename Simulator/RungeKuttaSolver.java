@@ -69,11 +69,21 @@ public class RungeKuttaSolver implements IODESolver {
 
     @Override
     public IState step(IODEFunction f, double t, IState y, double h) {
-        // TODO Auto-generated method stub
-        double k1 = (double) y.addmultiply(h, f.motion(t, y));
-        State k2 = (State) y.addmultiply(h, f.motion(t + 0.5 * h, y + (0.5 * k1)));
 
-        State newState = (State) y.addmultiply(h, f.motion(h, y));
+        /**
+         * TODO redo the casting part and variables
+         * It might work or not
+         * we not really sure because we don't know why it's working
+         */
+        AccelerationRate k1 = (AccelerationRate) f.motion(t, y);
+        AccelerationRate k2 = (AccelerationRate) f.motion(t + (0.5 * h), y.addmultiply(0.5, k1));
+        AccelerationRate k3 = (AccelerationRate) f.motion(t + 0.5 * h, y.addmultiply(0.5, k2));
+        AccelerationRate k4 = (AccelerationRate) f.motion(t + 0.5 * h, y.addmultiply(1, k3));
+
+        State newState = (State) y.addmultiply(h / 6,
+                (AccelerationRate) ((IState) k1).addmultiply(2, k2).addmultiply(2, k3).addmultiply(1, k4));
+
+        return newState;
 
     }
 
