@@ -22,8 +22,8 @@ public class Testing {
     static BufferedWriter bufferedWriter;
 
     public static void main(String[] args) {
-        System.out.println("Testing");
-
+        //System.out.println("Testing");
+        
         File outputFile = new File("C:\\newproject12\\p2\\Simulator\\testing");
         try{
             writer = new FileWriter(outputFile);
@@ -37,10 +37,10 @@ public class Testing {
                 h = stepSizes[i];
                 spaceProbe.trajectory(p0,v0, timeFinal, h);
 
-                double distEarthPos = earthPos.euclideanDist(spaceProbe.earthPosOneYear);
-                double distTitanPos = titanPos.euclideanDist(spaceProbe.titanPosOneYear);
+               // double distEarthPos = earthPos.euclideanDist(spaceProbe.earthPosOneYear);
+                //double distTitanPos = titanPos.euclideanDist(spaceProbe.titanPosOneYear);
 
-                bufferedWriter.write("Euler Method ,"+h+","+distEarthPos+","+distTitanPos);
+               // bufferedWriter.write("Euler Method ,"+h+","+distEarthPos+","+distTitanPos);
                 bufferedWriter.newLine();
 
                 System.out.println();

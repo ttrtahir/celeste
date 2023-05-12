@@ -35,10 +35,10 @@ public class State implements IState {
         }
 
         int i = 11;
-        System.out.println(
-                "position after update " + CelestialBody.celestialBodies[i].name + " " + newState.getPosition(i));
-        System.out.println(
-                "velocity after update" + CelestialBody.celestialBodies[i].name + " " + newState.getVelocity(i));
+        //System.out.println(
+        //        "position after update " + CelestialBody.celestialBodies[i].name + " " + newState.getPosition(i));
+        //System.out.println(
+        //        "velocity after update" + CelestialBody.celestialBodies[i].name + " " + newState.getVelocity(i));
         return newState;
     }
 

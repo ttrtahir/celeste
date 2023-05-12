@@ -20,6 +20,6 @@ public class PlanetStats {
         this.positionX = x;
         this.positionY = y;
 
-        System.out.println(name + " " + positionX + " " + positionY);
+       // System.out.println(name + " " + positionX + " " + positionY);
     }
 }

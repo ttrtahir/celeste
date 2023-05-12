@@ -21,7 +21,7 @@ public class ODEFunction implements IODEFunction {
     @Override
     public IAccelerationRate call(double t, IState y) {
         acceleration.initialize(nBodies);
-        System.out.println("acceleration before update " + acceleration.toString());
+        //System.out.println("acceleration before update " + acceleration.toString());
 
         //get dx = v
 
@@ -43,7 +43,7 @@ public class ODEFunction implements IODEFunction {
                 }
             }
         }
-        System.out.println("Acceleration after update " + acceleration.toString());
+        //System.out.println("Acceleration after update " + acceleration.toString());
         return acceleration;
     }
 

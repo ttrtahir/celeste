@@ -15,17 +15,22 @@ public class GeneticAlgorithm{
 
         initPopulation();
         
-        for(){
-            run calculations 
+        for(;;){
+            
         }
     }
 
-    
+    // TODO
+    private void initPopulation() {
+    }
+
+
     class Individual{
         // for each individual initial
         private Vector3 position = new Vector3(1,1,1);
-        private int velocity = 1;
+        private Vector3 velocity = new Vector3(1,1,1);
         private double fitness = 0;
+        private double velocityMax = 60;
         
         Individual(){
 

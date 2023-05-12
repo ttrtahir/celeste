@@ -97,7 +97,7 @@ public class EulerSolver implements IODESolver {
     @Override
     public IState step(IODEFunction f, double t, IState y, double h) {
         State newState = (State) y.addmultiply(h, f.call(t,y));
-        System.out.println("We are here\n\n\n\n\n\n\n\n\n\n " + t + "\n " );
+        //System.out.println("We are here\n\n\n\n\n\n\n\n\n\n " + t + "\n " );
         return newState;
     }
 
