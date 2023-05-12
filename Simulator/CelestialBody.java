@@ -35,6 +35,7 @@ public class CelestialBody {
     public CelestialBody(String celestialName) {
         name = celestialName;
         step = 0;
+
     }
 
     public void createVectors() {

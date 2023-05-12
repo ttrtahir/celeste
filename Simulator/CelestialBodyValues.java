@@ -1,9 +1,9 @@
 package Simulator;
-
+import Simulator.CelestialBody;
 public class CelestialBodyValues {
-    public CelestialBody[] celestialBodies;
+    //public CelestialBody[] celestialBodies;
     public CelestialBodyValues(){
-        celestialBodies = new CelestialBody[12];
+        CelestialBody.celestialBodies = new CelestialBody[12];
         //sun
         CelestialBody sun = new CelestialBody("Sun");
         sun.mass = 1.9885e+30;
@@ -15,7 +15,7 @@ public class CelestialBodyValues {
         sun.veloY = 0;
         sun.veloZ = 0;
         sun.createVectors();
-        celestialBodies[0] = sun;
+        CelestialBody.celestialBodies[0] = sun;
 
         //mercury
         CelestialBody mercury = new CelestialBody("Mercury");
@@ -27,7 +27,7 @@ public class CelestialBodyValues {
         mercury.veloY = 1.152095127176+01;
         mercury.veloZ = 6.21695374334136e+00;
         mercury.createVectors();
-        celestialBodies[1] = mercury;
+        CelestialBody.celestialBodies[1] = mercury;
 
         //venus
         CelestialBody venus = new CelestialBody("Venus");
@@ -39,7 +39,7 @@ public class CelestialBodyValues {
         venus.veloY = -8.96521274e+00;
         venus.veloZ = 1.840617353e+00;
         venus.createVectors();
-        celestialBodies[2] = venus;
+        CelestialBody.celestialBodies[2] = venus;
 
 
         //earth
@@ -52,7 +52,7 @@ public class CelestialBodyValues {
         earth.veloY = -2.939266e+01;
         earth.veloZ = 1.70974274e-03;
         earth.createVectors();
-        celestialBodies[3] = earth;
+        CelestialBody.celestialBodies[3] = earth;
 
 
         //moon
@@ -65,7 +65,7 @@ public class CelestialBodyValues {
         moon.veloY = -3.00480834e+01;
         moon.veloZ = -1.16103535e-02;
         moon.createVectors();
-        celestialBodies[4] = moon;
+        CelestialBody.celestialBodies[4] = moon;
 
         //mars
         CelestialBody mars = new CelestialBody("Mars");
@@ -77,7 +77,7 @@ public class CelestialBodyValues {
         mars.veloY = -1.34635253e+01;
         mars.veloZ = 1.523319282e-01;
         mars.createVectors();
-        celestialBodies[5] = mars;
+        CelestialBody.celestialBodies[5] = mars;
 
         //jupiter
         CelestialBody jupiter = new CelestialBody("Jupiter");
@@ -89,7 +89,7 @@ public class CelestialBodyValues {
         jupiter.veloY = 1.285550969e+01;
         jupiter.veloZ = 5.221181269e-02;
         jupiter.createVectors();
-        celestialBodies[6] = jupiter;
+        CelestialBody.celestialBodies[6] = jupiter;
 
         //saturn
         CelestialBody saturn = new CelestialBody("Saturn");
@@ -101,7 +101,7 @@ public class CelestialBodyValues {
         saturn.veloY = 8.2398954e+00;
         saturn.veloZ = -3.207454e-01;
         saturn.createVectors();
-        celestialBodies[7] = saturn;
+        CelestialBody.celestialBodies[7] = saturn;
 
 
         //titan
@@ -114,7 +114,7 @@ public class CelestialBodyValues {
         titan.veloY = 1.1108571e+01;
         titan.veloZ = -2.251309e+00;
         titan.createVectors();
-        celestialBodies[8] = titan;
+        CelestialBody.celestialBodies[8] = titan;
 
         //neptune
         CelestialBody neptune = new CelestialBody("Neptune");
@@ -126,7 +126,7 @@ public class CelestialBodyValues {
         neptune.veloY = 5.44610698e+00;
         neptune.veloZ = -1.22638125e-01;
         neptune.createVectors();
-        celestialBodies[9] = neptune;
+        CelestialBody.celestialBodies[9] = neptune;
 
         //uranus
         CelestialBody uranus = new CelestialBody("Uranus");
@@ -138,10 +138,7 @@ public class CelestialBodyValues {
         uranus.veloY = 4.220553472e+00;
         uranus.veloZ = 8.211903364e-02;
         uranus.createVectors();
-        celestialBodies[10] = uranus;
-
-
-
+        CelestialBody.celestialBodies[10] = uranus;
 
         //space probe
         CelestialBody spaceProbe = new CelestialBody("Space Probe");
@@ -153,10 +150,14 @@ public class CelestialBodyValues {
         spaceProbe.veloY = -43.49;
         spaceProbe.veloZ = -3.3;
         spaceProbe.createVectors();
-        celestialBodies[11] = spaceProbe;
+        CelestialBody.celestialBodies[11] = spaceProbe;
+
 
         //celestialBodies[i].color = Values.COLORS[i];
         //celestialBodies[i].size = Values.SIZES[i];
         //celestialBodies[i].name = Values.NAMES[i];
     }
 }
+
+
+

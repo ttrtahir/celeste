@@ -22,7 +22,14 @@ public class ODEFunction implements IODEFunction {
     public IAccelerationRate call(double t, IState y) {
         acceleration.initialize(nBodies);
         System.out.println("acceleration before update " + acceleration.toString());
-        // traverse all celestial bodies
+
+        //get dx = v
+
+        for(int i = 0; i < nBodies; i++){
+            Vector3 velocity = (Vector3) ((State) y).getVelocity(i);  //suspicious
+            acceleration.addVelocity(i, velocity);
+        }
+        // get dx = acceleration
         for (int i = 0; i < nBodies; i++) {
             double distance = 0;
             for (int j = 0; j < nBodies; j++) {

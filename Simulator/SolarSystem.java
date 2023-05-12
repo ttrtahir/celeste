@@ -13,7 +13,7 @@ public class SolarSystem {
     private static double h = 0.1*daySec;
 
     public SolarSystem() {
-        //inital
+        //inita; nodies
         CelestialBodyValues cbv = new CelestialBodyValues();
 
         states = new State[((int)Math.round((timeFinal/h))+ 1)];
