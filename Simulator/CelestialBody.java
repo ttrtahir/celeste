@@ -43,4 +43,8 @@ public class CelestialBody {
         veloVec = new Vector3(veloX, veloY, veloZ);
         accelVec = new Vector3(0, 0, 0);
     }
+
+    public double getMass() {
+        return mass;
+    }
 }
