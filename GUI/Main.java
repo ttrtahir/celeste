@@ -15,7 +15,7 @@ import Simulator.SolarSystem;
 import Simulator.State;
 
 public class Main extends JPanel {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         JFrame frame = new JFrame("Solar System Simulation");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +27,7 @@ public class Main extends JPanel {
         ArrayList<PlanetStats> planetStats = new ArrayList<PlanetStats>();
 
         for (int i = 0; i < 11; i++) {
-            planetStats.add(new PlanetStats(Values.NAMES[i], 60, Values.COLORS[i]));
+            planetStats.add(new PlanetStats(Values.NAMES[i], Values.SIZES[i], Values.COLORS[i]));
 
             drawables.add(new Planet(planetStats.get(i)));
         }
@@ -63,15 +63,19 @@ public class Main extends JPanel {
 
         int currStateIndex = 0;
         State[] states = solarSystem.getStates();
+
+        System.out.println("States ready ...");
+        System.out.println(states.length);
         while (true) {
             frame.repaint();
 
             for (int i = 0; i < 11; i++) {
                 planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
-                (int) states[currStateIndex].state[i][0].getX());
+                        (int) states[currStateIndex].state[i][0].getY());
             }
 
             currStateIndex++;
+            Thread.sleep(10);
         }
     }
 }

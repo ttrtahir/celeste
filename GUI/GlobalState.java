@@ -1,4 +1,5 @@
 package GUI;
+
 /*
  * Contains the variables that are used all across the files
  */
@@ -9,7 +10,7 @@ public class GlobalState {
     public static final int FRAME_WIDTH = (int) screenSize.getWidth();
     public static final int FRAME_HEIGHT = (int) screenSize.getHeight();
 
-    public static int SCALE = 1;
+    public static int SCALE = 2000000;
 
     public static int[] focusShift = { 0, 0, 0 };
 

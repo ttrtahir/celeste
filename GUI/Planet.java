@@ -13,8 +13,6 @@ public class Planet extends Drawable {
 	public void paintComponent(Graphics g) {
 		this.g2 = (Graphics2D) g;
 
-		System.out.println(planetStats.name);
-
 		this.draw(g2);
 	}
 
@@ -60,8 +58,7 @@ public class Planet extends Drawable {
 		g2.drawString(planetStats.name,
 				planetPositionX
 						- planetStats.name.length() * 3,
-				planetPositionY
-						- planetStats.size / 2 - 5);
+				planetPositionY);
 	}
 
 	private Ellipse2D.Double getPlanet() {

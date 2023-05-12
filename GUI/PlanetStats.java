@@ -19,5 +19,7 @@ public class PlanetStats {
     public void setPos(int x, int y) {
         this.positionX = x;
         this.positionY = y;
+
+        System.out.println(name + " " + positionX + " " + positionY);
     }
 }
