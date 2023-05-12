@@ -50,7 +50,6 @@ public class SolarSystem {
     public static void main(String[] args) {
         SolarSystem ss = new SolarSystem();
         ss.initialProcess();
-        int a = 5;
         System.out.println(ss.states[1].state[1][0]);
     }
 }

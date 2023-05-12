@@ -79,4 +79,10 @@ public class SpaceProbe implements ISpaceProbe {
         System.gc();
         return trajectory;
     }
+
+    public static void main(String[] args) {
+        SpaceProbe probe = new SpaceProbe();
+
+        probe.trajectory(new Vector3())
+    }
 }
