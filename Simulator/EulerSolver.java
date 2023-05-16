@@ -8,7 +8,7 @@ import Interface.IState;
 * class implementing Euler's method to calculate motion of objects in the solar system
 * */
 
-public class EulerSolver implements IODESolver {
+public class EulerSolver extends ODESolver {
     public State[] states;
 
     public Vector3[] earthPosition;
@@ -16,7 +16,7 @@ public class EulerSolver implements IODESolver {
     public Vector3[] titanPosition;
     public Vector3 titanPosOneYear;
 
-
+/*
     /**
      * solve ODE
      *
@@ -24,7 +24,7 @@ public class EulerSolver implements IODESolver {
      * @param y0 initial state
      * @param timeStep updated time steps
      * @return states of Solar System at different time
-     */
+     
     @Override
     public IState[] solve(IODEFunction f, IState y0, double[] timeStep) {
         //create array storing states at different time steps
@@ -42,8 +42,8 @@ public class EulerSolver implements IODESolver {
         //updating positions for 1 step
         updateState(f, timeStep);
         return states;
-    }
-
+    }*/
+    /*
     @Override
     public IState[] solve(IODEFunction f, IState y0, double timeFinal, double h) {
 
@@ -84,7 +84,7 @@ public class EulerSolver implements IODESolver {
         titanPosOneYear = (Vector3) states[states.length -1].getPosition(8);
         earthPosOneYear = (Vector3) states[states.length-1].getPosition(3);
     }
-
+    */
     /**
      * calculating one step
      *
@@ -97,7 +97,6 @@ public class EulerSolver implements IODESolver {
     @Override
     public IState step(IODEFunction f, double t, IState y, double h) {
         State newState = (State) y.addmultiply(h, f.call(t,y));
-        //System.out.println("We are here\n\n\n\n\n\n\n\n\n\n " + t + "\n " );
         return newState;
     }
 
