@@ -26,7 +26,7 @@ public class Main extends JPanel {
 
         ArrayList<PlanetStats> planetStats = new ArrayList<PlanetStats>();
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i <= 11; i++) {
             planetStats.add(new PlanetStats(Values.NAMES[i], Values.SIZES[i], Values.COLORS[i]));
 
             drawables.add(new Planet(planetStats.get(i)));
@@ -69,7 +69,7 @@ public class Main extends JPanel {
         while (true) {
             frame.repaint();
 
-            for (int i = 0; i < 11; i++) {
+            for (int i = 0; i <= 11; i++) {
                 planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
                         (int) states[currStateIndex].state[i][0].getY());
             }
