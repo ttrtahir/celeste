@@ -82,7 +82,7 @@ public class Vector3 implements IVector3 {
     @Override
     public double euclideanDist(IVector3 another) {
         double d = Math.sqrt((Math.pow((this.x - another.getX()), 2) + Math.pow((this.y - another.getY()), 2)
-                + Math.pow(this.z - another.getZ(), 2)));
+                + Math.pow((this.z - another.getZ()), 2)));
         return d;
     }
 
