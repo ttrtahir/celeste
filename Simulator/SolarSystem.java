@@ -2,6 +2,8 @@ package Simulator;
 
 import java.io.OptionalDataException;
 
+import Interface.IODESolver;
+
 public class SolarSystem {
 
     public OptionalDataException celestialBody;
@@ -29,7 +31,7 @@ public class SolarSystem {
          */
 
         states[0].inputState();
-        ODESolver solver = new ODESolver();
+        IODESolver solver = new ODESolver();
         states = (State[]) solver.solve(new ODEFunction(),(State) states[0],h, timeFinal);
 
 
