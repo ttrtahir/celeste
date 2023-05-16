@@ -54,12 +54,25 @@ public class AccelerationRate implements IAccelerationRate {
      */
     public AccelerationRate add(AccelerationRate anotherVec){
 
+        // return addMultiply(1, anotherVec); Alternatively
         AccelerationRate newRate = new AccelerationRate();
         newRate.initialize(nBodies);
 
         for(int i = 1; i < accRate.length; i++){
             newRate.accRate[i][0] = (Vector3) this.accRate[i][0].add(anotherVec.getVelocity(i));
             newRate.accRate[i][1] = (Vector3) this.accRate[i][1].add(anotherVec.getAcceleration(i));
+        }
+        return newRate;
+    }
+
+    public AccelerationRate addMultiply(double stepsize, AccelerationRate anotherVec){
+        
+        AccelerationRate newRate = new AccelerationRate();
+        newRate.initialize(nBodies);
+
+        for(int i = 1; i < accRate.length; i++){
+            newRate.accRate[i][0] = (Vector3) this.accRate[i][0].add(anotherVec.getVelocity(i).multiply(stepsize));
+            newRate.accRate[i][1] = (Vector3) this.accRate[i][1].add(anotherVec.getAcceleration(i).multiply(stepsize));
         }
         return newRate;
     }
