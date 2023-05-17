@@ -20,37 +20,37 @@ public class CelestialBodyValues {
         //mercury
         CelestialBody mercury = new CelestialBody("Mercury");
         mercury.mass = 3.302e+23;
-        mercury.posX = 7.833268e+06;
-        mercury.posY = 4.4885949e+07;
-        mercury.posZ = 2.867693e+06;
-        mercury.veloX = -5.754967480139828e+01;
-        mercury.veloY = 1.152095127176+01;
-        mercury.veloZ = 6.21695374334136e+00;
+        mercury.posX = 7833268.43923962;
+        mercury.posY = 44885949.3703908;
+        mercury.posZ = 2867693.20054382;
+        mercury.veloX = -57.4967480139828;
+        mercury.veloY = 11.52095127176;
+        mercury.veloZ = 6.21695374334136;
         mercury.createVectors();
         CelestialBody.celestialBodies[1] = mercury;
 
         //venus
         CelestialBody venus = new CelestialBody("Venus");
-        venus.mass = 4.8685e+23;
-        venus.posX = -2.8216773e+07;
-        venus.posY = 1.03994008e+08;
-        venus.posZ = 3.012326e+06;
-        venus.veloX = -3.40236737e+01;
-        venus.veloY = -8.96521274e+00;
-        venus.veloZ = 1.840617353e+00;
+        venus.mass = 48.685e23;
+        venus.posX = -28216773.9426889;
+        venus.posY = 103994008.541512;
+        venus.posZ = 3012326.64296788;
+        venus.veloX = -34.0236737066136;
+        venus.veloY = -8.96521274688838;
+        venus.veloZ = 1.84061735279188;
         venus.createVectors();
         CelestialBody.celestialBodies[2] = venus;
 
 
         //earth
         CelestialBody earth = new CelestialBody("Earth");
-        earth.mass = 5.97219e+24;
-        earth.posX = -1.48186906e+08;
-        earth.posY = -2.7823158e+07;
-        earth.posZ = 3.3746898e+04;
-        earth.veloX = 5.052515e+00;
-        earth.veloY = -2.939266e+01;
-        earth.veloZ = 1.70974274e-03;
+        earth.mass = 5.97219e24;
+        earth.posX = -148186906.893642;
+        earth.posY = -27823158.5715694;
+        earth.posZ = 33746.8987977113;
+        earth.veloX = 5.05251577575409;
+        earth.veloY = -29.3926687625899;
+        earth.veloZ = 0.00170974277401292;
         earth.createVectors();
         CelestialBody.celestialBodies[3] = earth;
 
@@ -58,36 +58,36 @@ public class CelestialBodyValues {
         //moon
         CelestialBody moon = new CelestialBody("Moon");
         moon.mass = 7.349e+22;
-        moon.posX = -1.48458048e+08;
-        moon.posY = -2.7823158e+07;
-        moon.posZ = 7.0233e+04;
-        moon.veloX = 4.34032634e+00;
-        moon.veloY = -3.00480834e+01;
-        moon.veloZ = -1.16103535e-02;
+        moon.posX = -148458048.395164;
+        moon.posY = -27524868.1841142;
+        moon.posZ = 70233.6499287411;
+        moon.veloX = 4.34032634654904;
+        moon.veloY = -30.0480834180741;
+        moon.veloZ = -0.0116103535014229;
         moon.createVectors();
         CelestialBody.celestialBodies[4] = moon;
 
         //mars
         CelestialBody mars = new CelestialBody("Mars");
         mars.mass = 6.4171e+23;
-        mars.posX = -1.59116303e+08;
-        mars.posY = 1.89235671e+08;
-        mars.posZ = 7.870476e+06;
-        mars.veloX = -1.76954469e+01;
-        mars.veloY = -1.34635253e+01;
-        mars.veloZ = 1.523319282e-01;
+        mars.posX = -159116303.422552;
+        mars.posY = 189235671.561057;
+        mars.posZ = 7870476.08522969;
+        mars.veloX = -17.6954469224752;
+        mars.veloY = -13.4635253412947;
+        mars.veloZ = 0.152331928200531;
         mars.createVectors();
         CelestialBody.celestialBodies[5] = mars;
 
         //jupiter
         CelestialBody jupiter = new CelestialBody("Jupiter");
-        jupiter.mass = 1.89818722e+27;
-        jupiter.posX = 6.92722875e+08;
-        jupiter.posY = 2.58560760e+08;
-        jupiter.posZ = -1.6570817e+07;
-        jupiter.veloX = -4.7144306e+00;
-        jupiter.veloY = 1.285550969e+01;
-        jupiter.veloZ = 5.221181269e-02;
+        jupiter.mass = 189818722e19;
+        jupiter.posX = 692722875.928222;
+        jupiter.posY = 258560760.813524;
+        jupiter.posZ = -16570817.7105996;
+        jupiter.veloX = -4.71443059866156;
+        jupiter.veloY = 12.8555096964427;
+        jupiter.veloZ = 0.0522118126939208;
         jupiter.createVectors();
         CelestialBody.celestialBodies[6] = jupiter;
 
@@ -130,7 +130,7 @@ public class CelestialBodyValues {
 
         //uranus
         CelestialBody uranus = new CelestialBody("Uranus");
-        uranus.mass = 8.6813e+24;
+        uranus.mass = 8.6813e+25;
         uranus.posX = 1.958732435e+09;
         uranus.posY = 2.191808553e+09;
         uranus.posZ = -1.7235283e+07;
