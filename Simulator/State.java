@@ -33,18 +33,8 @@ public class State implements IState {
             newState.addPosition(i, this.state[i][0].addmultiply(step, ((AccelerationRate) accRate).getVelocity(i)));
             newState.addVelocity(i, this.state[i][1].addmultiply(step, ((AccelerationRate) accRate).getAcceleration(i)));
         }
-
-        int i = 11;
-        //System.out.println(
-        //        "position after update " + CelestialBody.celestialBodies[i].name + " " + newState.getPosition(i));
-        //System.out.println(
-        //        "velocity after update" + CelestialBody.celestialBodies[i].name + " " + newState.getVelocity(i));
         return newState;
     }
-
-    //public State updatePosition(double step, IRate newRate)
-
-    //public State updateVelocity(doubl step, IRate newRate)
 
     public void addPosition(int i, IVector3 position) {
         state[i][0] = position;
