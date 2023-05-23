@@ -65,6 +65,7 @@ public class Planet extends Drawable {
 		return new Ellipse2D.Double(
 				planetPositionX,
 				planetPositionY,
-				planetStats.size, planetStats.size);
+				planetStats.size - (int) (GlobalState.SCALE / 500000),
+				planetStats.size - (int) (GlobalState.SCALE / 500000));
 	}
 }
