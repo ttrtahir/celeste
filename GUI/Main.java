@@ -32,9 +32,12 @@ public class Main extends JPanel {
             drawables.add(new Planet(planetStats.get(i)));
         }
 
-        Drawable bg = new Background();
+        Text daysText = new Text(100, 100);
+        Text iText = new Text(100, 200);
+        drawables.add((Drawable) daysText);
+        drawables.add((Drawable) iText);
 
-        drawables.add(bg);
+        drawables.add(new Background());
 
         JLayeredPane layeredPane = new JLayeredPane();
 
@@ -63,19 +66,24 @@ public class Main extends JPanel {
 
         int currStateIndex = 0;
         State[] states = solarSystem.getStates();
+        int daysSinceStart = 0;
 
         System.out.println("States ready ...");
         System.out.println(states.length);
         while (true) {
             frame.repaint();
 
+            daysSinceStart = (int) (currStateIndex * 0.01);
+
             for (int i = 0; i <= 11; i++) {
                 planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
                         (int) states[currStateIndex].state[i][0].getY());
             }
+            daysText.setText("Time: " + daysSinceStart + " days");
+            iText.setText("i: " + currStateIndex);
 
             currStateIndex++;
-            Thread.sleep(10);
+            Thread.sleep(1);
         }
     }
 }
