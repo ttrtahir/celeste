@@ -60,6 +60,8 @@ public class Main extends JPanel {
          * - Reintroduce simulation speed
          */
         frame.addMouseWheelListener(new MouseEvents());
+        KeyEvents keyEvents = new KeyEvents(planetStats);
+        frame.addKeyListener(keyEvents);
 
         SolarSystem solarSystem = new SolarSystem();
         solarSystem.initialProcess();
@@ -74,6 +76,7 @@ public class Main extends JPanel {
             frame.repaint();
 
             daysSinceStart = (int) (currStateIndex * 0.01);
+            keyEvents.setPlanetStats(planetStats);
 
             for (int i = 0; i <= 11; i++) {
                 planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
