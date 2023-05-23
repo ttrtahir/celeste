@@ -83,7 +83,7 @@ public class Main extends JPanel {
             iText.setText("i: " + currStateIndex);
 
             currStateIndex++;
-            Thread.sleep(1);
+            Thread.sleep(10);
         }
     }
 }
