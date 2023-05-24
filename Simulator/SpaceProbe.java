@@ -6,10 +6,10 @@ import Interface.IVector3;
 public class SpaceProbe implements ISpaceProbe {
     public State y0;
     public Vector3[] trajectory;
-    /*public Vector3[] earthPos;
+    public Vector3[] earthPos;
     public Vector3 earthPosOneYear;
     public Vector3 titanPosOneYear;
-    public Vector3[] titanPos; */
+    public Vector3[] titanPos;
     public State[] states;
 
    // Vector3[] positions;
@@ -17,6 +17,7 @@ public class SpaceProbe implements ISpaceProbe {
     //Vector3[] gravValues;
 
     public EulerSolver eulerSolver;
+    public RK4 rungeKuttaSolver;
     public ODEFunction f = new ODEFunction();
 
     /**
@@ -39,10 +40,10 @@ public class SpaceProbe implements ISpaceProbe {
         eulerSolver = new EulerSolver();
         states = (State[]) eulerSolver.solve(f,y0,timeStep);
 
-       /* earthPos = eulerSolver.earthPosition;
-        earthPosOneYear = eulerSolver.earthPosOneYear;
-        titanPos = eulerSolver.titanPosition;
-        titanPosOneYear = eulerSolver.titanPosOneYear; */
+//       earthPos = eulerSolver.earthPosition;
+//        earthPosOneYear = eulerSolver.earthPosOneYear;
+//        titanPos = eulerSolver.titanPosition;
+//        titanPosOneYear = eulerSolver.titanPosOneYear;
 
         trajectory = new Vector3[timeStep.length];
         for(int i = 0 ; i < trajectory.length; i++){
