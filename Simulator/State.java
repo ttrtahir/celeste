@@ -18,8 +18,8 @@ public class State implements IState {
             state[i][0] = CelestialBody.celestialBodies[i].posVec;
             state[i][1] = CelestialBody.celestialBodies[i].veloVec;
 
-            System.out.println("Initial position of " + CelestialBody.celestialBodies[i].name + " " + state[i][0]);
-            System.out.println("Initial velocity of " + CelestialBody.celestialBodies[i].name + " " + state[i][1]);
+            //System.out.println("Initial position of " + CelestialBody.celestialBodies[i].name + " " + state[i][0]);
+            //System.out.println("Initial velocity of " + CelestialBody.celestialBodies[i].name + " " + state[i][1]);
         }
 
     }
