@@ -91,7 +91,7 @@ public class Main extends JPanel {
             iText.setText("i: " + currStateIndex);
 
             currStateIndex++;
-            Thread.sleep(10);
+            Thread.sleep(GlobalState.simulationSpeed);
         }
     }
 }

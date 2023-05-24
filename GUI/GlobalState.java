@@ -12,6 +12,9 @@ public class GlobalState {
 
     public static boolean paused = false;
 
+    public static int simulationSpeedIncrement = 2;
+    public static int simulationSpeed = 10;
+
     public static int SCALE = 2000000;
 
     public static PlanetStats planetFocused = new PlanetStats(null, 0, null);

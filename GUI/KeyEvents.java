@@ -40,6 +40,13 @@ public class KeyEvents implements KeyListener {
             GlobalState.planetFocused = planetStats.get(focuseablePlanets[currentIndex]);
         } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
             GlobalState.paused = !GlobalState.paused;
+        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+            GlobalState.simulationSpeed -= GlobalState.simulationSpeedIncrement;
+            GlobalState.simulationSpeed = Math.max(1, GlobalState.simulationSpeed);
+        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN) {
+            GlobalState.simulationSpeed += GlobalState.simulationSpeedIncrement;
+        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
+            System.exit(0);
         }
     }
 
