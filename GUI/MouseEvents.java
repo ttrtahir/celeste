@@ -8,7 +8,6 @@ import java.awt.event.MouseWheelListener;
 
 public class MouseEvents implements MouseWheelListener {
     public MouseEvents() {
-
     }
 
     @Override

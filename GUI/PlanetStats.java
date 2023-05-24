@@ -7,8 +7,8 @@ public class PlanetStats {
     public int size;
     public Color color;
 
-    public int positionX;
-    public int positionY;
+    public int positionX = 0;
+    public int positionY = 0;
 
     public PlanetStats(String name, int size, Color color) {
         this.name = name;
@@ -20,6 +20,6 @@ public class PlanetStats {
         this.positionX = x;
         this.positionY = y;
 
-       // System.out.println(name + " " + positionX + " " + positionY);
+        // System.out.println(name + " " + positionX + " " + positionY);
     }
 }
