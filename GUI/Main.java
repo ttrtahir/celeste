@@ -73,6 +73,11 @@ public class Main extends JPanel {
         System.out.println("States ready ...");
         System.out.println(states.length);
         while (true) {
+            if (GlobalState.paused) {
+                frame.repaint();
+                continue;
+            }
+
             frame.repaint();
 
             daysSinceStart = (int) (currStateIndex * 0.01);

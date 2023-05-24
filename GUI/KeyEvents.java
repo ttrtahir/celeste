@@ -3,6 +3,8 @@ package GUI;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.lang.model.util.ElementScanner6;
+
 /*
  * Contains methods for the mouse events
  */
@@ -36,6 +38,8 @@ public class KeyEvents implements KeyListener {
 
             currentIndex++;
             GlobalState.planetFocused = planetStats.get(focuseablePlanets[currentIndex]);
+        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
+            GlobalState.paused = !GlobalState.paused;
         }
     }
 

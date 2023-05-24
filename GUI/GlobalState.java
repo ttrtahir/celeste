@@ -10,6 +10,8 @@ public class GlobalState {
     public static final int FRAME_WIDTH = (int) screenSize.getWidth();
     public static final int FRAME_HEIGHT = (int) screenSize.getHeight();
 
+    public static boolean paused = false;
+
     public static int SCALE = 2000000;
 
     public static PlanetStats planetFocused = new PlanetStats(null, 0, null);
