@@ -14,6 +14,8 @@ public class Text extends Drawable {
     private int x = 0;
     private int y = 0;
 
+    private boolean center = false;
+
     @Override
     public void paintComponent(Graphics g) {
         this.g2 = (Graphics2D) g;
@@ -29,6 +31,12 @@ public class Text extends Drawable {
         this.y = y;
     }
 
+    public Text(int x, int y, boolean center) {
+        this.x = x;
+        this.y = y;
+        this.center = center;
+    }
+
     // Method for creating the specific planet on specific position
     public void draw(Graphics2D g2) {
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
@@ -36,7 +44,12 @@ public class Text extends Drawable {
 
         g2.setFont(Style.fontBig);
         g2.setColor(Color.WHITE);
-        g2.drawString(this.text, this.x, this.y);
+
+        int tempX = this.x;
+        if (center) {
+            tempX = this.x - g2.getFontMetrics().stringWidth(this.text) / 2;
+        }
+        g2.drawString(this.text, tempX, this.y);
     }
 
     public void setText(String text) {

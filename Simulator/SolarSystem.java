@@ -12,7 +12,7 @@ public class SolarSystem {
     private static double daySec = 60 * 24 * 60;
 
     public long timeFinal = 60 * 24 * 60 * 365 * 2;
-    public static double h = 0.1 * daySec;
+    public static double h = 0.01 * daySec;
 
     public SolarSystem() {
         // inita; nodies

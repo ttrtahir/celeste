@@ -32,8 +32,11 @@ public class Main extends JPanel {
             drawables.add(new Planet(planetStats.get(i)));
         }
 
-        Text daysText = new Text(612, 40);
+        Text currentDateText = new Text(GlobalState.getCenter()[0], 40, true);
+        Text daysText = new Text(GlobalState.getCenter()[0], 70, true);
         Text iText = new Text(100, 200);
+
+        drawables.add((Drawable) currentDateText);
         drawables.add((Drawable) daysText);
         drawables.add((Drawable) iText);
 
@@ -82,7 +85,8 @@ public class Main extends JPanel {
 
             frame.repaint();
 
-            daysSinceStart = (int) (currStateIndex * 0.1); // No idea why 0.1 works, but it calculates days EXACTLY
+            daysSinceStart = (int) (currStateIndex * 0.01); // No idea why 0.1 works, but it calculates days EXACTLY
+                                                             // Yoo, it's actually the step size multiplier
             keyEvents.setPlanetStats(planetStats);
 
             for (int i = 0; i <= 11; i++) {
@@ -92,7 +96,8 @@ public class Main extends JPanel {
 
             int[] currDate = Values.getDateFromDays(daysSinceStart);
 
-            daysText.setText(Values.MONTHS[currDate[1]] + " " + currDate[2] + " " + currDate[0]);
+            currentDateText.setText(Values.MONTHS[currDate[1] % 12] + " " + (currDate[2] - 1) + ", " + currDate[0]);
+            daysText.setText("Days since start: " + daysSinceStart);
             iText.setText("i: " + currStateIndex);
 
             currStateIndex++;
