@@ -93,6 +93,11 @@ public class Vector3 implements IVector3 {
         double z = this.getZ() + scalar * anotherVector.getZ();
         return (IVector3) new Vector3(x,y,z);
     }
+    
+    @Override
+    public double getMagnitude(){
+        return euclideanDist(new Vector3(0,0,0));
+    }
 
     @Override
     public String toString() {

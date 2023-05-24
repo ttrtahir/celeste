@@ -29,5 +29,7 @@ public interface IVector3 {
      */
     public IVector3 addmultiply(double scalar, IVector3 anotherVector);
 
+    public double getMagnitude();
+
     public String toString();
 }
