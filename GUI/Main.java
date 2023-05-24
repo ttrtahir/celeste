@@ -32,9 +32,15 @@ public class Main extends JPanel {
             drawables.add(new Planet(planetStats.get(i)));
         }
 
-        Drawable bg = new Background();
+        Text currentDateText = new Text(GlobalState.getCenter()[0], 40, true);
+        Text daysText = new Text(GlobalState.getCenter()[0], 70, true);
+        Text iText = new Text(100, 200);
 
-        drawables.add(bg);
+        drawables.add((Drawable) currentDateText);
+        drawables.add((Drawable) daysText);
+        drawables.add((Drawable) iText);
+
+        drawables.add(new Background());
 
         JLayeredPane layeredPane = new JLayeredPane();
 
@@ -57,25 +63,46 @@ public class Main extends JPanel {
          * - Reintroduce simulation speed
          */
         frame.addMouseWheelListener(new MouseEvents());
+        KeyEvents keyEvents = new KeyEvents(planetStats);
+        frame.addKeyListener(keyEvents);
 
         SolarSystem solarSystem = new SolarSystem();
         solarSystem.initialProcess();
 
         int currStateIndex = 0;
         State[] states = solarSystem.getStates();
+        int daysSinceStart = 0;
 
         System.out.println("States ready ...");
         System.out.println(states.length);
+
+        int[] currentDate = { 2023, 4, 1 };
         while (true) {
+            if (GlobalState.paused) {
+                frame.repaint();
+                continue;
+            }
+
             frame.repaint();
+
+            daysSinceStart = (int) (currStateIndex * 0.01); // No idea why 0.1 works, but it calculates days EXACTLY
+                                                             // Yoo, it's actually the step size multiplier
+            keyEvents.setPlanetStats(planetStats);
 
             for (int i = 0; i <= 11; i++) {
                 planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
                         (int) states[currStateIndex].state[i][0].getY());
             }
 
+            int[] currDate = Values.getDateFromDays(daysSinceStart);
+
+            currentDateText.setText(Values.MONTHS[currDate[1] % 12] + " " + (currDate[2] - 1) + ", " + currDate[0]);
+            daysText.setText("Days since start: " + daysSinceStart);
+            iText.setText("i: " + currStateIndex);
+
             currStateIndex++;
-            Thread.sleep(10);
+            Thread.sleep(GlobalState.simulationSpeed);
         }
     }
+
 }

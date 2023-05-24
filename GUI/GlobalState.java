@@ -10,16 +10,21 @@ public class GlobalState {
     public static final int FRAME_WIDTH = (int) screenSize.getWidth();
     public static final int FRAME_HEIGHT = (int) screenSize.getHeight();
 
+    public static boolean paused = false;
+
+    public static int simulationSpeedIncrement = 2;
+    public static int simulationSpeed = 10;
+
     public static int SCALE = 2000000;
 
-    public static int[] focusShift = { 0, 0, 0 };
+    public static PlanetStats planetFocused = new PlanetStats(null, 0, null);
 
     public static int getFocusShiftX() {
-        return focusShift[0] / SCALE;
+        return planetFocused.positionX / SCALE;
     }
 
     public static int getFocusShiftY() {
-        return focusShift[1] / SCALE;
+        return planetFocused.positionY / SCALE;
     }
 
     public static int[] getCenter() {

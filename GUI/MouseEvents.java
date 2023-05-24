@@ -1,4 +1,5 @@
 package GUI;
+
 /*
  * Contains methods for the mouse events
  */
@@ -7,16 +8,24 @@ import java.awt.event.MouseWheelListener;
 
 public class MouseEvents implements MouseWheelListener {
     public MouseEvents() {
-
     }
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = -e.getWheelRotation();
-        if (notches < 0) {
-            GlobalState.SCALE += 1;
+        int scaleIncrease = 300000;
+
+        if (GlobalState.SCALE < 100001) {
+            scaleIncrease = 1000;
+        } else if (GlobalState.SCALE <= 900001) {
+            scaleIncrease = 20000;
         } else {
-            GlobalState.SCALE -= 1;
+            scaleIncrease = 300000;
+        }
+        if (notches < 0) {
+            GlobalState.SCALE += scaleIncrease;
+        } else {
+            GlobalState.SCALE -= scaleIncrease;
         }
         GlobalState.SCALE = Math.max(1, GlobalState.SCALE);
     }

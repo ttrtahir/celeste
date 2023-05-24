@@ -1,13 +1,16 @@
-package Simulator;
+package Testing;
 
 import Interface.IVector3;
+import Simulator.CelestialBodyValues;
+import Simulator.SpaceProbe;
+import Simulator.Vector3;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Testing {
+public class Test {
     static CelestialBodyValues celestialBodyValues = new CelestialBodyValues();
     static IVector3 p0 = new Vector3(0,0,0);
     static IVector3 v0 = new Vector3(0,0,0);
@@ -24,7 +27,7 @@ public class Testing {
     public static void main(String[] args) {
         //System.out.println("Testing");
         
-        File outputFile = new File("C:\\newproject12\\p2\\Simulator\\testing");
+        File outputFile = new File("C:\\celeste\\Testing\\testing");
         try{
             writer = new FileWriter(outputFile);
             bufferedWriter =  new BufferedWriter(writer);
