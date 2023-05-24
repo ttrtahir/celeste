@@ -1,11 +1,12 @@
 package GUI;
+
 /*
  * Contains the values required for the project
  */
 import java.awt.Color;
 
 public class Values {
-        //Contains the positions of the planets
+        // Contains the positions of the planets
         public static double[][] positions = {
                         { 0, 0, 0 }, // 1
                         { 7833268.43923962, 44885949.3703908, 2867693.20054382 }, // 2
@@ -19,7 +20,7 @@ public class Values {
                         { 4454487339.09447, -397895128.763904, -94464151.3421107 }, // 10
                         { 1958732435.99338, 2191808553.21893, -17235283.8321992 }, // 11
                         { -148186906.893642, -27814158.5715694, 33746.8987977113 } }; // 12
-        //Contains the veolcity of the planets
+        // Contains the veolcity of the planets
         public static double[][] velocity = {
                         { 0, 0, 0 }, // 1
                         { -57.4967480139828, 11.52095127176, 6.21695374334136 }, // 2
@@ -33,7 +34,7 @@ public class Values {
                         { 0.447991656952326, 5.44610697514907, -0.122638125365954 }, // 10
                         { -5.12766216337626, 4.22055347264457, 0.0821190336403063 }, // 11
                         { 47, -43.49, -3.3 }, }; // 12
-        //Contains the mass of the planets
+        // Contains the mass of the planets
         public static double[][] mass = {
                         { 1.9885e30 }, // 1
                         { 3.302e23 }, // 2
@@ -47,12 +48,12 @@ public class Values {
                         { 102.409e24 },
                         { 86.813e24 },
                         { 50000 } };
-        //Contains the colors of the planets
+        // Contains the colors of the planets
         public static final Color[] COLORS = { new Color(0xffde3b), new Color(0x009973), new Color(0xffad33),
                         new Color(0x6fa8dc), new Color(0xa1a2a9), new Color(0xcc7a00), new Color(0xbcafb2),
                         new Color(0x99ccff), new Color(0xa1a2a9), new Color(0x0000ff), new Color(0x99d6ff),
                         new Color(0xFF0000) };
-        //Contains the sizes of the planets
+        // Contains the sizes of the planets
         public static final int[] SIZES = {
                         30,
                         12,
@@ -66,14 +67,14 @@ public class Values {
                         34,
                         28,
                         12 };
-        //Contains the names of the planets
+        // Contains the names of the planets
         public static final String[] NAMES = { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn",
                         "Titan", "Uranus", "Neptune", "Missile" };
-        //Contains the orbit names of the planets
+        // Contains the orbit names of the planets
         public static final String[] ORBIT_NAMES = {
                         "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn"
         };
-        //Contains the months of the year
+        // Contains the months of the year
         public static final String[] MONTHS = {
                         "January",
                         "February",
@@ -88,7 +89,7 @@ public class Values {
                         "November",
                         "December"
         };
-        //Contains the total days in each month
+        // Contains the total days in each month
         public static final int[] DAYS_IN_MONTH = {
                         31,
                         28,
@@ -103,7 +104,7 @@ public class Values {
                         30,
                         31
         };
-        //Contains the focus index
+        // Contains the focus index
         public static final int[] focusIndex = {
                         0,
                         3,
@@ -125,4 +126,24 @@ public class Values {
                         61190,
                         -1
         };
+
+        public static int[] getDateFromDays(int days) {
+                int[] date = { 2023, 4, 1 };
+
+                int daysInMonth = 0;
+
+                while (days > 0) {
+                        daysInMonth = Values.DAYS_IN_MONTH[date[1]] - 1;
+
+                        if (days > daysInMonth) {
+                                days -= daysInMonth;
+                                date[1]++;
+                        } else {
+                                date[2] += days;
+                                break;
+                        }
+                }
+
+                return date;
+        }
 }

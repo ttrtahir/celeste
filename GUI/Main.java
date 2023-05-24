@@ -32,7 +32,7 @@ public class Main extends JPanel {
             drawables.add(new Planet(planetStats.get(i)));
         }
 
-        Text daysText = new Text(100, 100);
+        Text daysText = new Text(612, 40);
         Text iText = new Text(100, 200);
         drawables.add((Drawable) daysText);
         drawables.add((Drawable) iText);
@@ -72,6 +72,8 @@ public class Main extends JPanel {
 
         System.out.println("States ready ...");
         System.out.println(states.length);
+
+        int[] currentDate = { 2023, 4, 1 };
         while (true) {
             if (GlobalState.paused) {
                 frame.repaint();
@@ -80,18 +82,22 @@ public class Main extends JPanel {
 
             frame.repaint();
 
-            daysSinceStart = (int) (currStateIndex * 0.01);
+            daysSinceStart = (int) (currStateIndex * 0.1); // No idea why 0.1 works, but it calculates days EXACTLY
             keyEvents.setPlanetStats(planetStats);
 
             for (int i = 0; i <= 11; i++) {
                 planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
                         (int) states[currStateIndex].state[i][0].getY());
             }
-            daysText.setText("Time: " + daysSinceStart + " days");
+
+            int[] currDate = Values.getDateFromDays(daysSinceStart);
+
+            daysText.setText(Values.MONTHS[currDate[1]] + " " + currDate[2] + " " + currDate[0]);
             iText.setText("i: " + currStateIndex);
 
             currStateIndex++;
             Thread.sleep(GlobalState.simulationSpeed);
         }
     }
+
 }

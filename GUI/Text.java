@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.Font;
 /*
  * Contains methods for creating and coloring the Planet
  */
@@ -33,7 +34,7 @@ public class Text extends Drawable {
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
                 java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2.setFont(Style.font);
+        g2.setFont(Style.fontBig);
         g2.setColor(Color.WHITE);
         g2.drawString(this.text, this.x, this.y);
     }
