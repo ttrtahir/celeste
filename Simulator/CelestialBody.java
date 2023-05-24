@@ -47,4 +47,12 @@ public class CelestialBody {
     public double getMass() {
         return mass;
     }
+
+    // Needed for the genetic algorithm
+    public void setVeloVec(double veloX) {
+        this.veloX = veloX;
+    }
+    public void setPosVec(IVector3 posVec) {
+        this.posVec = posVec;
+    }
 }
