@@ -91,9 +91,9 @@ public class Main extends JPanel {
             int[] currDate = Values.daysPassedToDate(daysSinceStart);
             uiTexts.get(0).setText(Values.MONTHS[currDate[1] - 1] + " " + (currDate[2]) + ", " + currDate[0]);
             uiTexts.get(1).setText("Days since start: " + daysSinceStart);
-            uiTexts.get(2).setText("Focused planet: " + GlobalState.planetFocused.name);
-            uiTexts.get(3)
+            uiTexts.get(2)
                     .setText("Simulation speed: " + Math.ceil((10.00 / GlobalState.simulationSpeed) * 100) / 100 + "x");
+            uiTexts.get(3).setText("Focused planet: " + GlobalState.planetFocused.name);
 
             /* Determines the simulation speed */
             Thread.sleep(GlobalState.simulationSpeed);
