@@ -35,10 +35,12 @@ public class Main extends JPanel {
         Text currentDateText = new Text(GlobalState.getCenter()[0], 40, true);
         Text daysText = new Text(GlobalState.getCenter()[0], 70, true);
         Text iText = new Text(100, 200);
+        Text simulationSpeed = new Text(GlobalState.simulationSpeed,800);
 
         drawables.add((Drawable) currentDateText);
         drawables.add((Drawable) daysText);
         drawables.add((Drawable) iText);
+        drawables.add((Drawable) simulationSpeed);
 
         drawables.add(new Background());
 
@@ -99,6 +101,10 @@ public class Main extends JPanel {
             currentDateText.setText(Values.MONTHS[currDate[1] % 12] + " " + (currDate[2] - 1) + ", " + currDate[0]);
             daysText.setText("Days since start: " + daysSinceStart);
             iText.setText("i: " + currStateIndex);
+            
+            double sSpeed = Math.ceil((10.00 / GlobalState.simulationSpeed) * 100) / 100  ;
+            
+            simulationSpeed.setText("Simulation speed: " + sSpeed + "x");
 
             currStateIndex++;
             Thread.sleep(GlobalState.simulationSpeed);
