@@ -17,7 +17,7 @@ public class GlobalState {
 
     public static int SCALE = 2000000;
 
-    public static PlanetStats planetFocused = new PlanetStats(Values.NAMES[0], 0, null);
+    public static PlanetStats planetFocused = new PlanetStats(null, 0, null);
 
     public static int getFocusShiftX() {
         return planetFocused.positionX / SCALE;

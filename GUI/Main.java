@@ -35,8 +35,8 @@ public class Main extends JPanel {
         Text currentDateText = new Text(GlobalState.getCenter()[0], 40, true);
         Text daysText = new Text(GlobalState.getCenter()[0], 70, true);
         Text iText = new Text(100, 200);
-        Text simulationSpeed = new Text(GlobalState.simulationSpeed, 800);
-        Text nameFocusedPlanet = new Text(100, 400);
+        Text simulationSpeed = new Text(0, 800);
+        Text nameFocusedPlanet = new Text(1100, 800);
 
         drawables.add((Drawable) currentDateText);
         drawables.add((Drawable) daysText);
