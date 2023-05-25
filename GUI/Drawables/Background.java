@@ -1,4 +1,5 @@
-package GUI;
+package GUI.Drawables;
+
 /*
  * Contains information and methods for the background of the GUI.
  */
@@ -6,13 +7,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import GUI.GlobalState;
+
 public class Background extends Drawable {
     private Graphics2D g2;
 
-    static int STAR_COUNT = 500; 
+    static int STAR_COUNT = 500;
     static int[] STAR_SIZES = new int[500];
     static int[][] starPositions = new int[STAR_COUNT][3];
-    static {    //Creates stars at specific positions
+    static { // Creates stars at specific positions
         for (int i = 0; i < STAR_COUNT; i++) {
             starPositions[i][0] = (int) (Math.random() * GlobalState.FRAME_WIDTH);
             starPositions[i][1] = (int) (Math.random() * GlobalState.FRAME_HEIGHT);
@@ -33,13 +36,15 @@ public class Background extends Drawable {
         drawSpace();
         drawStars();
     }
-    //Draws the color of the background of the GUI
+
+    // Draws the color of the background of the GUI
     public void drawSpace() {
         // set HEX color
         g2.setColor(Color.decode("#000"));
         g2.fillRect(0, 0, GlobalState.FRAME_WIDTH, GlobalState.FRAME_HEIGHT);
     }
-    //Draws the stars in the bacground of the GUI
+
+    // Draws the stars in the bacground of the GUI
     public void drawStars() {
         // set HEX color
         for (int i = 0; i < STAR_COUNT; i++) {

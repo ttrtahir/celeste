@@ -1,9 +1,10 @@
-package GUI;
+package GUI.Events;
 
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-import javax.lang.model.util.ElementScanner6;
+import GUI.GlobalState;
+import GUI.Drawables.PlanetStats;
 
 /*
  * Contains methods for the mouse events

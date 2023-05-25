@@ -1,13 +1,13 @@
-package GUI;
+package GUI.Drawables;
 
 import java.awt.Color;
-import java.awt.Font;
 /*
  * Contains methods for creating and coloring the Planet
  */
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
+
+import GUI.GlobalState;
 
 public class Text extends Drawable {
     private String text = "Hello world!";

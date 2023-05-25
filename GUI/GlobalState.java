@@ -5,6 +5,8 @@ package GUI;
  */
 import java.awt.*;
 
+import GUI.Drawables.PlanetStats;
+
 public class GlobalState {
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static final int FRAME_WIDTH = (int) screenSize.getWidth();

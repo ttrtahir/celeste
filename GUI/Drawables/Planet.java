@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Drawables;
 
 /*
  * Contains methods for creating and coloring the Planet
@@ -6,6 +6,8 @@ package GUI;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+
+import GUI.GlobalState;
 
 public class Planet extends Drawable {
 

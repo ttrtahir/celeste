@@ -10,7 +10,13 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import Simulator.CelestialBody;
+import GUI.Drawables.Background;
+import GUI.Drawables.Drawable;
+import GUI.Drawables.Planet;
+import GUI.Drawables.PlanetStats;
+import GUI.Drawables.Text;
+import GUI.Events.KeyEvents;
+import GUI.Events.MouseEvents;
 import Simulator.SolarSystem;
 import Simulator.State;
 
@@ -76,7 +82,6 @@ public class Main extends JPanel {
         System.out.println("States ready ...");
         System.out.println(states.length);
 
-        int[] currentDate = { 2023, 4, 1 };
         while (true) {
             if (GlobalState.paused) {
                 frame.repaint();

@@ -1,4 +1,4 @@
-package GUI;
+package GUI.Drawables;
 
 import java.awt.Color;
 

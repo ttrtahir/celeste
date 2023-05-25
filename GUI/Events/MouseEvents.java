@@ -1,10 +1,12 @@
-package GUI;
+package GUI.Events;
 
 /*
  * Contains methods for the mouse events
  */
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+
+import GUI.GlobalState;
 
 public class MouseEvents implements MouseWheelListener {
     public MouseEvents() {

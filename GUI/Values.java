@@ -133,7 +133,6 @@ public class Values {
 
 		// Calculate what date is it if daysPassed days have passed
 		int[] date = { startDate[0], startDate[1], startDate[2] };
-		int daysInYear = 365;
 
 		// Add the days to the date
 		date[2] += daysPassed;
