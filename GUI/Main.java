@@ -15,6 +15,7 @@ import GUI.Drawables.Drawable;
 import GUI.Drawables.Planet;
 import GUI.Drawables.PlanetStats;
 import GUI.Drawables.Text;
+import GUI.Drawables.Trajectory;
 import GUI.Events.KeyEvents;
 import GUI.Events.MouseEvents;
 import Simulator.SolarSystem;
@@ -25,6 +26,11 @@ public class Main extends JPanel {
         JFrame frame = new JFrame("Solar System Simulation");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        /* The PHYSICS part */
+        SolarSystem solarSystem = new SolarSystem();
+        solarSystem.initialProcess();
+        State[] states = solarSystem.getStates();
 
         /*
          * drawables represents any element, that will be drawed to the screen in each
@@ -39,6 +45,11 @@ public class Main extends JPanel {
         /* All the UI text on screen */
         ArrayList<Text> uiTexts = new ArrayList<Text>();
         HelperFunctions.createUIText(drawables, uiTexts);
+
+        /* Space Probe's trajectory */
+        Trajectory trajectory = new Trajectory(states, 11);
+
+        drawables.add(trajectory);
 
         drawables.add(new Background());
 
@@ -60,12 +71,7 @@ public class Main extends JPanel {
         KeyEvents keyEvents = new KeyEvents(planetStats);
         frame.addKeyListener(keyEvents);
 
-        /* The PHYSICS part */
-        SolarSystem solarSystem = new SolarSystem();
-        solarSystem.initialProcess();
-
         int currStateIndex = 0;
-        State[] states = solarSystem.getStates();
         int daysSinceStart = (int) (GlobalState.STEP_MULTIPLIER * currStateIndex);
 
         while (true) {
@@ -86,6 +92,8 @@ public class Main extends JPanel {
                 planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
                         (int) states[currStateIndex].state[i][0].getY());
             }
+
+            trajectory.updateCurrentStateIndex(currStateIndex);
 
             /* Updating all UI text on screen */
             int[] currDate = Values.daysPassedToDate(daysSinceStart);
