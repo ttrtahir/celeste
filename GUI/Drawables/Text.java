@@ -52,6 +52,8 @@ public class Text extends Drawable {
             this.center = true;
         } else if (horizontalPosition == "right") {
             this.right = true;
+        } else if (horizontalPosition == "left") {
+            this.x = 20;
         }
 
         if (verticalPosition == "bottom") {
