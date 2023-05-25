@@ -35,12 +35,14 @@ public class Main extends JPanel {
         Text currentDateText = new Text(GlobalState.getCenter()[0], 40, true);
         Text daysText = new Text(GlobalState.getCenter()[0], 70, true);
         Text iText = new Text(100, 200);
-        Text simulationSpeed = new Text(GlobalState.simulationSpeed,800);
+        Text simulationSpeed = new Text(GlobalState.simulationSpeed, 800);
+        Text nameFocusedPlanet = new Text(100, 400);
 
         drawables.add((Drawable) currentDateText);
         drawables.add((Drawable) daysText);
         drawables.add((Drawable) iText);
         drawables.add((Drawable) simulationSpeed);
+        drawables.add((Drawable) nameFocusedPlanet);
 
         drawables.add(new Background());
 
@@ -88,7 +90,7 @@ public class Main extends JPanel {
             frame.repaint();
 
             daysSinceStart = (int) (currStateIndex * 0.01); // No idea why 0.1 works, but it calculates days EXACTLY
-                                                             // Yoo, it's actually the step size multiplier
+                                                            // Yoo, it's actually the step size multiplier
             keyEvents.setPlanetStats(planetStats);
 
             for (int i = 0; i <= 11; i++) {
@@ -101,9 +103,10 @@ public class Main extends JPanel {
             currentDateText.setText(Values.MONTHS[currDate[1] % 12] + " " + (currDate[2] - 1) + ", " + currDate[0]);
             daysText.setText("Days since start: " + daysSinceStart);
             iText.setText("i: " + currStateIndex);
-            
-            double sSpeed = Math.ceil((10.00 / GlobalState.simulationSpeed) * 100) / 100  ;
-            
+            nameFocusedPlanet.setText("Focused planet: " + GlobalState.planetFocused.name);
+
+            double sSpeed = Math.ceil((10.00 / GlobalState.simulationSpeed) * 100) / 100;
+
             simulationSpeed.setText("Simulation speed: " + sSpeed + "x");
 
             currStateIndex++;
