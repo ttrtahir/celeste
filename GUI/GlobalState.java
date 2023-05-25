@@ -6,6 +6,7 @@ package GUI;
 import java.awt.*;
 
 import GUI.Drawables.PlanetStats;
+import Simulator.State;
 
 public class GlobalState {
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -21,6 +22,7 @@ public class GlobalState {
     public static int SCALE = 2000000;
 
     public static PlanetStats planetFocused = new PlanetStats("Sun", 0, null);
+    public static State[] states;
 
     public static int getFocusShiftX() {
         return planetFocused.positionX / SCALE;

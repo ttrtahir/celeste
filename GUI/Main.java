@@ -30,7 +30,7 @@ public class Main extends JPanel {
         /* The PHYSICS part */
         SolarSystem solarSystem = new SolarSystem();
         solarSystem.initialProcess();
-        State[] states = solarSystem.getStates();
+        GlobalState.states = solarSystem.getStates();
 
         /*
          * drawables represents any element, that will be drawed to the screen in each
@@ -47,9 +47,21 @@ public class Main extends JPanel {
         HelperFunctions.createUIText(drawables, uiTexts);
 
         /* Space Probe's trajectory */
-        Trajectory trajectory = new Trajectory(states, 11);
+        Trajectory trajectoryMercury = new Trajectory(1);
+        Trajectory trajectoryVenus = new Trajectory(2);
+        Trajectory trajectoryEarth = new Trajectory(4);
+        Trajectory trajectoryMars = new Trajectory(5);
+        Trajectory trajectoryJupiter = new Trajectory(6);
+        Trajectory trajectorySaturn = new Trajectory(7);
+        Trajectory trajectorySpaceProbe = new Trajectory(11, true);
 
-        drawables.add(trajectory);
+        drawables.add(trajectorySpaceProbe);
+        drawables.add(trajectoryMercury);
+        drawables.add(trajectoryVenus);
+        drawables.add(trajectoryEarth);
+        drawables.add(trajectoryMars);
+        drawables.add(trajectoryJupiter);
+        drawables.add(trajectorySaturn);
 
         drawables.add(new Background());
 
@@ -89,11 +101,11 @@ public class Main extends JPanel {
 
             /* Update all planets' positions */
             for (int i = 0; i <= 11; i++) {
-                planetStats.get(i).setPos((int) states[currStateIndex].state[i][0].getX(),
-                        (int) states[currStateIndex].state[i][0].getY());
+                planetStats.get(i).setPos((int) GlobalState.states[currStateIndex].state[i][0].getX(),
+                        (int) GlobalState.states[currStateIndex].state[i][0].getY());
             }
 
-            trajectory.updateCurrentStateIndex(currStateIndex);
+            trajectorySpaceProbe.updateCurrentStateIndex(currStateIndex);
 
             /* Updating all UI text on screen */
             int[] currDate = Values.daysPassedToDate(daysSinceStart);
