@@ -22,8 +22,6 @@ public class Main extends JPanel {
 
         ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 
-        /* TODO: Finish */
-
         ArrayList<PlanetStats> planetStats = new ArrayList<PlanetStats>();
 
         for (int i = 0; i <= 11; i++) {
@@ -32,15 +30,13 @@ public class Main extends JPanel {
             drawables.add(new Planet(planetStats.get(i)));
         }
 
-        Text currentDateText = new Text(GlobalState.getCenter()[0], 40, true);
-        Text daysText = new Text(GlobalState.getCenter()[0], 70, true);
-        Text iText = new Text(100, 200);
-        Text simulationSpeed = new Text(0, 800);
-        Text nameFocusedPlanet = new Text(1100, 800);
+        Text currentDateText = new Text(GlobalState.getCenter()[0], 40, "center");
+        Text daysText = new Text(GlobalState.getCenter()[0], 70, "center");
+        Text simulationSpeed = new Text(20, 0, "bottom");
+        Text nameFocusedPlanet = new Text("right", "bottom");
 
         drawables.add((Drawable) currentDateText);
         drawables.add((Drawable) daysText);
-        drawables.add((Drawable) iText);
         drawables.add((Drawable) simulationSpeed);
         drawables.add((Drawable) nameFocusedPlanet);
 
@@ -89,8 +85,8 @@ public class Main extends JPanel {
 
             frame.repaint();
 
-            daysSinceStart = (int) (currStateIndex * 0.01); // No idea why 0.1 works, but it calculates days EXACTLY
-                                                            // Yoo, it's actually the step size multiplier
+            daysSinceStart = (int) (currStateIndex * 0.1); // No idea why 0.1 works, but it calculates days EXACTLY
+                                                           // Yoo, it's actually the step size multiplier
             keyEvents.setPlanetStats(planetStats);
 
             for (int i = 0; i <= 11; i++) {
@@ -98,11 +94,10 @@ public class Main extends JPanel {
                         (int) states[currStateIndex].state[i][0].getY());
             }
 
-            int[] currDate = Values.getDateFromDays(daysSinceStart);
+            int[] currDate = Values.daysPassedToDate(daysSinceStart);
 
-            currentDateText.setText(Values.MONTHS[currDate[1] % 12] + " " + (currDate[2] - 1) + ", " + currDate[0]);
+            currentDateText.setText(Values.MONTHS[currDate[1] - 1] + " " + (currDate[2]) + ", " + currDate[0]);
             daysText.setText("Days since start: " + daysSinceStart);
-            iText.setText("i: " + currStateIndex);
             nameFocusedPlanet.setText("Focused planet: " + GlobalState.planetFocused.name);
 
             double sSpeed = Math.ceil((10.00 / GlobalState.simulationSpeed) * 100) / 100;

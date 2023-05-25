@@ -15,6 +15,8 @@ public class Text extends Drawable {
     private int y = 0;
 
     private boolean center = false;
+    private boolean right = false;
+    private boolean bottom = false;
 
     @Override
     public void paintComponent(Graphics g) {
@@ -31,10 +33,30 @@ public class Text extends Drawable {
         this.y = y;
     }
 
-    public Text(int x, int y, boolean center) {
+    public Text(int x, int y, String horizontalPosition) {
         this.x = x;
         this.y = y;
-        this.center = center;
+        if (horizontalPosition == "center") {
+            this.center = true;
+        } else if (horizontalPosition == "right") {
+            this.right = true;
+        } else if (horizontalPosition == "bottom") {
+            this.bottom = true;
+        }
+    }
+
+    public Text(String horizontalPosition, String verticalPosition) {
+        this.x = 0;
+        this.y = 200;
+        if (horizontalPosition == "center") {
+            this.center = true;
+        } else if (horizontalPosition == "right") {
+            this.right = true;
+        }
+
+        if (verticalPosition == "bottom") {
+            this.bottom = true;
+        }
     }
 
     // Method for creating the specific planet on specific position
@@ -46,10 +68,17 @@ public class Text extends Drawable {
         g2.setColor(Color.WHITE);
 
         int tempX = this.x;
+        int tempY = this.y;
         if (center) {
             tempX = this.x - g2.getFontMetrics().stringWidth(this.text) / 2;
         }
-        g2.drawString(this.text, tempX, this.y);
+        if (right) {
+            tempX = GlobalState.FRAME_WIDTH - g2.getFontMetrics().stringWidth(this.text) - 20;
+        }
+        if (bottom) {
+            tempY = GlobalState.FRAME_HEIGHT - 90;
+        }
+        g2.drawString(this.text, tempX, tempY);
     }
 
     public void setText(String text) {

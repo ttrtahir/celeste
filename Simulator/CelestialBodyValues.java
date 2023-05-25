@@ -145,12 +145,12 @@ public class CelestialBodyValues {
         spaceProbe.posX = -148186906.893642;
         spaceProbe.posY = -27814158.5715694;
         spaceProbe.posZ = 33746.8987977113;
-        spaceProbe.veloX = 52.81075214803779; // best distance is 61751 between titan
-        spaceProbe.veloY = -4.000190217844775;
-        spaceProbe.veloZ = -3.0718394890313516;
+        // 44.46293344609362, y= -1.6318918240351392, z= -3.2936113004386103
+        spaceProbe.veloX = 44.46293344609362; // best distance is 61751 between titan
+        spaceProbe.veloY = -1.6318918240351392;
+        spaceProbe.veloZ = -3.2936113004386103;
         spaceProbe.createVectors();
         CelestialBody.celestialBodies[11] = spaceProbe;
-        
 
         // celestialBodies[i].color = Values.COLORS[i];
         // celestialBodies[i].size = Values.SIZES[i];

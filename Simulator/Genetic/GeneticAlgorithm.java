@@ -15,13 +15,14 @@ public class GeneticAlgorithm {
         System.out.println(ga.found);
     }
 
-    //Coordinate of this vector: x = 46.523072208288795, y= -3.493557729103768, z= -2.3419267033312465
+    // Coordinate of this vector: x = 46.523072208288795, y= -3.493557729103768, z=
+    // -2.3419267033312465
 
-    public static void findBestInitialVelocities(Individual[] population){
+    public static void findBestInitialVelocities(Individual[] population) {
         System.out.println("");
         System.out.println("Best velocities are :");
-        for(var indi : population){
-            if(indi.fitness >= 1)
+        for (var indi : population) {
+            if (indi.fitness >= 1)
                 System.out.println(indi.getVelocity().toString());
         }
         System.out.println("nb: if nothing is printed increase the generation and population amount");
@@ -42,7 +43,8 @@ public class GeneticAlgorithm {
             for (Individual individual : population) {
                 individual.sol.initialProcess(individual.getVelocity());
                 Vector3 temp = (Vector3) individual.sol.getStates()[0].state[11][1];
-                //System.out.println(individual.id + " " + temp.getX() + " " + temp.getY() + " " + temp.getZ());
+                // System.out.println(individual.id + " " + temp.getX() + " " + temp.getY() + "
+                // " + temp.getZ());
             }
             evaluateFitness();
             Individual[] offsprings = reproduce(population);
@@ -52,7 +54,7 @@ public class GeneticAlgorithm {
         // After all generations, print the final results
         // System.out.println("Final population:");
         // for (Individual individual : population) {
-        //     System.out.println(individual.toString());
+        // System.out.println(individual.toString());
         // }
     }
 
@@ -62,7 +64,7 @@ public class GeneticAlgorithm {
             Vector3 velocity;
             do {
                 double randomX = Math.random() * velocityMax * 1; // positive
-                double randomY = Math.random() * velocityMax * -1; // negative 
+                double randomY = Math.random() * velocityMax * -1; // negative
                 double randomZ = Math.random() * velocityMax * -1; // negative < 10
                 velocity = new Vector3(randomX, randomY, randomZ);
             } while (velocity.getMagnitude() > velocityMax);
@@ -82,19 +84,19 @@ public class GeneticAlgorithm {
         Individual[] parents = new Individual[populationAmount];
         double[] cumulativeFitness = new double[populationAmount];
         double totalFitness = 0;
-    
+
         // Calculate the total fitness of the population
         for (int i = 0; i < populationAmount; i++) {
             double fitness = population[i].getFitness();
             totalFitness += fitness;
             cumulativeFitness[i] = totalFitness;
         }
-    
+
         // Select parents based on their fitness probabilities
         for (int j = 0; j < populationAmount; j++) {
             Random r = new Random();
             double luckyNumber = r.nextDouble() * totalFitness;
-    
+
             // Find the parent whose cumulative fitness exceeds the lucky number
             int selectedParentIndex = 0;
             for (int i = 0; i < populationAmount; i++) {
@@ -105,10 +107,9 @@ public class GeneticAlgorithm {
             }
             parents[j] = population[selectedParentIndex];
         }
-    
+
         return parents;
     }
-    
 
     private Individual[] reproduce(Individual[] population) {
         Individual[] offsprings = new Individual[populationAmount];
@@ -118,12 +119,12 @@ public class GeneticAlgorithm {
 
             // Perform single-point crossover to produce offspring
             Vector3 parent1Velocity = parents[i].getVelocity();
-            Vector3 parent2Velocity = parents[(i+1)%(populationAmount)].getVelocity();
+            Vector3 parent2Velocity = parents[(i + 1) % (populationAmount)].getVelocity();
 
             // Create offspring velocity by combining the velocities of parents
             Vector3 offspringVelocity1 = (Vector3) (parent1Velocity.add(parent2Velocity).multiply(0.5));
 
-           System.out.println(offspringVelocity1.toString());
+            System.out.println(offspringVelocity1.toString());
 
             offsprings[i] = new Individual(offspringVelocity1);
         }
@@ -138,7 +139,7 @@ public class GeneticAlgorithm {
                 double randomX = Math.random() * velocityMax * (Math.random() < 0.5 ? -1 : 1);
                 double randomY = Math.random() * velocityMax * (Math.random() < 0.5 ? -1 : 1);
                 double randomZ = Math.random() * velocityMax * (Math.random() < 0.5 ? -1 : 1);
-                Vector3 randomVector = new Vector3(randomX,randomY,randomZ);
+                Vector3 randomVector = new Vector3(randomX, randomY, randomZ);
                 individual.setVelocity((Vector3) individual.getVelocity().addmultiply(mutationRate, randomVector));
             }
         }
@@ -175,7 +176,7 @@ public class GeneticAlgorithm {
         public void evaluateFitness() {
             getMinState();
             this.fitness = desiredDistanceMax / this.minDistanceBetweenTitanAndSpaceProbe;
-            if(this.fitness >= 1){
+            if (this.fitness >= 1) {
                 found = true;
                 System.out.println(this.getVelocity().toString());
             }

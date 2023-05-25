@@ -127,28 +127,32 @@ public class Values {
 			-1
 	};
 
-	public static int[] getDateFromDays(int days) {
-		int[] date = { 2023, 3, 1 };
+	public static int[] daysPassedToDate(int daysPassed) {
+		/* Start Date: 1st of April 2023 */
+		int[] startDate = { 2023, 4, 1 };
 
-		int daysInMonth = 0;
+		// Calculate what date is it if daysPassed days have passed
+		int[] date = { startDate[0], startDate[1], startDate[2] };
+		int daysInYear = 365;
 
-		while (days > 0) {
-			daysInMonth = Values.DAYS_IN_MONTH[date[1] % 12];
-
-			if (days > daysInMonth) {
-				days -= daysInMonth;
-				date[1]++;
-
-				if (date[1] > 12) {
-					date[1] = 1;
-					date[0]++;
-				}
+		// Add the days to the date
+		date[2] += daysPassed;
+		// If the days exceed the days in the month
+		while (date[2] > DAYS_IN_MONTH[date[1] - 1]) {
+			// Subtract the days in the month from the days
+			date[2] -= DAYS_IN_MONTH[date[1] - 1];
+			if (date[1] == 12) {
+				// Increment the year
+				date[0]++;
+				// Reset the month
+				date[1] = 1;
 			} else {
-				date[2] += days;
-				break;
+				// Increment the month
+				date[1]++;
 			}
 		}
 
+		// Return the date
 		return date;
 	}
 }
