@@ -1,6 +1,8 @@
 package Simulator;
 
 import java.io.OptionalDataException;
+
+import GUI.GlobalState;
 import Interface.IODESolver;
 
 public class SolarSystem {
@@ -10,8 +12,8 @@ public class SolarSystem {
 
     private static double daySec = 60 * 24 * 60;
 
-    public long timeFinal = 60*24*60 * 365 * 2; // 2 years
-    private static double h = 0.1*daySec;
+    public long timeFinal = 60 * 24 * 60 * 365 * 2; // 2 years
+    private static double h = GlobalState.STEP_MULTIPLIER * daySec;
 
     public SolarSystem() {
         // inita; nodies
@@ -30,15 +32,15 @@ public class SolarSystem {
          */
         states[0].inputState();
         IODESolver solver = new ODESolver();
-        states = (State[]) solver.solve(new ODEFunction(),(State) states[0],h, timeFinal);
+        states = (State[]) solver.solve(new ODEFunction(), (State) states[0], h, timeFinal);
     }
 
     // For genetic algorithm
-    public void initialProcess(Vector3 velocity){
+    public void initialProcess(Vector3 velocity) {
         states[0].inputState();
         states[0].state[11][1] = velocity;
         IODESolver solver = new ODESolver();
-        states = (State[]) solver.solve(new ODEFunction(),(State) states[0],h, timeFinal);
+        states = (State[]) solver.solve(new ODEFunction(), (State) states[0], h, timeFinal);
     }
 
     public void setStates(State[] states) {

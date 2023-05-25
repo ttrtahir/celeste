@@ -90,8 +90,7 @@ public class Main extends JPanel {
 
             frame.repaint();
 
-            daysSinceStart = (int) (currStateIndex * 0.1); // No idea why 0.1 works, but it calculates days EXACTLY
-                                                           // Yoo, it's actually the step size multiplier
+            daysSinceStart = (int) (currStateIndex * GlobalState.STEP_MULTIPLIER);
             keyEvents.setPlanetStats(planetStats);
 
             for (int i = 0; i <= 11; i++) {
