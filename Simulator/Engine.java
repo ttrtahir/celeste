@@ -23,7 +23,7 @@ public class Engine {
     }
 
     public double getMomentum() {
-        double momentum = rocketMass * endVelocity - startVelocity;
+        double momentum = rocketMass * endVelocity - rocketMass * startVelocity;
         return momentum;
     }
 
@@ -32,14 +32,31 @@ public class Engine {
         return thrust;
     }
 
-    public double getSpecificImpulse(){
-        specificImpulse = getThrust() / ((rocketMass / dTime) * 9.80665);
-        return specificImpulse;
-    }
-
     public double fuelConsumed() {
         double thrust = getThrust();
         double fuelConsumed = Math.abs(thrust) / (Gravity * specificImpulse) * dTime;
         return fuelConsumed;
+    }
+
+    public double getVelocity(double t, double deltaTime) {
+        double integral = 0.0;
+        double time = t;
+        double upperBound = t + deltaTime;
+        double step = 0.001; // Step size for numerical integration (adjust)
+
+        while (time <= upperBound) {
+            double force = calculateForce(time);
+            integral += force;
+            time += step;
+        }
+
+        double impulse = integral * step;
+        double velocity = impulse / rocketMass + startVelocity;
+        return velocity;
+    }
+
+    private double calculateForce(double time) {
+        
+        return 0.0;
     }
 }
