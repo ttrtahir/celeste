@@ -17,6 +17,9 @@ public class Text extends Drawable {
     private boolean center = false;
     private boolean right = false;
     private boolean bottom = false;
+    private boolean top = false;
+
+    private boolean bigFont = false;
 
     @Override
     public void paintComponent(Graphics g) {
@@ -58,6 +61,8 @@ public class Text extends Drawable {
 
         if (verticalPosition == "bottom") {
             this.bottom = true;
+        } else if (verticalPosition == "top") {
+            this.top = true;
         }
     }
 
@@ -66,7 +71,10 @@ public class Text extends Drawable {
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
                 java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
 
-        g2.setFont(Style.fontBig);
+        g2.setFont(Style.font);
+        if (this.bigFont) {
+            g2.setFont(Style.fontBig);
+        }
         g2.setColor(Color.WHITE);
 
         int tempX = this.x;
@@ -80,10 +88,17 @@ public class Text extends Drawable {
         if (bottom) {
             tempY = GlobalState.FRAME_HEIGHT - 90;
         }
+        if (top) {
+            tempY = 30;
+        }
         g2.drawString(this.text, tempX, tempY);
     }
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public void setBigFont(boolean bigFont) {
+        this.bigFont = bigFont;
     }
 }

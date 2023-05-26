@@ -56,7 +56,7 @@ public class Planet extends Drawable {
 
 	private void drawPlanetName() {
 		g2.setColor(Style.fontColor);
-		g2.setFont(Style.font);
+		g2.setFont(Style.fontSmall);
 		g2.drawString(planetStats.name,
 				planetPositionX
 						- planetStats.name.length() * 3,

@@ -32,6 +32,8 @@ public class Main extends JPanel {
         solarSystem.initialProcess();
         GlobalState.states = solarSystem.getStates();
 
+        /* They are closest at state 3492 or 3493 */
+
         /*
          * drawables represents any element, that will be drawed to the screen in each
          * frame
@@ -114,6 +116,7 @@ public class Main extends JPanel {
             uiTexts.get(2)
                     .setText("Simulation speed: " + Math.ceil((10.00 / GlobalState.simulationSpeed) * 100) / 100 + "x");
             uiTexts.get(3).setText("Focused planet: " + GlobalState.planetFocused.name);
+            uiTexts.get(4).setText("Current iteration: " + currStateIndex);
 
             /* Determines the simulation speed */
             Thread.sleep(GlobalState.simulationSpeed);

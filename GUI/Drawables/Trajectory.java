@@ -52,7 +52,7 @@ public class Trajectory extends Drawable {
                 + GlobalState.getCenter()[1]
                 - GlobalState.getFocusShiftY();
 
-        for (int i = 1; i < states.length; i += 1) {
+        for (int i = 1; i < states.length; i += 10) {
             if (spaceProbe && i > currentStateIndex) {
                 g2.setColor(new Color(255, 0, 0, 200));
 

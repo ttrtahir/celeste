@@ -19,14 +19,17 @@ public class HelperFunctions {
 
     public static void createUIText(ArrayList<Drawable> drawables, ArrayList<Text> uiTexts) {
         Text currentDateText = new Text(GlobalState.getCenter()[0], 40, "center");
-        Text daysText = new Text(GlobalState.getCenter()[0], 70, "center");
+        Text daysText = new Text(GlobalState.getCenter()[0], 75, "center");
         Text simulationSpeed = new Text("left", "bottom");
         Text nameFocusedPlanet = new Text("right", "bottom");
+        Text currentIteration = new Text("right", "top");
+        currentDateText.setBigFont(true);
 
         uiTexts.add(currentDateText);
         uiTexts.add(daysText);
         uiTexts.add(simulationSpeed);
         uiTexts.add(nameFocusedPlanet);
+        uiTexts.add(currentIteration);
 
         for (Text text : uiTexts) {
             drawables.add(text);
