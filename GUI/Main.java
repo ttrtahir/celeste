@@ -94,9 +94,12 @@ public class Main extends JPanel {
         KeyEvents keyEvents = new KeyEvents(planetStats);
         frame.addKeyListener(keyEvents);
 
-        int currStateIndex = 3480;
+        int currStateIndex = 0;
         int daysSinceStart = (int) (GlobalState.STEP_MULTIPLIER * currStateIndex);
-
+        /* TODO: TEMPORARY */
+        GlobalState.planetFocused = planetStats.get(11);
+        // GlobalState.SCALE = 10000;
+        GlobalState.simulationSpeed = 10;
         while (true) {
             if (GlobalState.paused) {
                 frame.repaint();
@@ -109,11 +112,6 @@ public class Main extends JPanel {
 
             /* Neccessary to keep the focusedPlanet position up-to-date */
             keyEvents.setPlanetStats(planetStats);
-
-            /* TODO: TEMPORARY */
-            GlobalState.planetFocused = planetStats.get(11);
-            GlobalState.SCALE = 10000;
-            GlobalState.simulationSpeed = 20;
 
             /* Update all planets' positions */
             for (int i = 0; i <= 11; i++) {
