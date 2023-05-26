@@ -12,14 +12,12 @@ import javax.swing.JPanel;
 
 import GUI.Drawables.Background;
 import GUI.Drawables.Drawable;
-import GUI.Drawables.Planet;
 import GUI.Drawables.PlanetStats;
 import GUI.Drawables.Text;
 import GUI.Drawables.Trajectory;
 import GUI.Events.KeyEvents;
 import GUI.Events.MouseEvents;
 import Simulator.SolarSystem;
-import Simulator.State;
 
 public class Main extends JPanel {
     public static void main(String[] args) throws InterruptedException {
@@ -33,6 +31,17 @@ public class Main extends JPanel {
         GlobalState.states = solarSystem.getStates();
 
         /* They are closest at state 3492 or 3493 */
+        /* Distance at 3492: 315929.89353160484 */
+        /* Distance at 3493: 293897.19830514514 */
+        /*
+         * IVector3 missilePos = GlobalState.states[3493].state[11][0];
+         * IVector3 titanPos = GlobalState.states[3493].state[8][0];
+         * 
+         * System.out.println("Missile position: " + missilePos);
+         * System.out.println("Titan position: " + titanPos);
+         * System.out.println("Distance between them: " +
+         * missilePos.euclideanDist(titanPos));
+         */
 
         /*
          * drawables represents any element, that will be drawed to the screen in each
@@ -85,7 +94,7 @@ public class Main extends JPanel {
         KeyEvents keyEvents = new KeyEvents(planetStats);
         frame.addKeyListener(keyEvents);
 
-        int currStateIndex = 0;
+        int currStateIndex = 3480;
         int daysSinceStart = (int) (GlobalState.STEP_MULTIPLIER * currStateIndex);
 
         while (true) {
@@ -100,6 +109,11 @@ public class Main extends JPanel {
 
             /* Neccessary to keep the focusedPlanet position up-to-date */
             keyEvents.setPlanetStats(planetStats);
+
+            /* TODO: TEMPORARY */
+            GlobalState.planetFocused = planetStats.get(11);
+            GlobalState.SCALE = 10000;
+            GlobalState.simulationSpeed = 20;
 
             /* Update all planets' positions */
             for (int i = 0; i <= 11; i++) {
