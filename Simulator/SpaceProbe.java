@@ -12,9 +12,9 @@ public class SpaceProbe implements ISpaceProbe {
     public Vector3[] titanPos;
     public State[] states;
 
-   // Vector3[] positions;
-    //Vector3[] velocities;
-    //Vector3[] gravValues;
+    // Vector3[] positions;
+    // Vector3[] velocities;
+    // Vector3[] gravValues;
 
     public EulerSolver eulerSolver;
     public RK4 rungeKuttaSolver;
@@ -23,8 +23,8 @@ public class SpaceProbe implements ISpaceProbe {
     /**
      * calculate trajectory of a probe
      *
-     * @param p0 starting position
-     * @param v0 starting velocity
+     * @param p0       starting position
+     * @param v0       starting velocity
      * @param timeStep time steps at which position is being updated
      * @return positions of the probe over a given time period
      */
@@ -38,20 +38,20 @@ public class SpaceProbe implements ISpaceProbe {
         y0.inputState();
 
         eulerSolver = new EulerSolver();
-        states = (State[]) eulerSolver.solve(f,y0,timeStep);
+        states = (State[]) eulerSolver.solve(f, y0, timeStep);
 
-//       earthPos = eulerSolver.earthPosition;
-//        earthPosOneYear = eulerSolver.earthPosOneYear;
-//        titanPos = eulerSolver.titanPosition;
-//        titanPosOneYear = eulerSolver.titanPosOneYear;
+        // earthPos = eulerSolver.earthPosition;
+        // earthPosOneYear = eulerSolver.earthPosOneYear;
+        // titanPos = eulerSolver.titanPosition;
+        // titanPosOneYear = eulerSolver.titanPosOneYear;
 
         trajectory = new Vector3[timeStep.length];
-        for(int i = 0 ; i < trajectory.length; i++){
+        for (int i = 0; i < trajectory.length; i++) {
             trajectory[i] = (Vector3) states[i].getPosition(11);
         }
 
-        //eulerSolver = null;
-        //System.gc();
+        // eulerSolver = null;
+        // System.gc();
         return trajectory;
     }
 
@@ -63,21 +63,23 @@ public class SpaceProbe implements ISpaceProbe {
         y0 = new State();
         y0.inputState();
 
-        /*eulerSolver = new EulerSolver();
-        states = (State[]) eulerSolver.solve(f, y0, timefinal, h);
-        earthPos = eulerSolver.earthPosition;
-        earthPosOneYear = eulerSolver.earthPosOneYear;
-        titanPos = eulerSolver.titanPosition;
-        titanPosOneYear = eulerSolver.titanPosOneYear; */
+        /*
+         * eulerSolver = new EulerSolver();
+         * states = (State[]) eulerSolver.solve(f, y0, timefinal, h);
+         * earthPos = eulerSolver.earthPosition;
+         * earthPosOneYear = eulerSolver.earthPosOneYear;
+         * titanPos = eulerSolver.titanPosition;
+         * titanPosOneYear = eulerSolver.titanPosOneYear;
+         */
 
-        trajectory = new Vector3[(int) Math.round((timefinal/h) + 1)];
+        trajectory = new Vector3[(int) Math.round((timefinal / h) + 1)];
 
-        for(int i = 0; i < trajectory.length; i++){
+        for (int i = 0; i < trajectory.length; i++) {
             trajectory[i] = (Vector3) states[i].getPosition(11);
         }
 
-        //eulerSolver = null;
-        //System.gc();
+        // eulerSolver = null;
+        // System.gc();
         return trajectory;
     }
 
@@ -85,6 +87,6 @@ public class SpaceProbe implements ISpaceProbe {
         SpaceProbe probe = new SpaceProbe();
 
         // TODO: change the parameters
-        probe.trajectory(new Vector3(1,1,1), new Vector3(1,1,1), 1000,10);
+        probe.trajectory(new Vector3(1, 1, 1), new Vector3(1, 1, 1), 1000, 10);
     }
 }

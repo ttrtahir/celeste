@@ -9,6 +9,27 @@ public class ODESolver implements IODESolver {
     public State[] states;
 
     @Override
+    public IState[] solve(IODEFunction f, IState y0, double[] timestep) {
+        /**
+         * Euler's method
+         * 
+         * @param f  a Function calculating force
+         * @param y0 initial state
+         * @param ts updated time steps
+         * @return states of Solar System at different time
+         */
+
+        states = new State[timestep.length];
+        states[0] = (State) y0;
+
+        // update positions of each planet for 1 step
+        for (int i = 1; i < states.length; i++) {
+            states[i] = (State) step(f, timestep[i], states[i - 1], (timestep[i] - timestep[i - 1]), false);
+        }
+        return states;
+    }
+
+    @Override
     public IState[] solve(IODEFunction f, IState y0, double h, double timefinal) {
         /**
          * Euler's method
