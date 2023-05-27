@@ -53,7 +53,7 @@ public class ODESolver implements IODESolver {
         // update positions of each planet for 1 step
         for (int i = 1; i < states.length; i++) {
             boolean isAboutToOrbit = false;
-            if (i == 3493) {
+            if (i == 3493 || i == 4494) {
                 isAboutToOrbit = true;
             }
             states[i] = (State) step(f, timeStep[i], states[i - 1], (timeStep[i] - timeStep[i - 1]), isAboutToOrbit);
@@ -72,14 +72,22 @@ public class ODESolver implements IODESolver {
      * @return new state after update 1 step
      */
 
+    private int isAboutToOrbitCounter = 0;
+
     @Override
     public IState step(IODEFunction f, double t, IState y, double h, boolean isAboutToOrbit) {
         State newState = (State) y.addmultiply(h, f.call(h, y));
         if (isAboutToOrbit) {
-            Vector3 titanVelocity = (Vector3) newState.state[8][1];
-            Vector3 spaceProbeVelocity = (Vector3) newState.state[11][1];
+            isAboutToOrbitCounter++;
+        }
 
+        if (isAboutToOrbit && isAboutToOrbitCounter == 1) {
             Vector3 newVelocity = new Vector3(-0.3, 11, -0.86);
+
+            newState.state[11][1] = newVelocity;
+        }
+        if (isAboutToOrbit && isAboutToOrbitCounter == 2) {
+            Vector3 newVelocity = new Vector3(-69.6, 30, -0.86);
 
             newState.state[11][1] = newVelocity;
         }

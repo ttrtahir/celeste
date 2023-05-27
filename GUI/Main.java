@@ -17,6 +17,7 @@ import GUI.Drawables.Text;
 import GUI.Drawables.Trajectory;
 import GUI.Events.KeyEvents;
 import GUI.Events.MouseEvents;
+import Interface.IVector3;
 import Simulator.SolarSystem;
 
 public class Main extends JPanel {
@@ -31,6 +32,8 @@ public class Main extends JPanel {
         GlobalState.states = solarSystem.getStates();
 
         /* They are closest at state 3492 or 3493 */
+        /* Let's start journey back at 4494 */
+        /* 6742 is when we go near Earth */
         /* Distance at 3492: 315929.89353160484 */
         /* Distance at 3493: 293897.19830514514 */
         /*
@@ -42,7 +45,10 @@ public class Main extends JPanel {
          * System.out.println("Distance between them: " +
          * missilePos.euclideanDist(titanPos));
          */
-
+        IVector3 missilePos = GlobalState.states[6742].state[11][0];
+        IVector3 earthPos = GlobalState.states[6742].state[4][0];
+        System.out.println("Distance between them: " +
+                missilePos.euclideanDist(earthPos));
         /*
          * drawables represents any element, that will be drawed to the screen in each
          * frame
