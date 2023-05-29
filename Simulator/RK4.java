@@ -20,7 +20,7 @@ public class RK4 extends ODESolver {
      * @return new state of the system after one update step
      */
     @Override
-    public IState step(IODEFunction f, double t, IState y, double h, boolean isAboutToOrbit) {
+    public IState step(IODEFunction f, double t, IState y, double h, boolean thrustNeeded) {
 
         AccelerationRate k1 = (AccelerationRate) f.call(t, y);
         AccelerationRate k2 = (AccelerationRate) f.call(t + (0.5 * h), y.addmultiply(0.5, k1));

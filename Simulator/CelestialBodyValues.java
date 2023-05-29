@@ -1,7 +1,5 @@
 package Simulator;
 
-import Simulator.CelestialBody;
-
 public class CelestialBodyValues {
     // public CelestialBody[] celestialBodies;
     public CelestialBodyValues() {
@@ -146,7 +144,13 @@ public class CelestialBodyValues {
         spaceProbe.posY = -27814158.5715694;
         spaceProbe.posZ = 33746.8987977113;
         // 44.46293344609362, y= -1.6318918240351392, z= -3.2936113004386103
-        spaceProbe.veloX = 44.46293344609362; // best distance is 61751 between titan
+        // best distance is 61751 (= 61.751 km) between titan
+        /*
+         * spaceProbe.veloX = 44.46293344609362;
+         * spaceProbe.veloY = -1.6318918240351392;
+         * spaceProbe.veloZ = -3.2936113004386103;
+         */
+        spaceProbe.veloX = 44.46293344609362;
         spaceProbe.veloY = -1.6318918240351392;
         spaceProbe.veloZ = -3.2936113004386103;
         spaceProbe.createVectors();

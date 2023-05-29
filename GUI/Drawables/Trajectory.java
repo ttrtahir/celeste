@@ -42,7 +42,7 @@ public class Trajectory extends Drawable {
             g2.setColor(new Color(255, 255, 255, 200));
         } else {
             g2.setStroke(new java.awt.BasicStroke(1));
-            g2.setColor(new Color(255, 255, 255, 30));
+            g2.setColor(new Color(255, 255, 255, 60));
         }
 
         int oldX = (int) states[0].state[index][0].getX() / GlobalState.SCALE
@@ -52,7 +52,11 @@ public class Trajectory extends Drawable {
                 + GlobalState.getCenter()[1]
                 - GlobalState.getFocusShiftY();
 
-        for (int i = 1; i < states.length; i += 10) {
+        int increment = 10;
+        if (spaceProbe) {
+            increment = 1;
+        }
+        for (int i = 1; i < states.length; i += increment) {
             if (spaceProbe && i > currentStateIndex) {
                 g2.setColor(new Color(255, 0, 0, 200));
 

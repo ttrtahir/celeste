@@ -10,5 +10,5 @@ public interface IODESolver {
 
     public IState[] solve(IODEFunction f, IState y0, double timeFinal, double h);
 
-    public IState step(IODEFunction f, double t, IState y, double h, boolean isAboutToOrbit);
+    public IState step(IODEFunction f, double t, IState y, double h, boolean thrustNeeded);
 }

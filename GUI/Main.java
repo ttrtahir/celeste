@@ -66,7 +66,7 @@ public class Main extends JPanel {
         /* Space Probe's trajectory */
         Trajectory trajectoryMercury = new Trajectory(1);
         Trajectory trajectoryVenus = new Trajectory(2);
-        Trajectory trajectoryEarth = new Trajectory(4);
+        Trajectory trajectoryEarth = new Trajectory(3);
         Trajectory trajectoryMars = new Trajectory(5);
         Trajectory trajectoryJupiter = new Trajectory(6);
         Trajectory trajectorySaturn = new Trajectory(7);

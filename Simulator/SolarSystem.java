@@ -17,7 +17,7 @@ public class SolarSystem {
 
     public SolarSystem() {
         // inita; nodies
-        CelestialBodyValues cbv = new CelestialBodyValues();
+        new CelestialBodyValues();
 
         states = new State[((int) Math.round((timeFinal / h)) + 1)];
         int length = states.length;

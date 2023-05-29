@@ -8,6 +8,8 @@ public class ODESolver implements IODESolver {
     /* class implements EULER's method */
     public State[] states;
 
+    private Engine engine = new Engine();
+
     @Override
     public IState[] solve(IODEFunction f, IState y0, double[] timestep) {
         /**
@@ -52,11 +54,12 @@ public class ODESolver implements IODESolver {
 
         // update positions of each planet for 1 step
         for (int i = 1; i < states.length; i++) {
-            boolean isAboutToOrbit = false;
+            boolean thrustNeeded = false;
             if (i == 3493 || i == 4494) {
-                isAboutToOrbit = true;
+                System.out.println("here");
+                thrustNeeded = true;
             }
-            states[i] = (State) step(f, timeStep[i], states[i - 1], (timeStep[i] - timeStep[i - 1]), isAboutToOrbit);
+            states[i] = (State) step(f, timeStep[i], states[i - 1], (timeStep[i] - timeStep[i - 1]), thrustNeeded);
         }
 
         return states;
@@ -72,24 +75,12 @@ public class ODESolver implements IODESolver {
      * @return new state after update 1 step
      */
 
-    private int isAboutToOrbitCounter = 0;
-
     @Override
-    public IState step(IODEFunction f, double t, IState y, double h, boolean isAboutToOrbit) {
+    public IState step(IODEFunction f, double t, IState y, double h, boolean thrustNeeded) {
         State newState = (State) y.addmultiply(h, f.call(h, y));
-        if (isAboutToOrbit) {
-            isAboutToOrbitCounter++;
-        }
 
-        if (isAboutToOrbit && isAboutToOrbitCounter == 1) {
-            Vector3 newVelocity = new Vector3(-0.3, 11, -0.86);
-
-            newState.state[11][1] = newVelocity;
-        }
-        if (isAboutToOrbit && isAboutToOrbitCounter == 2) {
-            Vector3 newVelocity = new Vector3(-69.6, 30, -0.86);
-
-            newState.state[11][1] = newVelocity;
+        if (thrustNeeded) {
+            newState.state[11][1] = this.engine.initiateThrust(newState.state[11][1]);
         }
 
         return newState;
