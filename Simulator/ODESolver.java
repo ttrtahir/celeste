@@ -56,7 +56,6 @@ public class ODESolver implements IODESolver {
         for (int i = 1; i < states.length; i++) {
             boolean thrustNeeded = false;
             if (i == 3493 || i == 4494) {
-                System.out.println("here");
                 thrustNeeded = true;
             }
             states[i] = (State) step(f, timeStep[i], states[i - 1], (timeStep[i] - timeStep[i - 1]), thrustNeeded);

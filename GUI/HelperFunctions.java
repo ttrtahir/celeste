@@ -4,7 +4,6 @@ import GUI.Drawables.PlanetStats;
 import GUI.Drawables.Text;
 import GUI.Drawables.Drawable;
 import GUI.Drawables.Planet;
-import Simulator.Values;
 
 import java.util.ArrayList;
 

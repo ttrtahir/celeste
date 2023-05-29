@@ -78,6 +78,8 @@ public class Engine {
 
             this.endVelocity = newVelocity.euclideanDist(new Vector3(0, 0, 0));
 
+            System.out.println("Fuel consumed: " + getFuelConsumed((Vector3) inputVelocity, newVelocity));
+
             return newVelocity;
         } else {
             /* Velocity to start journey towards Earth */
