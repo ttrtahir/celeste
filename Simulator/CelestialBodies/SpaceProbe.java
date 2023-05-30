@@ -1,7 +1,11 @@
-package Simulator;
+package Simulator.CelestialBodies;
 
 import Interface.ISpaceProbe;
 import Interface.IVector3;
+import Simulator.State;
+import Simulator.Vector3;
+import Simulator.Solvers.EulerSolver;
+import Simulator.Solvers.RK4;
 
 public class SpaceProbe implements ISpaceProbe {
     public State y0;

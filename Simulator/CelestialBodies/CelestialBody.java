@@ -1,8 +1,9 @@
-package Simulator;
+package Simulator.CelestialBodies;
 
 import java.awt.Color;
 
 import Interface.IVector3;
+import Simulator.Vector3;
 
 public class CelestialBody {
     public String name;
@@ -52,6 +53,7 @@ public class CelestialBody {
     public void setVeloVec(double veloX) {
         this.veloX = veloX;
     }
+
     public void setPosVec(IVector3 posVec) {
         this.posVec = posVec;
     }

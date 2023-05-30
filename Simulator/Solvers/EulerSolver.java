@@ -1,7 +1,8 @@
-package Simulator;
+package Simulator.Solvers;
 
 import Interface.IODEFunction;
 import Interface.IState;
+import Simulator.State;
 
 /*
 * class implementing Euler's method to calculate motion of objects in the solar system

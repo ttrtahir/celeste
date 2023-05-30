@@ -1,11 +1,11 @@
-package GUI;
+package GUI.Resources;
 
 /*
  * Contains the values required for the project
  */
 import java.awt.Color;
 
-public class Values {
+public class StyleValues {
 	// Contains the colors of the planets
 	public static final Color[] COLORS = { new Color(0xffde3b), new Color(0x009973), new Color(0xffad33),
 			new Color(0x6fa8dc), new Color(0xa1a2a9), new Color(0xcc7a00), new Color(0xbcafb2),

@@ -1,8 +1,10 @@
-package Simulator;
+package Simulator.Solvers;
 
 import Interface.IODEFunction;
 import Interface.IODESolver;
 import Interface.IState;
+import Simulator.State;
+import Simulator.CelestialBodies.Engine;
 
 public class ODESolver implements IODESolver {
     /* class implements EULER's method */

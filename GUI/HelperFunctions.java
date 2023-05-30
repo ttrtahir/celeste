@@ -2,6 +2,7 @@ package GUI;
 
 import GUI.Drawables.PlanetStats;
 import GUI.Drawables.Text;
+import GUI.Resources.StyleValues;
 import GUI.Drawables.Drawable;
 import GUI.Drawables.Planet;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class HelperFunctions {
     public static void addPlanetsToDrawables(ArrayList<PlanetStats> planetStats, ArrayList<Drawable> drawables) {
         for (int i = 0; i <= 11; i++) {
-            planetStats.add(new PlanetStats(Values.NAMES[i], Values.SIZES[i], Values.COLORS[i]));
+            planetStats.add(new PlanetStats(StyleValues.NAMES[i], StyleValues.SIZES[i], StyleValues.COLORS[i]));
 
             drawables.add(new Planet(planetStats.get(i)));
         }

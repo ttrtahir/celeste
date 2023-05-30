@@ -1,4 +1,4 @@
-package Simulator;
+package FileReader;
 
 /*
  * Contains the method for reading the values from a file
@@ -7,7 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import GUI.Values;
+import GUI.Resources.StyleValues;
+import Simulator.CelestialBodies.CelestialBody;
 
 public class ReadFile {
     static double[][] readSection(BufferedReader br, String sectionName) throws IOException, SectionNotFoundException {
@@ -48,8 +49,8 @@ public class ReadFile {
         return data;
     }
 
-    static void updateCelestialBodyValues(String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+    public static void updateCelestialBodyValues() {
+        try (BufferedReader br = new BufferedReader(new FileReader("FileReader/Values.txt"))) {
             double[][] positions = ReadFile.readSection(br, "POSITIONS");
             double[][] velocities = ReadFile.readSection(br, "VELOCITY");
             double[][] masses = ReadFile.readSection(br, "MASS");
@@ -62,7 +63,7 @@ public class ReadFile {
             CelestialBody.celestialBodies = new CelestialBody[positions.length];
 
             for (int i = 0; i < positions.length; i++) {
-                CelestialBody celestialBody = new CelestialBody(Values.NAMES[i]);
+                CelestialBody celestialBody = new CelestialBody(StyleValues.NAMES[i]);
                 celestialBody.posX = positions[i][0];
                 celestialBody.posY = positions[i][1];
                 celestialBody.posZ = positions[i][2];

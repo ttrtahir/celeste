@@ -1,7 +1,11 @@
 package Simulator;
 
+import FileReader.ReadFile;
 import GUI.GlobalState;
 import Interface.IODESolver;
+import Simulator.CelestialBodies.CelestialBody;
+import Simulator.CelestialBodies.ODEFunction;
+import Simulator.Solvers.ODESolver;
 
 public class SolarSystem {
     private State[] states;
@@ -23,8 +27,7 @@ public class SolarSystem {
 
     public void readValuesFromFile() {
         // Read values from file
-        String filename = "Simulator/Values.txt";
-        ReadFile.updateCelestialBodyValues(filename);
+        ReadFile.updateCelestialBodyValues();
     }
 
     public void initialProcess() {

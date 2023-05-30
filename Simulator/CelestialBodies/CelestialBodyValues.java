@@ -1,4 +1,4 @@
-package Simulator;
+package Simulator.CelestialBodies;
 
 public class CelestialBodyValues {
     // public CelestialBody[] celestialBodies;

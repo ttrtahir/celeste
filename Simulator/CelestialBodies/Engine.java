@@ -1,6 +1,7 @@
-package Simulator;
+package Simulator.CelestialBodies;
 
 import Interface.IVector3;
+import Simulator.Vector3;
 
 /*
  * Contains methods required for the Engine.
@@ -14,7 +15,6 @@ public class Engine {
     private double Gravity = ODEFunction.G;
     private double rocketMass = 50000;
     private double specificImpulse;
-    private double fuelConsumed;
 
     private int thrustCounter = 0;
 

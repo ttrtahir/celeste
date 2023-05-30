@@ -1,7 +1,8 @@
-package Simulator;
+package Simulator.Solvers;
 
 import Interface.IODEFunction;
 import Interface.IState;
+import Simulator.CelestialBodies.AccelerationRate;
 
 /**
  * Class modifies the step method of the ODESolver class to calculate the state

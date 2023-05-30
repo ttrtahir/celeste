@@ -3,6 +3,8 @@ package Simulator;
 import Interface.IAccelerationRate;
 import Interface.IState;
 import Interface.IVector3;
+import Simulator.CelestialBodies.AccelerationRate;
+import Simulator.CelestialBodies.CelestialBody;
 
 public class State implements IState {
     public int size;
@@ -18,12 +20,15 @@ public class State implements IState {
             state[i][0] = CelestialBody.celestialBodies[i].posVec;
             state[i][1] = CelestialBody.celestialBodies[i].veloVec;
 
-            //System.out.println("Initial position of " + CelestialBody.celestialBodies[i].name + " " + state[i][0]);
-            //System.out.println("Initial velocity of " + CelestialBody.celestialBodies[i].name + " " + state[i][1]);
+            // System.out.println("Initial position of " +
+            // CelestialBody.celestialBodies[i].name + " " + state[i][0]);
+            // System.out.println("Initial velocity of " +
+            // CelestialBody.celestialBodies[i].name + " " + state[i][1]);
         }
 
     }
-    //update position and velocity
+
+    // update position and velocity
     @Override
     public IState addmultiply(double step, IAccelerationRate accRate) {
         State newState = new State();
@@ -31,7 +36,8 @@ public class State implements IState {
         for (int i = 0; i < this.state.length; i++) {
 
             newState.addPosition(i, this.state[i][0].addmultiply(step, ((AccelerationRate) accRate).getVelocity(i)));
-            newState.addVelocity(i, this.state[i][1].addmultiply(step, ((AccelerationRate) accRate).getAcceleration(i)));
+            newState.addVelocity(i,
+                    this.state[i][1].addmultiply(step, ((AccelerationRate) accRate).getAcceleration(i)));
         }
         return newState;
     }
