@@ -23,6 +23,8 @@ import Interface.IVector3;
 import Simulator.SolarSystem;
 
 public class Main extends JPanel {
+    private static final int REACHED_EARTH = 7220;
+
     public static void main(String[] args) throws InterruptedException {
         new Style();
 
@@ -41,7 +43,7 @@ public class Main extends JPanel {
         /* Distance at 3493: 293897.19830514514 */
 
         /* Let's start our return journey at state 4494 */
-        /* state 6742 is when we go near Earth */
+        /* state 7219 is when we go near Earth */
         /*
          * IVector3 missilePos = GlobalState.states[3493].state[11][0];
          * IVector3 titanPos = GlobalState.states[3493].state[8][0];
@@ -56,6 +58,10 @@ public class Main extends JPanel {
          * System.out.println("Distance between them: " +
          * missilePos.euclideanDist(earthPos));
          */
+        IVector3 missilePos = GlobalState.states[7220].state[11][0];
+        IVector3 earthPos = GlobalState.states[7220].state[4][0];
+        System.out.println("Distance between them: " +
+                missilePos.euclideanDist(earthPos));
 
         /*
          * drawables represents any element, that will be drawed to the screen in each
@@ -166,6 +172,10 @@ public class Main extends JPanel {
 
             /* Determines the simulation speed */
             Thread.sleep(GlobalState.simulationSpeed);
+
+            if (currStateIndex == Main.REACHED_EARTH) {
+                break;
+            }
         }
     }
 
