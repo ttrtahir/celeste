@@ -1,9 +1,8 @@
 package Testing;
 
 import Interface.IVector3;
-import Simulator.Vector3;
-import Simulator.CelestialBodies.CelestialBodyValues;
 import Simulator.CelestialBodies.SpaceProbe;
+import Simulator.Vector3;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Draft {
-    static CelestialBodyValues celestialBodyValues = new CelestialBodyValues();
+    //static CelestialBodyValues celestialBodyValues = new CelestialBodyValues();
     static IVector3 p0 = new Vector3(0, 0, 0);
     static IVector3 v0 = new Vector3(0, 0, 0);
     static Vector3 titanPos = new Vector3(1.254501624e+09, -7.61340299e+08, -3.6309613e+07);

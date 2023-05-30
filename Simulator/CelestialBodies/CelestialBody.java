@@ -1,9 +1,9 @@
 package Simulator.CelestialBodies;
 
-import java.awt.Color;
-
 import Interface.IVector3;
 import Simulator.Vector3;
+
+import java.awt.*;
 
 public class CelestialBody {
     public String name;
@@ -36,7 +36,6 @@ public class CelestialBody {
     public CelestialBody(String celestialName) {
         name = celestialName;
         step = 0;
-
     }
 
     public void createVectors() {
