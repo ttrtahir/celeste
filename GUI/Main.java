@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import GUI.Drawables.Background;
 import GUI.Drawables.Drawable;
 import GUI.Drawables.PlanetStats;
+import GUI.Drawables.Style;
 import GUI.Drawables.Text;
 import GUI.Drawables.Trajectory;
 import GUI.Events.KeyEvents;
@@ -22,6 +23,8 @@ import Simulator.SolarSystem;
 
 public class Main extends JPanel {
     public static void main(String[] args) throws InterruptedException {
+        new Style();
+
         JFrame frame = new JFrame("Solar System Simulation");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
