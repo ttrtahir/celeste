@@ -59,8 +59,8 @@ public class Planet extends Drawable {
 		g2.setFont(Style.fontSmall);
 		g2.drawString(planetStats.name,
 				planetPositionX
-						- planetStats.name.length() * 3,
-				planetPositionY);
+						- g2.getFontMetrics().stringWidth(planetStats.name) / 3,
+				planetPositionY - 5);
 	}
 
 	private Ellipse2D.Double getPlanet() {
