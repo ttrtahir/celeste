@@ -24,7 +24,7 @@ public class StyleValues {
 			4,
 			34,
 			28,
-			12 };
+			20 };
 	// Contains the names of the planets
 	public static final String[] NAMES = { "Sun", "Mercury", "Venus", "Earth", "Moon", "Mars", "Jupiter", "Saturn",
 			"Titan", "Uranus", "Neptune", "Missile" };

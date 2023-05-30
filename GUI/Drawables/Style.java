@@ -22,7 +22,6 @@ public class Style {
             Font font = Font.createFont(Font.TRUETYPE_FONT, url.openStream());
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(font);
-            System.out.println("Font loaded");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -35,11 +35,13 @@ public class Main extends JPanel {
         solarSystem.initialProcess();
         GlobalState.states = solarSystem.getStates();
 
-        /* They are closest at state 3492 or 3493 */
-        /* Let's start journey back at 4494 */
-        /* 6742 is when we go near Earth */
+        /* Some notes so I don't forget them: */
+        /* Space probe and Titan are closest at state 3492 or 3493 */
         /* Distance at 3492: 315929.89353160484 */
         /* Distance at 3493: 293897.19830514514 */
+
+        /* Let's start our return journey at state 4494 */
+        /* state 6742 is when we go near Earth */
         /*
          * IVector3 missilePos = GlobalState.states[3493].state[11][0];
          * IVector3 titanPos = GlobalState.states[3493].state[8][0];
@@ -48,11 +50,13 @@ public class Main extends JPanel {
          * System.out.println("Titan position: " + titanPos);
          * System.out.println("Distance between them: " +
          * missilePos.euclideanDist(titanPos));
+         *
+         * IVector3 missilePos = GlobalState.states[6742].state[11][0];
+         * IVector3 earthPos = GlobalState.states[6742].state[4][0];
+         * System.out.println("Distance between them: " +
+         * missilePos.euclideanDist(earthPos));
          */
-        IVector3 missilePos = GlobalState.states[6742].state[11][0];
-        IVector3 earthPos = GlobalState.states[6742].state[4][0];
-        System.out.println("Distance between them: " +
-                missilePos.euclideanDist(earthPos));
+
         /*
          * drawables represents any element, that will be drawed to the screen in each
          * frame
@@ -94,30 +98,49 @@ public class Main extends JPanel {
             layeredPane.add(drawable);
         }
 
-        /* For some reason in JLayeredPane the first rendered is the one in front */
+        /*
+         * For some reason in JLayeredPane the first rendered is the one in front.
+         * Makes no sense but it is what it is
+         */
         Collections.reverse(drawables);
 
         frame.add(layeredPane);
         frame.setVisible(true);
-        /* key and mouse events */
+        /* key and mouse press events */
         frame.addMouseWheelListener(new MouseEvents());
         KeyEvents keyEvents = new KeyEvents(planetStats);
         frame.addKeyListener(keyEvents);
 
+        /*
+         * Can change simulation starting point here. Max state can be calculated from
+         * values in SolarSystem.java by (timeFinal / h) + 1
+         */
         int currStateIndex = 0;
+        /* Counts how many days passed */
         int daysSinceStart = (int) (GlobalState.STEP_MULTIPLIER * currStateIndex);
-        /* TODO: TEMPORARY */
+        /*
+         * Choose which planet to focus on. Can be changed using right and left arrow
+         * keys.
+         */
         GlobalState.planetFocused = planetStats.get(11);
-        // GlobalState.SCALE = 10000;
+        /* Can set initial SCALE */
+        GlobalState.SCALE = GlobalState.SCALE;
+        /*
+         * Set simulations speed. A bit deceiving variable name (if you come up with a
+         * better one let me know), because it is time in milliseconds between each
+         * frame. So the lower the number the faster the simulation.
+         */
         GlobalState.simulationSpeed = 10;
         while (true) {
             if (GlobalState.paused) {
+                /* These allow for SCALE and focused planet change even if paused */
                 frame.repaint();
+                keyEvents.setPlanetStats(planetStats);
                 continue;
             }
             frame.repaint();
-
             currStateIndex++;
+
             daysSinceStart = (int) (currStateIndex * GlobalState.STEP_MULTIPLIER);
 
             /* Neccessary to keep the focusedPlanet position up-to-date */
@@ -129,6 +152,7 @@ public class Main extends JPanel {
                         (int) GlobalState.states[currStateIndex].state[i][0].getY());
             }
 
+            /* Update space probe's white/red trajectory ratio */
             trajectorySpaceProbe.updateCurrentStateIndex(currStateIndex);
 
             /* Updating all UI text on screen */

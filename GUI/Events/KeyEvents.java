@@ -13,7 +13,7 @@ import GUI.Drawables.PlanetStats;
 public class KeyEvents implements KeyListener {
     private ArrayList<PlanetStats> planetStats;
     private int currentIndex = 0;
-    private int[] focuseablePlanets = { 0, 3, 7, 11 };
+    private int[] focuseablePlanets = { 0, 3, 8, 1, };
 
     public KeyEvents(ArrayList<PlanetStats> planetStats) {
         this.planetStats = planetStats;
