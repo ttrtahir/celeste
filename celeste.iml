@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library name="JUnit4">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/" />
@@ -17,7 +17,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library name="JUnit5.8.1">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/" />
@@ -33,21 +33,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES />
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../jfreechart-1.0.19/jfreechart-1.0.19/experimental" />
-          <root url="file://$MODULE_DIR$/../jfreechart-1.0.19/jfreechart-1.0.19/source" />
-          <root url="file://$MODULE_DIR$/../jfreechart-1.0.19/jfreechart-1.0.19/swt" />
-          <root url="file://$MODULE_DIR$/../jfreechart-1.0.19/jfreechart-1.0.19/tests" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="experimental" level="project" />
-    <orderEntry type="library" name="jfreechart-1.0.19-demo" level="project" />
-    <orderEntry type="library" name="jfreechart-1.0" level="project" />
-    <orderEntry type="library" exported="" name="source" level="project" />
   </component>
 </module>
