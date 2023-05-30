@@ -1,7 +1,9 @@
 package Simulator;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.OptionalDataException;
-
 import GUI.GlobalState;
 import Interface.IODESolver;
 
@@ -16,6 +18,7 @@ public class SolarSystem {
     private static double h = GlobalState.STEP_MULTIPLIER * daySec;
 
     public SolarSystem() {
+
         // inita; nodies
         new CelestialBodyValues();
 
@@ -27,12 +30,22 @@ public class SolarSystem {
     }
 
     public void initialProcess() {
-        /*
-         * rewrite this method to initialize the solar system
-         */
-        states[0].inputState();
-        IODESolver solver = new ODESolver();
-        states = (State[]) solver.solve(new ODEFunction(), (State) states[0], h, timeFinal);
+        // Initialize celestial bodies
+        String filename = "Simulator/Values.txt";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            ReadFile.updateCelestialBodyPositions(ReadFile.readSection(br, "POSITIONS"));
+            ReadFile.updateCelestialBodyVelocities(ReadFile.readSection(br, "VELOCITY"));
+            ReadFile.updateCelestialBodyMasses(ReadFile.readSection(br, "MASS"));
+
+            states[0].inputState();
+            IODESolver solver = new ODESolver();
+            states = (State[]) solver.solve(new ODEFunction(), (State) states[0], h, timeFinal);
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        } catch (ReadFile.SectionNotFoundException e) {
+            System.out.println("Section not found: " + e.getMessage());
+        }
     }
 
     // For genetic algorithm
