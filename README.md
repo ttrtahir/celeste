@@ -20,8 +20,4 @@ The key component of GUI is Drawables/Drawable.java, which is the interface for 
 
 ### Genetic Algorithm
 
-TODO
-
-### Tests
-
-TODO
+Run Simulator/Genetic/GeneticAlgorithm.java to start the genetic algorithm. Values can be tweaked to your liking.
