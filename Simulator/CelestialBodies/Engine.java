@@ -71,9 +71,16 @@ public class Engine {
 
     public Vector3 initiateThrust(IVector3 inputVelocity) {
         this.startVelocity = inputVelocity.euclideanDist(new Vector3(0, 0, 0));
+
+        /* Earth liftoff calculations */
+        // Vector3 initialVelocity = new Vector3(44.46293344609362, -1.6318918240351392,
+        // -3.2936113004386103);
+        // System.out.println("Fuel consumed: " + getFuelConsumed(new Vector3(0, 0, 0),
+        // initialVelocity));
+
         if (thrustCounter == 0) {
             thrustCounter++;
-            /* Velocity to enter Titan's orbit */
+            /* Velocity to enter Titan's orbit. Found using GA. */
             Vector3 newVelocity = new Vector3(-0.25, 10.94, -0.86);
 
             this.endVelocity = newVelocity.euclideanDist(new Vector3(0, 0, 0));
@@ -82,7 +89,7 @@ public class Engine {
 
             return newVelocity;
         } else {
-            /* Velocity to start journey towards Earth */
+            /* Velocity to start journey towards Earth. Found using GA. */
             Vector3 newVelocity = new Vector3(-60, 23.447, -0.86);
 
             this.endVelocity = newVelocity.euclideanDist(new Vector3(0, 0, 0));

@@ -1,5 +1,6 @@
 package GUI.Drawables;
 
+import java.awt.Color;
 /*
  * Contains methods for creating and coloring the Planet
  */
@@ -37,9 +38,16 @@ public class Planet extends Drawable {
 		calculatePosition();
 		drawPlanetName();
 
-		g2.setStroke(new java.awt.BasicStroke(3));
+		g2.setStroke(new java.awt.BasicStroke(5));
 		g2.setColor(planetStats.color);
-		g2.draw(getPlanet());
+		if (planetStats.name == "Missile") {
+			g2.fill(getPlanet());
+			g2.setStroke(new java.awt.BasicStroke(4));
+			g2.setColor(Color.WHITE);
+			g2.draw(getPlanet());
+		} else {
+			g2.draw(getPlanet());
+		}
 	}
 
 	// Calculates the position of the celestialBody
