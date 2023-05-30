@@ -22,6 +22,7 @@ class Vector3Test {
     }
 
     @Test
+
     void getY() {
         IVector3 v = new Vector3(-1.5, 0.2, 1.1);
         assertEquals(0.2, v.getY());

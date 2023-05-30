@@ -7,7 +7,11 @@ import Simulator.CelestialBodies.CelestialBody;
 import Simulator.CelestialBodies.ODEFunction;
 import Simulator.Solvers.ODESolver;
 
+import java.io.OptionalDataException;
+
 public class SolarSystem {
+
+    public OptionalDataException celestialBody;
     private State[] states;
 
     private static double daySec = 60 * 24 * 60;
@@ -31,6 +35,9 @@ public class SolarSystem {
     }
 
     public void initialProcess() {
+        /*
+         * rewrite this method to initialize the solar system
+         */
         states[0].inputState();
         IODESolver solver = new ODESolver();
         states = (State[]) solver.solve(new ODEFunction(), (State) states[0], h, timeFinal);
@@ -58,7 +65,7 @@ public class SolarSystem {
 
     public static void main(String[] args) {
         SolarSystem ss = new SolarSystem();
-        // ss.initialProcess();
+        ss.initialProcess();
         System.out.println(ss.states[1].state[1][0]);
     }
 }

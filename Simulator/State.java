@@ -57,4 +57,5 @@ public class State implements IState {
     public IVector3 getVelocity(int i) {
         return state[i][1];
     }
+
 }

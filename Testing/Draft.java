@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Test {
+public class Draft {
     static CelestialBodyValues celestialBodyValues = new CelestialBodyValues();
     static IVector3 p0 = new Vector3(0, 0, 0);
     static IVector3 v0 = new Vector3(0, 0, 0);
