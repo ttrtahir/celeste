@@ -26,5 +26,4 @@ public class RK2 extends ODESolver {
 
         return y.addmultiply(h / 4, (k1).addMultiply(3, k2));
     }
-    // hahah
 }
