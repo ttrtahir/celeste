@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.FileReader;
+package celeste.FileReader;
 
 /*
  * Contains the method for reading the values from a file
@@ -7,8 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import app.src.main.java.celeste.GUI.Resources.StyleValues;
-import app.src.main.java.celeste.Simulator.CelestialBodies.CelestialBody;
+import celeste.GUI.Resources.StyleValues;
+import celeste.Simulator.CelestialBodies.CelestialBody;
 
 public class ReadFile {
     static double[][] readSection(BufferedReader br, String sectionName) throws IOException, SectionNotFoundException {

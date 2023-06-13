@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.GUI.Resources;
+package celeste.GUI.Resources;
 
 public class FontFamily {
 

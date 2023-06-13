@@ -1,7 +1,7 @@
-package Testing;
+package celeste;
 
-import app.src.main.java.celeste.Interface.IVector3;
-import app.src.main.java.celeste.Simulator.Vector3;
+import celeste.Interface.IVector3;
+import celeste.Simulator.Vector3;
 
 import static org.junit.Assert.*;
 

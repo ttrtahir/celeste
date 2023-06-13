@@ -1,11 +1,11 @@
-package app.src.main.java.celeste.GUI.Drawables;
+package celeste.GUI.Drawables;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import app.src.main.java.celeste.GUI.GlobalState;
-import app.src.main.java.celeste.Simulator.State;
+import celeste.GUI.GlobalState;
+import celeste.Simulator.State;
 
 public class Trajectory extends Drawable {
     private Graphics2D g2;

@@ -1,8 +1,8 @@
-package app.src.main.java.celeste.Simulator.Solvers;
+package celeste.Simulator.Solvers;
 
-import app.src.main.java.celeste.Interface.IODEFunction;
-import app.src.main.java.celeste.Interface.IState;
-import app.src.main.java.celeste.Simulator.State;
+import celeste.Interface.IODEFunction;
+import celeste.Interface.IState;
+import celeste.Simulator.State;
 
 /*
 * class implementing Euler's method to calculate motion of objects in the solar system

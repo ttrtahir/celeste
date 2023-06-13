@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.GUI.Drawables;
+package celeste.GUI.Drawables;
 
 /*
  * Contains a custom style
@@ -8,7 +8,7 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.net.URL;
 
-import app.src.main.java.celeste.GUI.Resources.FontFamily;
+import celeste.GUI.Resources.FontFamily;
 
 public class Style {
     public static Color fontColor = Color.WHITE;

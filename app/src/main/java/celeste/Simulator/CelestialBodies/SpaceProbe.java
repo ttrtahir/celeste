@@ -1,11 +1,11 @@
-package app.src.main.java.celeste.Simulator.CelestialBodies;
+package celeste.Simulator.CelestialBodies;
 
-import app.src.main.java.celeste.Interface.ISpaceProbe;
-import app.src.main.java.celeste.Interface.IVector3;
-import app.src.main.java.celeste.Simulator.State;
-import app.src.main.java.celeste.Simulator.Vector3;
-import app.src.main.java.celeste.Simulator.Solvers.EulerSolver;
-import app.src.main.java.celeste.Simulator.Solvers.RK4;
+import celeste.Interface.ISpaceProbe;
+import celeste.Interface.IVector3;
+import celeste.Simulator.State;
+import celeste.Simulator.Vector3;
+import celeste.Simulator.Solvers.EulerSolver;
+import celeste.Simulator.Solvers.RK4;
 
 public class SpaceProbe implements ISpaceProbe {
     public State y0;

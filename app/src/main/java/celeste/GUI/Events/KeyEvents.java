@@ -1,10 +1,10 @@
-package app.src.main.java.celeste.GUI.Events;
+package celeste.GUI.Events;
 
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-import app.src.main.java.celeste.GUI.GlobalState;
-import app.src.main.java.celeste.GUI.Drawables.PlanetStats;
+import celeste.GUI.GlobalState;
+import celeste.GUI.Drawables.PlanetStats;
 
 /*
  * Contains methods for the mouse events

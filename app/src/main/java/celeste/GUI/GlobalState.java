@@ -1,12 +1,12 @@
-package app.src.main.java.celeste.GUI;
+package celeste.GUI;
 
 /*
  * Contains the variables that are used all across the files
  */
 import java.awt.*;
 
-import app.src.main.java.celeste.GUI.Drawables.PlanetStats;
-import app.src.main.java.celeste.Simulator.State;
+import celeste.GUI.Drawables.PlanetStats;
+import celeste.Simulator.State;
 
 public class GlobalState {
     private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

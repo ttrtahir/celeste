@@ -1,6 +1,6 @@
-package app.src.main.java.celeste.Simulator;
+package celeste.Simulator;
 
-import app.src.main.java.celeste.Interface.IVector3;
+import celeste.Interface.IVector3;
 
 public class Vector3 implements IVector3 {
     /**

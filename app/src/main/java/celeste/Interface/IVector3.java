@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.Interface;
+package celeste.Interface;
 
 public interface IVector3 {
     public double getX();

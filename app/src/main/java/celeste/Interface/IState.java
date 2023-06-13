@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.Interface;
+package celeste.Interface;
 
 public interface IState {
     // state of Solar System implemented by a differential equation

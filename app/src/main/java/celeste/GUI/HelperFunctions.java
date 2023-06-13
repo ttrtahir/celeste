@@ -1,10 +1,10 @@
-package app.src.main.java.celeste.GUI;
+package celeste.GUI;
 
-import app.src.main.java.celeste.GUI.Drawables.PlanetStats;
-import app.src.main.java.celeste.GUI.Drawables.Text;
-import app.src.main.java.celeste.GUI.Resources.StyleValues;
-import app.src.main.java.celeste.GUI.Drawables.Drawable;
-import app.src.main.java.celeste.GUI.Drawables.Planet;
+import celeste.GUI.Drawables.PlanetStats;
+import celeste.GUI.Drawables.Text;
+import celeste.GUI.Resources.StyleValues;
+import celeste.GUI.Drawables.Drawable;
+import celeste.GUI.Drawables.Planet;
 
 import java.util.ArrayList;
 

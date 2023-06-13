@@ -1,7 +1,7 @@
-package app.src.main.java.celeste.Simulator.CelestialBodies;
+package celeste.Simulator.CelestialBodies;
 
-import app.src.main.java.celeste.Interface.IVector3;
-import app.src.main.java.celeste.Simulator.Vector3;
+import celeste.Interface.IVector3;
+import celeste.Simulator.Vector3;
 
 /*
  * Contains methods required for the Engine.

@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.GUI.Drawables;
+package celeste.GUI.Drawables;
 
 import java.awt.Color;
 /*
@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
-import app.src.main.java.celeste.GUI.GlobalState;
+import celeste.GUI.GlobalState;
 
 public class Planet extends Drawable {
 

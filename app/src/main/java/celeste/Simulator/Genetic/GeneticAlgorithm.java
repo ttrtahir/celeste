@@ -1,8 +1,8 @@
-package app.src.main.java.celeste.Simulator.Genetic;
+package celeste.Simulator.Genetic;
 
-import app.src.main.java.celeste.Simulator.SolarSystem;
-import app.src.main.java.celeste.Simulator.State;
-import app.src.main.java.celeste.Simulator.Vector3;
+import celeste.Simulator.SolarSystem;
+import celeste.Simulator.State;
+import celeste.Simulator.Vector3;
 
 import java.util.Random;
 

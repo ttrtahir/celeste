@@ -1,7 +1,7 @@
-package app.src.main.java.celeste.Simulator.CelestialBodies;
+package celeste.Simulator.CelestialBodies;
 
-import app.src.main.java.celeste.Interface.IAccelerationRate;
-import app.src.main.java.celeste.Simulator.Vector3;
+import celeste.Interface.IAccelerationRate;
+import celeste.Simulator.Vector3;
 
 public class AccelerationRate implements IAccelerationRate {
     /**

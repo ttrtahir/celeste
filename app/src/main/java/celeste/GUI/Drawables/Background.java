@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.GUI.Drawables;
+package celeste.GUI.Drawables;
 
 /*
  * Contains information and methods for the background of the GUI.
@@ -7,7 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import app.src.main.java.celeste.GUI.GlobalState;
+import celeste.GUI.GlobalState;
 
 public class Background extends Drawable {
     private Graphics2D g2;

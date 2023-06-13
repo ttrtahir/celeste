@@ -1,16 +1,16 @@
-package Testing;
+package celeste;
 
-import app.src.main.java.celeste.Simulator.CelestialBodies.CelestialBodyValues;
-import app.src.main.java.celeste.Simulator.CelestialBodies.ODEFunction;
-import app.src.main.java.celeste.Simulator.Solvers.EulerSolver;
-import app.src.main.java.celeste.Simulator.Solvers.RK2;
-import app.src.main.java.celeste.Simulator.Solvers.RK3;
-import app.src.main.java.celeste.Simulator.Solvers.RK4;
+import celeste.Simulator.CelestialBodies.CelestialBodyValues;
+import celeste.Simulator.CelestialBodies.ODEFunction;
+import celeste.Simulator.Solvers.EulerSolver;
+import celeste.Simulator.Solvers.RK2;
+import celeste.Simulator.Solvers.RK3;
+import celeste.Simulator.Solvers.RK4;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import app.src.main.java.celeste.Simulator.State;
+import celeste.Simulator.State;
 
 public class ODEFunctionTest {
     static final double ACCURACY = 1.0; // titan

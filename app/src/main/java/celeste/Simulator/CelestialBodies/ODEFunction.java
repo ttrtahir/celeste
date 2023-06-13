@@ -1,10 +1,10 @@
-package app.src.main.java.celeste.Simulator.CelestialBodies;
+package celeste.Simulator.CelestialBodies;
 
-import app.src.main.java.celeste.Interface.IAccelerationRate;
-import app.src.main.java.celeste.Interface.IODEFunction;
-import app.src.main.java.celeste.Interface.IState;
-import app.src.main.java.celeste.Simulator.State;
-import app.src.main.java.celeste.Simulator.Vector3;
+import celeste.Interface.IAccelerationRate;
+import celeste.Interface.IODEFunction;
+import celeste.Interface.IState;
+import celeste.Simulator.State;
+import celeste.Simulator.Vector3;
 
 /**
  * A class contains a method for Newton's gravitational calculations

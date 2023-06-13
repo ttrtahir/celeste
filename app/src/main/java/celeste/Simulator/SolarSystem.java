@@ -1,11 +1,11 @@
-package app.src.main.java.celeste.Simulator;
+package celeste.Simulator;
 
-import app.src.main.java.celeste.FileReader.ReadFile;
-import app.src.main.java.celeste.GUI.GlobalState;
-import app.src.main.java.celeste.Interface.IODESolver;
-import app.src.main.java.celeste.Simulator.CelestialBodies.CelestialBody;
-import app.src.main.java.celeste.Simulator.CelestialBodies.ODEFunction;
-import app.src.main.java.celeste.Simulator.Solvers.ODESolver;
+import celeste.FileReader.ReadFile;
+import celeste.GUI.GlobalState;
+import celeste.Interface.IODESolver;
+import celeste.Simulator.CelestialBodies.CelestialBody;
+import celeste.Simulator.CelestialBodies.ODEFunction;
+import celeste.Simulator.Solvers.ODESolver;
 
 import java.io.OptionalDataException;
 

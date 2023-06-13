@@ -1,8 +1,8 @@
-package app.src.main.java.celeste.Simulator.Solvers;
+package celeste.Simulator.Solvers;
 
-import app.src.main.java.celeste.Interface.IODEFunction;
-import app.src.main.java.celeste.Interface.IState;
-import app.src.main.java.celeste.Simulator.CelestialBodies.AccelerationRate;
+import celeste.Interface.IODEFunction;
+import celeste.Interface.IState;
+import celeste.Simulator.CelestialBodies.AccelerationRate;
 
 /**
  * Class modifies the step method of the ODESolver class to calculate the state

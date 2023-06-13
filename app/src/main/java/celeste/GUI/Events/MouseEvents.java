@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.GUI.Events;
+package celeste.GUI.Events;
 
 /*
  * Contains methods for the mouse events
@@ -6,7 +6,7 @@ package app.src.main.java.celeste.GUI.Events;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-import app.src.main.java.celeste.GUI.GlobalState;
+import celeste.GUI.GlobalState;
 
 public class MouseEvents implements MouseWheelListener {
     public MouseEvents() {

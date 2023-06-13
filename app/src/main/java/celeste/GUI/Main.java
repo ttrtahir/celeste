@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.GUI;
+package celeste.GUI;
 
 /*
  * Contains the main class for running and testing the project
@@ -10,17 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import app.src.main.java.celeste.GUI.Drawables.Background;
-import app.src.main.java.celeste.GUI.Drawables.Drawable;
-import app.src.main.java.celeste.GUI.Drawables.PlanetStats;
-import app.src.main.java.celeste.GUI.Drawables.Style;
-import app.src.main.java.celeste.GUI.Drawables.Text;
-import app.src.main.java.celeste.GUI.Drawables.Trajectory;
-import app.src.main.java.celeste.GUI.Events.KeyEvents;
-import app.src.main.java.celeste.GUI.Events.MouseEvents;
-import app.src.main.java.celeste.GUI.Resources.StyleValues;
-import app.src.main.java.celeste.Interface.IVector3;
-import app.src.main.java.celeste.Simulator.SolarSystem;
+import celeste.GUI.Drawables.Background;
+import celeste.GUI.Drawables.Drawable;
+import celeste.GUI.Drawables.PlanetStats;
+import celeste.GUI.Drawables.Style;
+import celeste.GUI.Drawables.Text;
+import celeste.GUI.Drawables.Trajectory;
+import celeste.GUI.Events.KeyEvents;
+import celeste.GUI.Events.MouseEvents;
+import celeste.GUI.Resources.StyleValues;
+import celeste.Interface.IVector3;
+import celeste.Simulator.SolarSystem;
 
 public class Main extends JPanel {
     private static final int REACHED_EARTH = 7220;

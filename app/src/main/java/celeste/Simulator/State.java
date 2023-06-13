@@ -1,10 +1,10 @@
-package app.src.main.java.celeste.Simulator;
+package celeste.Simulator;
 
-import app.src.main.java.celeste.Interface.IAccelerationRate;
-import app.src.main.java.celeste.Interface.IState;
-import app.src.main.java.celeste.Interface.IVector3;
-import app.src.main.java.celeste.Simulator.CelestialBodies.AccelerationRate;
-import app.src.main.java.celeste.Simulator.CelestialBodies.CelestialBody;
+import celeste.Interface.IAccelerationRate;
+import celeste.Interface.IState;
+import celeste.Interface.IVector3;
+import celeste.Simulator.CelestialBodies.AccelerationRate;
+import celeste.Simulator.CelestialBodies.CelestialBody;
 
 public class State implements IState {
     public int size;

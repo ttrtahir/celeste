@@ -1,4 +1,4 @@
-package app.src.main.java.celeste.GUI.Drawables;
+package celeste.GUI.Drawables;
 
 /*
  * Interface class for drawing objects

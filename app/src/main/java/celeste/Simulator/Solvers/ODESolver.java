@@ -1,10 +1,10 @@
-package app.src.main.java.celeste.Simulator.Solvers;
+package celeste.Simulator.Solvers;
 
-import app.src.main.java.celeste.Interface.IODEFunction;
-import app.src.main.java.celeste.Interface.IODESolver;
-import app.src.main.java.celeste.Interface.IState;
-import app.src.main.java.celeste.Simulator.State;
-import app.src.main.java.celeste.Simulator.CelestialBodies.Engine;
+import celeste.Interface.IODEFunction;
+import celeste.Interface.IODESolver;
+import celeste.Interface.IState;
+import celeste.Simulator.State;
+import celeste.Simulator.CelestialBodies.Engine;
 
 public class ODESolver implements IODESolver {
     /* class implements EULER's method */
