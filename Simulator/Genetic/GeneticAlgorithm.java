@@ -146,7 +146,6 @@ public class GeneticAlgorithm {
     }
 
     class Individual {
-        private static int individualID = 0;
         private int id;
         private Vector3 velocity;
         private double fitness = 0;
@@ -154,8 +153,6 @@ public class GeneticAlgorithm {
         SolarSystem sol = new SolarSystem();
 
         Individual(Vector3 velocity) {
-            this.id = individualID;
-            individualID++;
             this.velocity = velocity;
             this.sol = new SolarSystem();
         }
