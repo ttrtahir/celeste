@@ -28,13 +28,17 @@ public class LandingModule {
             System.out.println(state.toString());
         }
     }
-    public void openLoopController() {
-        //TO-DO
+    public double[] openLoopController(double t) {
+        
+        double[] control = new double[3]; 
+        return control;
     }
 
   
-    public void feedbackController() {
-        //TO-DO
+    public double[] feedbackController(State currentState, State desiredState) {
+
+        double[] control = new double[3]; 
+        return control;
     }
 
     
