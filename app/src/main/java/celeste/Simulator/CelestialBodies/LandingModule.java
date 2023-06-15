@@ -18,7 +18,7 @@ public class LandingModule {
         this.function = function;
         this.currentState = new State();
 
-        this.controllers = new PIDController[3];  // assuming 3D space
+        this.controllers = new PIDController[3];
         for (int i = 0; i < 3; i++) {
             this.controllers[i] = new PIDController(0,0,0);
         }
@@ -36,7 +36,7 @@ public class LandingModule {
     }
 
     public double[] openLoopController(double t) {
-        // Control values for x, y, z are pre-defined or computed based on time t
+       
         double[] control = new double[3];
         control[0] = 0;/* control for x */
         control[1] = 0;/* control for y */
@@ -45,12 +45,12 @@ public class LandingModule {
     }
 
     public double[] feedbackController(State currentState, State desiredState, double dt) {
-        // Control is computed based on the difference between current and desired state
+        
         double[] control = new double[3];
 
         for (int i = 0; i < 3; i++) {
-            controllers[i].setSetPoint(desiredState.state[i][0]); // Assuming state[i][0] is position
-            control[i] = controllers[i].calculate(currentState.state[i][0]); // Feed current position to PID
+            controllers[i].setSetPoint(desiredState.state[i][0]);
+            control[i] = controllers[i].calculate(currentState.state[i][0]);
         }
 
         return control;
