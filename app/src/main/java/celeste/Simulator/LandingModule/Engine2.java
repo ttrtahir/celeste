@@ -1,10 +1,10 @@
 package celeste.Simulator.LandingModule;
 
-public class Engine {
+public class Engine2 {
     private double uMax;//Max acceleration from main thruster
     private double vMax;//Max torque from side thrusters
 
-    public Engine(double uMax, double vMax) {
+    public Engine2(double uMax, double vMax) {
         this.uMax = uMax;
         this.vMax = vMax;
     }
