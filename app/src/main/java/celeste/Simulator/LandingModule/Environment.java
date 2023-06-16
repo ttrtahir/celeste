@@ -5,13 +5,13 @@ public class Environment {
     public static final double UMAX = 10 * GRAVITY;
     public static final double VMAX = 1;
 
-    private LandingModule landingPad;
+    private LandingModule landingModule;
 
-    public Environment(LandingModule landingPad) {
-        this.landingPad = landingPad;
+    public Environment(LandingModule landingModule) {
+        this.landingModule = landingModule;
     }
 
     public boolean isSafeLanding(Spaceship spaceship) {
-        return landingPad.isSafeLanding(spaceship);
+        return landingModule.isSafeLanding(spaceship);
     }
 }
