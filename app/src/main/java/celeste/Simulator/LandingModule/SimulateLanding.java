@@ -4,12 +4,12 @@ public class SimulateLanding {
  
     public static void main(String[] args) {
         Engine2 engine = new Engine2(10 * Environment.GRAVITY, 1);
-        Spaceship spaceship = new Spaceship(0, 10000, 0, 0, 0, 0, 0, 0, engine);
+        Spaceship spaceship = new Spaceship(10000, 10000, 0, 0, 0, 0, 0, 0, engine);
         
         LandingModule landingModule = new LandingModule();
 
         double dt = 0.1;
-        double simulationTime = 1000;
+        double simulationTime = 20000;
         int steps = (int)(simulationTime / dt);
 
         for (int i = 0; i < steps; i++) {

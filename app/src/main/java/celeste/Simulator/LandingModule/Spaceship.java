@@ -4,8 +4,11 @@ public class Spaceship {
     private double x, y, theta, u, v, vX, vY, vTheta;
     private Engine2 engine;
     private double targetX = 0, targetY = 0, targetVX = 0, targetVY = 0, targetTheta = 0, targetVTheta = 0;
-    private double Kp = 0.1, Ki = 0.06, Kd = 0.1; //PID control constants
+    private double desiredAccelX = 0;
+    private double K_crossTrack = 8;
+    private double Kp = 0.01, Ki = 0.01, Kd = 0.2; //PID control constants
 
+    
     public Spaceship(double x, double y, double theta, double u, double v, double vX, double vY, double vTheta, Engine2 engine) {
         this.x = x;
         this.y = y;
@@ -32,43 +35,61 @@ public class Spaceship {
         }
     
 
-    public void controlSideEngine() {
-        double errorX = targetX - x;
-        double errorVX = targetVX - vX;
-        double errorY = targetY - y;
-        double errorTheta = targetTheta - theta;
-        double errorVTheta = targetVTheta - vTheta;
-    
-        // Adjust the target thrust angle based on the errors in the horizontal position and velocity
-        if (Math.abs(errorX) > 0.1 || Math.abs(errorVX) > 0.1) {
-            targetTheta = Math.atan2(errorX + errorVX, errorY);
-        } else {
+        public void controlSideEngine() {
+            double errorX = targetX - x;
+            double errorVX = targetVX - vX;
+            double errorTheta = targetTheta - theta;
+            double errorVTheta = targetVTheta - vTheta;
+            double crossTrackError = x;
+        
             targetTheta = 0;
-        }
-    
-        //Control the rotation to aim the thrust in the direction that will correct the errors in the horizontal and vertical positions
-        double integralPart = 0.001 * Ki * (errorTheta + errorVTheta);
-        double derivativePart = 0.001 * Kd * (errorTheta - errorVTheta);
-        this.v = Kp * errorTheta + integralPart + derivativePart; //PID control for rotation and rotational velocity
-        this.v = Math.min(this.v, engine.getVMax()); //Limit the torque to the engine's maximum
-    }
-    
-    
+        
+            //Control the rotation to aim the thrust in the direction that will correct the errors in the horizontal position
+            double integralPartTheta = 0.01 * Ki * (errorTheta + errorVTheta);
+            double derivativePartTheta = 0.01 * Kd * (errorTheta - errorVTheta);
+            this.v = Kp * errorTheta + integralPartTheta + derivativePartTheta; //PID control for rotation
+            this.v = Math.min(this.v, engine.getVMax());// Limit the torque to the engine's maximum
+        
+            //Control the lateral position
+            double integralPartX = 0.01 * Ki * (errorX + errorVX);
+            double derivativePartX = 0.01 * Kd * (errorX - errorVX);
+            double controlX = Kp * errorX + integralPartX + derivativePartX; //PID control for lateral position
+            
+            //Cross-Track Correction
+            double correction = -K_crossTrack * crossTrackError;
+            controlX += correction;
+        
+            this.desiredAccelX = controlX;
+        
+            //Modify control action based on proximity to target
+            if (Math.abs(this.x - targetX) < 50) {
+                controlX *= Math.pow(Math.abs(this.x - targetX) / 50, 2);
+            }
 
-    public void updateState(double dt) {
-        controlMainEngine();
-        controlSideEngine();
-        this.vX = u * Math.sin(theta);
-        this.vY = u * Math.cos(theta) - Environment.GRAVITY;
-        this.vTheta = v;
-        this.x += vX * dt;
-        this.y += vY * dt;
-        this.theta += vTheta * dt;
-        if (this.y < 0) {
-            this.y = 0;
-            this.vY = 0;
+            this.vX = controlX;
         }
-    }
+        
+        
+        
+
+        public void updateState(double dt) {
+            controlMainEngine();
+            controlSideEngine();
+            this.vX += desiredAccelX * dt;
+            this.vY = u * Math.cos(theta) - Environment.GRAVITY;
+            this.vTheta = v;
+            this.x += vX * dt;
+            this.y += vY * dt;
+            this.theta += vTheta * dt;
+           
+            if (this.y < 0) {
+                this.y = 0;
+                this.vY = 0;
+            }
+        }
+        
+        
+        
 
 
     public double getX() {
