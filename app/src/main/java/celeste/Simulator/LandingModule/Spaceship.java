@@ -19,13 +19,18 @@ public class Spaceship {
     }
 
     public void controlMainEngine() {
+
         double errorY = targetY - y;
         double errorVY = targetVY - vY;
         double integralPart = Ki * (errorY + errorVY);
         double derivativePart = Kd * (errorY - errorVY);
         this.u = Kp * errorY + integralPart + derivativePart; //PID control for vertical position and velocity
         this.u = Math.min(this.u, engine.getUMax()); //Limit the thrust to the engine's maximum
-    }
+        if (this.y < 30) {
+            this.u *= this.y;
+        }
+        }
+    
 
     public void controlSideEngine() {
         double errorX = targetX - x;
@@ -33,16 +38,22 @@ public class Spaceship {
         double errorY = targetY - y;
         double errorTheta = targetTheta - theta;
         double errorVTheta = targetVTheta - vTheta;
-
-        //Adjust the target thrust angle based on the errors in the horizontal position and velocity
-        targetTheta = Math.atan2(errorX + errorVX, errorY);
-
+    
+        // Adjust the target thrust angle based on the errors in the horizontal position and velocity
+        if (Math.abs(errorX) > 0.1 || Math.abs(errorVX) > 0.1) {
+            targetTheta = Math.atan2(errorX + errorVX, errorY);
+        } else {
+            targetTheta = 0;
+        }
+    
         //Control the rotation to aim the thrust in the direction that will correct the errors in the horizontal and vertical positions
-        double integralPart = Ki * (errorTheta + errorVTheta);
-        double derivativePart = Kd * (errorTheta - errorVTheta);
+        double integralPart = 0.001 * Ki * (errorTheta + errorVTheta);
+        double derivativePart = 0.001 * Kd * (errorTheta - errorVTheta);
         this.v = Kp * errorTheta + integralPart + derivativePart; //PID control for rotation and rotational velocity
         this.v = Math.min(this.v, engine.getVMax()); //Limit the torque to the engine's maximum
     }
+    
+    
 
     public void updateState(double dt) {
         controlMainEngine();
@@ -53,6 +64,10 @@ public class Spaceship {
         this.x += vX * dt;
         this.y += vY * dt;
         this.theta += vTheta * dt;
+        if (this.y < 0) {
+            this.y = 0;
+            this.vY = 0;
+        }
     }
 
 

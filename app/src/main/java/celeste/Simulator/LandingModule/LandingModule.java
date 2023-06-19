@@ -1,10 +1,10 @@
 package celeste.Simulator.LandingModule;
 
 public class LandingModule {
-    private double dx = 0.1 * Math.pow(10, -4);
+    private double dx = Math.pow(10, -4);
     private double dtheta = 0.02;
-    private double ex = 0.1 * Math.pow(10, -4);
-    private double ey = 0.1 * Math.pow(10, -4);
+    private double ex = Math.pow(10, -4);
+    private double ey = Math.pow(10, -4);
     private double etheta = 0.01;
 
     public boolean isSafeLanding(Spaceship spaceship) {
@@ -19,6 +19,7 @@ public class LandingModule {
         boolean isVXSafe = Math.abs(spaceship.getVX()) <= ex;
         boolean isVYSafe = Math.abs(spaceship.getVY()) <= ey;
         boolean isVThetaSafe = Math.abs(spaceship.getVTheta()) <= etheta;
+       
         
         return isXSafe && isThetaSafe && isVXSafe && isVYSafe && isVThetaSafe;
     }
