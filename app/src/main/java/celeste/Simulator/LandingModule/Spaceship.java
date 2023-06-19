@@ -4,7 +4,7 @@ public class Spaceship {
     private double x, y, theta, u, v, vX, vY, vTheta;
     private Engine2 engine;
     private double targetX = 0, targetY = 0, targetVX = 0, targetVY = 0, targetTheta = 0, targetVTheta = 0;
-    private double Kp = 0.1, Ki = 0.06, Kd = 0.05; //PID control constants
+    private double Kp = 0.1, Ki = 0.06, Kd = 0.1; //PID control constants
 
     public Spaceship(double x, double y, double theta, double u, double v, double vX, double vY, double vTheta, Engine2 engine) {
         this.x = x;
