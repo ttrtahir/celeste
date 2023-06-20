@@ -20,7 +20,8 @@ public class SolarSystem {
     private static double h = GlobalState.STEP_MULTIPLIER * daySec;
 
     public SolarSystem() {
-        readValuesFromFile();
+        // Read values from file into celestial bodies
+        ReadFile.updateCelestialBodyValues();
 
         states = new State[((int) Math.round((timeFinal / h)) + 1)];
         int length = states.length;
@@ -29,19 +30,13 @@ public class SolarSystem {
             states[i] = new State();
     }
 
-    public void readValuesFromFile() {
-        // Read values from file
-        System.out.println("Lol");
-        ReadFile.updateCelestialBodyValues();
-    }
-
     public void initialProcess() {
-        /*
-         * rewrite this method to initialize the solar system
-         */
         states[0].inputState();
         IODESolver solver = new ODESolver();
         states = (State[]) solver.solve(new ODEFunction(), (State) states[0], h, timeFinal);
+
+        // This updates the positions of the space probe
+        states = (State[]) solver.solveProbe(new ODEFunction(), (State) states[0], h, timeFinal, states);
     }
 
     // For genetic algorithm

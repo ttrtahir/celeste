@@ -11,12 +11,13 @@ public class State implements IState {
     public IVector3[][] state;
 
     public State() {
-        state = new Vector3[CelestialBody.celestialBodies.length][2];
+        /* + 1 for space probe */
+        state = new Vector3[CelestialBody.celestialBodies.length + 1][2];
         this.size = state.length;
     }
 
     public void inputState() {
-        for (int i = 0; i < state.length; i++) {
+        for (int i = 0; i < CelestialBody.celestialBodies.length; i++) {
             state[i][0] = CelestialBody.celestialBodies[i].posVec;
             state[i][1] = CelestialBody.celestialBodies[i].veloVec;
 
@@ -26,6 +27,8 @@ public class State implements IState {
             // CelestialBody.celestialBodies[i].name + " " + state[i][1]);
         }
 
+        state[11][0] = CelestialBody.spaceProbe.posVec;
+        state[11][1] = CelestialBody.spaceProbe.veloVec;
     }
 
     // update position and velocity
@@ -33,12 +36,22 @@ public class State implements IState {
     public IState addmultiply(double step, IAccelerationRate accRate) {
         State newState = new State();
 
-        for (int i = 0; i < this.state.length; i++) {
-
+        for (int i = 0; i < CelestialBody.celestialBodies.length; i++) {
             newState.addPosition(i, this.state[i][0].addmultiply(step, ((AccelerationRate) accRate).getVelocity(i)));
             newState.addVelocity(i,
                     this.state[i][1].addmultiply(step, ((AccelerationRate) accRate).getAcceleration(i)));
         }
+        return newState;
+    }
+
+    /* Only updates the position and velocity of the probe */
+    @Override
+    public IVector3[] addmultiplyProbe(double step, IAccelerationRate accRate) {
+        IVector3[] newState = new Vector3[2];
+
+        newState[0] = this.state[11][0].addmultiply(step, ((AccelerationRate) accRate).getVelocity(0));
+        newState[1] = this.state[11][1].addmultiply(step, ((AccelerationRate) accRate).getAcceleration(0));
+
         return newState;
     }
 

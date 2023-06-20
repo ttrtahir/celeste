@@ -52,4 +52,30 @@ public class ODEFunction implements IODEFunction {
         }
         return acceleration;
     }
+
+    /* Update the forces acting on the space probe */
+    @Override
+    public IAccelerationRate callProbe(double t, IState y) {
+        acceleration.initialize(1);
+
+        Vector3 velocity = (Vector3) ((State) y).getVelocity(11);
+        acceleration.addVelocity(0, velocity);
+
+        double distance = 0;
+        for (int j = 0; j < nBodies; j++) {
+            // calculate the distance
+            distance = Math.pow(((State) y).getPosition(11).euclideanDist(((State) y).getPosition(j)), 3);
+            Vector3 positionalDifference = (Vector3) ((((State) y).getPosition(j)
+                    .subtract(((State) y).getPosition(11))));
+
+            // a(i) = G * m(j) * pos(i) - pos(j) / (euler distance(pos(i) - pos(j))) ^ 3
+            Vector3 tempAcc = (Vector3) (positionalDifference
+                    .multiply(G * CelestialBody.celestialBodies[j].getMass() / distance));
+
+            // add the temporary acceleration to total acceleration of a planet
+            acceleration.addAcceleration(0, tempAcc);
+        }
+
+        return acceleration;
+    }
 }

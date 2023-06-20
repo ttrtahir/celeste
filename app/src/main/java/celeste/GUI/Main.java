@@ -19,8 +19,8 @@ import celeste.GUI.Drawables.Trajectory;
 import celeste.GUI.Events.KeyEvents;
 import celeste.GUI.Events.MouseEvents;
 import celeste.GUI.Resources.StyleValues;
-import celeste.Interface.IVector3;
 import celeste.Simulator.SolarSystem;
+import celeste.Simulator.CelestialBodies.CelestialBody;
 
 public class Main extends JPanel {
     private static final int REACHED_EARTH = 7220;
@@ -58,10 +58,12 @@ public class Main extends JPanel {
          * System.out.println("Distance between them: " +
          * missilePos.euclideanDist(earthPos));
          */
-        IVector3 missilePos = GlobalState.states[7220].state[11][0];
-        IVector3 earthPos = GlobalState.states[7220].state[4][0];
-        System.out.println("Distance between them: " +
-                missilePos.euclideanDist(earthPos));
+        /*
+         * IVector3 missilePos = GlobalState.states[7220].state[11][0];
+         * IVector3 earthPos = GlobalState.states[7220].state[4][0];
+         * System.out.println("Distance between them: " +
+         * missilePos.euclideanDist(earthPos));
+         */
 
         /*
          * drawables represents any element, that will be drawed to the screen in each
@@ -153,7 +155,7 @@ public class Main extends JPanel {
             keyEvents.setPlanetStats(planetStats);
 
             /* Update all planets' positions */
-            for (int i = 0; i <= 11; i++) {
+            for (int i = 0; i < CelestialBody.celestialBodies.length + 1; i++) {
                 planetStats.get(i).setPos((int) GlobalState.states[currStateIndex].state[i][0].getX(),
                         (int) GlobalState.states[currStateIndex].state[i][0].getY());
             }

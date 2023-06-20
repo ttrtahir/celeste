@@ -29,7 +29,7 @@ public class ODEFunctionTest {
         EulerSolver eulersolver = new EulerSolver();
         State y0 = new State();
         y0.inputState();
-        State eulersolverStep = (State) (eulersolver.step(odeF, T, y0, H, false));
+        State eulersolverStep = (State) (eulersolver.step(odeF, T, y0, H));
         assertEquals(EXPECTED_X, eulersolverStep.state[8][0].getX(), ACCURACY);
 
     }
@@ -40,7 +40,7 @@ public class ODEFunctionTest {
         EulerSolver eulersolver = new EulerSolver();
         State y0 = new State();
         y0.inputState();
-        State eulersolverStep = (State) (eulersolver.step(odeF, T, y0, H, false));
+        State eulersolverStep = (State) (eulersolver.step(odeF, T, y0, H));
         assertEquals(EXPECTED_Y, eulersolverStep.state[8][0].getY(), ACCURACY);
     }
 
@@ -50,7 +50,7 @@ public class ODEFunctionTest {
         EulerSolver eulersolver = new EulerSolver();
         State y0 = new State();
         y0.inputState();
-        State eulersolverStep = (State) (eulersolver.step(odeF, T, y0, H, false));
+        State eulersolverStep = (State) (eulersolver.step(odeF, T, y0, H));
         assertEquals(EXPECTED_Z, eulersolverStep.state[8][0].getZ(), ACCURACY);
     }
 
@@ -60,7 +60,7 @@ public class ODEFunctionTest {
         RK4 rungeKutta4 = new RK4();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta4.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta4.step(odeF, T, y0, H));
         assertEquals(EXPECTED_X, rkStep.state[8][0].getX(), ACCURACY);
     }
 
@@ -70,7 +70,7 @@ public class ODEFunctionTest {
         RK4 rungeKutta4 = new RK4();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta4.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta4.step(odeF, T, y0, H));
         assertEquals(EXPECTED_Y, rkStep.state[8][0].getY(), ACCURACY);
     }
 
@@ -80,7 +80,7 @@ public class ODEFunctionTest {
         RK4 rungeKutta4 = new RK4();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta4.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta4.step(odeF, T, y0, H));
         assertEquals(EXPECTED_Z, rkStep.state[8][0].getZ(), ACCURACY);
     }
 
@@ -90,7 +90,7 @@ public class ODEFunctionTest {
         RK2 rungeKutta2 = new RK2();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta2.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta2.step(odeF, T, y0, H));
         assertEquals(EXPECTED_X, rkStep.state[8][0].getX(), ACCURACY);
     }
 
@@ -100,7 +100,7 @@ public class ODEFunctionTest {
         RK2 rungeKutta2 = new RK2();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta2.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta2.step(odeF, T, y0, H));
         assertEquals(EXPECTED_Y, rkStep.state[8][0].getY(), ACCURACY);
     }
 
@@ -110,7 +110,7 @@ public class ODEFunctionTest {
         RK2 rungeKutta2 = new RK2();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta2.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta2.step(odeF, T, y0, H));
         assertEquals(EXPECTED_Z, rkStep.state[8][0].getZ(), ACCURACY);
     }
 
@@ -120,7 +120,7 @@ public class ODEFunctionTest {
         RK3 rungeKutta3 = new RK3();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta3.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta3.step(odeF, T, y0, H));
         assertEquals(EXPECTED_X, rkStep.state[8][0].getX(), ACCURACY);
     }
 
@@ -130,7 +130,7 @@ public class ODEFunctionTest {
         RK3 rungeKutta3 = new RK3();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta3.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta3.step(odeF, T, y0, H));
         assertEquals(EXPECTED_Y, rkStep.state[8][0].getY(), ACCURACY);
     }
 
@@ -140,7 +140,7 @@ public class ODEFunctionTest {
         RK3 rungeKutta3 = new RK3();
         State y0 = new State();
         y0.inputState();
-        State rkStep = (State) (rungeKutta3.step(odeF, T, y0, H, false));
+        State rkStep = (State) (rungeKutta3.step(odeF, T, y0, H));
         assertEquals(EXPECTED_Z, rkStep.state[8][0].getZ(), ACCURACY);
     }
 

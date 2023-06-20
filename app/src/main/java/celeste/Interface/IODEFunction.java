@@ -18,4 +18,6 @@ public interface IODEFunction {
      * @return motion of each planet
      */
     public IAccelerationRate call(double t, IState y);
+
+    public IAccelerationRate callProbe(double t, IState y);
 }

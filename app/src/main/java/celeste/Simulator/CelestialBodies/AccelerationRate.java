@@ -25,7 +25,7 @@ public class AccelerationRate implements IAccelerationRate {
      * @param size
      */
     public void initialize(int size) {
-        accRate = new Vector3[size][size];
+        accRate = new Vector3[size][2];
         for (int i = 0; i < size; i++) {
             accRate[i][0] = new Vector3(0, 0, 0);
             accRate[i][1] = new Vector3(0, 0, 0);

@@ -10,4 +10,6 @@ public interface IState {
      * @param accRate acceleration rate over time-step
      */
     public IState addmultiply(double step, IAccelerationRate accRate);
+
+    public IVector3[] addmultiplyProbe(double step, IAccelerationRate accRate);
 }

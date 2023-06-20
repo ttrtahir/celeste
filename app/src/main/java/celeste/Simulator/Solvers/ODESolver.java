@@ -3,6 +3,7 @@ package celeste.Simulator.Solvers;
 import celeste.Interface.IODEFunction;
 import celeste.Interface.IODESolver;
 import celeste.Interface.IState;
+import celeste.Interface.IVector3;
 import celeste.Simulator.State;
 import celeste.Simulator.CelestialBodies.Engine;
 
@@ -28,7 +29,7 @@ public class ODESolver implements IODESolver {
 
         // update positions of each planet for 1 step
         for (int i = 1; i < states.length; i++) {
-            states[i] = (State) step(f, timestep[i], states[i - 1], (timestep[i] - timestep[i - 1]), false);
+            states[i] = (State) step(f, timestep[i], states[i - 1], (timestep[i] - timestep[i - 1]));
         }
         return states;
     }
@@ -56,11 +57,38 @@ public class ODESolver implements IODESolver {
 
         // update positions of each planet for 1 step
         for (int i = 1; i < states.length; i++) {
+            states[i] = (State) step(f, timeStep[i], states[i - 1], (timeStep[i] - timeStep[i - 1]));
+        }
+
+        return states;
+    }
+
+    @Override
+    public IState[] solveProbe(IODEFunction f, IState y0, double h, double timefinal, State[] states) {
+        /**
+         * Euler's method specifically for Space Probe
+         *
+         * @param f         a Function calculate force
+         * @param y0        initial state
+         * @param timefinal final time
+         * @param h         step size
+         * @return states of Solar System in the given time interval
+         */
+
+        double[] timeStep = new double[(int) (Math.round((timefinal / h) + 1))];
+        timeStep[0] = 0;
+        for (int i = 1; i < timeStep.length; i++) {
+            timeStep[i] = timeStep[i - 1] + h;
+        }
+
+        // update positions of the probe for 1 step
+        for (int i = 1; i < states.length; i++) {
             boolean thrustNeeded = false;
             if (i == 3493 || i == 4494) {
                 thrustNeeded = true;
             }
-            states[i] = (State) step(f, timeStep[i], states[i - 1], (timeStep[i] - timeStep[i - 1]), thrustNeeded);
+            states[i].state[11] = stepProbe(f, timeStep[i], states[i - 1], (timeStep[i] - timeStep[i - 1]),
+                    thrustNeeded);
         }
 
         return states;
@@ -77,11 +105,19 @@ public class ODESolver implements IODESolver {
      */
 
     @Override
-    public IState step(IODEFunction f, double t, IState y, double h, boolean thrustNeeded) {
+    public IState step(IODEFunction f, double t, IState y, double h) {
         State newState = (State) y.addmultiply(h, f.call(h, y));
 
+        return newState;
+    }
+
+    /* Same as step, only for probe + has engine thrusts */
+    @Override
+    public IVector3[] stepProbe(IODEFunction f, double t, IState y, double h, boolean thrustNeeded) {
+        IVector3[] newState = y.addmultiplyProbe(h, f.callProbe(h, y));
+
         if (thrustNeeded) {
-            newState.state[11][1] = this.engine.initiateThrust(newState.state[11][1]);
+            newState[1] = this.engine.initiateThrust(newState[1]);
         }
 
         return newState;

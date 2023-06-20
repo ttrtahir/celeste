@@ -20,7 +20,7 @@ public class EulerSolver extends ODESolver {
      * @return new state of the system after one update step
      */
     @Override
-    public IState step(IODEFunction f, double t, IState y, double h, boolean thrustNeeded) {
+    public IState step(IODEFunction f, double t, IState y, double h) {
         State newState = (State) y.addmultiply(h, f.call(t, y));
         return newState;
     }

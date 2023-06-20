@@ -61,7 +61,7 @@ public class ReadFile {
                 return;
             }
 
-            CelestialBody.celestialBodies = new CelestialBody[positions.length];
+            CelestialBody.celestialBodies = new CelestialBody[positions.length - 1];
 
             for (int i = 0; i < positions.length; i++) {
                 CelestialBody celestialBody = new CelestialBody(StyleValues.NAMES[i]);
@@ -77,6 +77,10 @@ public class ReadFile {
 
                 celestialBody.createVectors();
 
+                if (i == positions.length - 1) {
+                    CelestialBody.spaceProbe = celestialBody;
+                    continue;
+                }
                 CelestialBody.celestialBodies[i] = celestialBody;
             }
 

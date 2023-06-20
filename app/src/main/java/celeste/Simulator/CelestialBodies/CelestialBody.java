@@ -27,6 +27,7 @@ public class CelestialBody {
 
     // array to store all celestial bodies
     public static CelestialBody[] celestialBodies;
+    public static CelestialBody spaceProbe;
 
     // vectors
     public IVector3 posVec;
