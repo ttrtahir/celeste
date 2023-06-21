@@ -1,6 +1,9 @@
 package celeste.Simulator.LandingModule;
-
+/*
+ * Method that contains the conditions for a safe landing
+ */
 public class LandingModule {
+    //Tolerance values from project manual
     private double dx = Math.pow(10, -4);
     private double dtheta = 0.02;
     private double ex = Math.pow(10, -4);
