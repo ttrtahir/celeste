@@ -26,9 +26,6 @@ public class State implements IState {
             // System.out.println("Initial velocity of " +
             // CelestialBody.celestialBodies[i].name + " " + state[i][1]);
         }
-
-        state[11][0] = CelestialBody.spaceProbe.posVec;
-        state[11][1] = CelestialBody.spaceProbe.veloVec;
     }
 
     // update position and velocity

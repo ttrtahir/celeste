@@ -3,6 +3,7 @@ package celeste.Simulator;
 import celeste.FileReader.ReadFile;
 import celeste.GUI.GlobalState;
 import celeste.Interface.IODESolver;
+import celeste.Interface.IVector3;
 import celeste.Simulator.CelestialBodies.CelestialBody;
 import celeste.Simulator.CelestialBodies.ODEFunction;
 import celeste.Simulator.Solvers.ODESolver;
@@ -12,7 +13,7 @@ import java.io.OptionalDataException;
 public class SolarSystem {
 
     public OptionalDataException celestialBody;
-    private State[] states;
+    public State[] states;
 
     private static double daySec = 60 * 24 * 60;
 
@@ -36,7 +37,20 @@ public class SolarSystem {
         states = (State[]) solver.solve(new ODEFunction(), (State) states[0], h, timeFinal);
 
         // This updates the positions of the space probe
-        states = (State[]) solver.solveProbe(new ODEFunction(), (State) states[0], h, timeFinal, states);
+        IVector3 probeVelocity = CelestialBody.spaceProbe.veloVec;
+        probeVelocity.setX(44.56293344609362);
+        states = (State[]) solver.solveProbe(new ODEFunction(), h, timeFinal, states, probeVelocity);
+    }
+
+    public State[] initialProcessOptimization(IVector3 probeVelocity) {
+        states[0].inputState();
+        IODESolver solver = new ODESolver();
+        states = (State[]) solver.solve(new ODEFunction(), (State) states[0], h, timeFinal);
+
+        // This updates the positions of the space probe
+        states = (State[]) solver.solveProbe(new ODEFunction(), h, timeFinal, states, probeVelocity);
+
+        return states;
     }
 
     // For genetic algorithm

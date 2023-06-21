@@ -12,7 +12,8 @@ public interface IODESolver {
 
     public IState[] solve(IODEFunction f, IState y0, double timeFinal, double h);
 
-    public IState[] solveProbe(IODEFunction f, IState y0, double timeFinal, double h, State[] states);
+    public IState[] solveProbe(IODEFunction f, double timeFinal, double h, State[] states,
+            IVector3 probeVel);
 
     public IState step(IODEFunction f, double t, IState y, double h);
 

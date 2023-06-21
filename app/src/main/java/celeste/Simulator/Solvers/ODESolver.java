@@ -5,6 +5,7 @@ import celeste.Interface.IODESolver;
 import celeste.Interface.IState;
 import celeste.Interface.IVector3;
 import celeste.Simulator.State;
+import celeste.Simulator.CelestialBodies.CelestialBody;
 import celeste.Simulator.CelestialBodies.Engine;
 
 public class ODESolver implements IODESolver {
@@ -64,16 +65,23 @@ public class ODESolver implements IODESolver {
     }
 
     @Override
-    public IState[] solveProbe(IODEFunction f, IState y0, double h, double timefinal, State[] states) {
+    public IState[] solveProbe(IODEFunction f, double h, double timefinal, State[] states,
+            IVector3 probeVel) {
         /**
          * Euler's method specifically for Space Probe
          *
          * @param f         a Function calculate force
-         * @param y0        initial state
          * @param timefinal final time
          * @param h         step size
+         * @param states    previously calculated states containing all planets'
+         *                  positions
+         * @param probePos  initial position of the probe
+         * @param probeVel  initial velocity of the probe
          * @return states of Solar System in the given time interval
          */
+
+        states[0].state[11][0] = CelestialBody.spaceProbe.posVec;
+        states[0].state[11][1] = probeVel;
 
         double[] timeStep = new double[(int) (Math.round((timefinal / h) + 1))];
         timeStep[0] = 0;
@@ -116,7 +124,8 @@ public class ODESolver implements IODESolver {
     public IVector3[] stepProbe(IODEFunction f, double t, IState y, double h, boolean thrustNeeded) {
         IVector3[] newState = y.addmultiplyProbe(h, f.callProbe(h, y));
 
-        if (thrustNeeded) {
+        /* false to turn off engine for now */
+        if (false && thrustNeeded) {
             newState[1] = this.engine.initiateThrust(newState[1]);
         }
 
