@@ -9,18 +9,19 @@ public class SimulateLanding {
 
     public static void initiateLanding(double x, double y, double vX, double vY) {
 
-        
+        System.out.println("x: " + x + "y:" + y + "vX:" + vX + "vY:" + vY);
         Engine2 engine = new Engine2(10 * Environment.GRAVITY, 1);
         Spaceship spaceship = new Spaceship(x, y, 0, 0, 0,vX, vY, 0, engine);
         
         LandingModule landingModule = new LandingModule();
 
         double dt = 0.1;//Time step
-        double simulationTime = 20000;//Total simulation time
+        double simulationTime = 20000000;//Total simulation time
         int steps = (int)(simulationTime / dt);//Calculate the total number of steps for the simulation
 
         //Simulate each step
         for (int i = 0; i < steps; i++) {
+           
             //Control the engines
             spaceship.controlMainEngine();
             spaceship.controlSideEngine();
