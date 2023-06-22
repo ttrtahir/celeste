@@ -5,8 +5,13 @@ package celeste.Simulator.LandingModule;
 public class SimulateLanding {
  
     public static void main(String[] args) {
+    }
+
+    public static void initiateLanding(double x, double y, double vX, double vY) {
+
+        
         Engine2 engine = new Engine2(10 * Environment.GRAVITY, 1);
-        Spaceship spaceship = new Spaceship(100, 10000, 1, 10, 25,30, 30, 4, engine);
+        Spaceship spaceship = new Spaceship(x, y, 0, 0, 0,vX, vY, 0, engine);
         
         LandingModule landingModule = new LandingModule();
 
