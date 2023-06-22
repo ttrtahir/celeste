@@ -6,12 +6,12 @@ public class SimulateLanding {
  
     public static void main(String[] args) {
         Engine2 engine = new Engine2(10 * Environment.GRAVITY, 1);
-        Spaceship spaceship = new Spaceship(10000, 10000, 1, 10, 25,30, 30, 4, engine);
+        Spaceship spaceship = new Spaceship(100, 10000, 1, 10, 25,30, 30, 4, engine);
         
         LandingModule landingModule = new LandingModule();
 
         double dt = 0.1;//Time step
-        double simulationTime = 2000;//Total simulation time
+        double simulationTime = 20000;//Total simulation time
         int steps = (int)(simulationTime / dt);//Calculate the total number of steps for the simulation
 
         //Simulate each step
