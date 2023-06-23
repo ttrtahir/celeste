@@ -1,6 +1,6 @@
 package celeste.Interface;
 
-public interface IVector3 {
+public interface  IVector3 {
     public double getX();
 
     public void setX(double x);
