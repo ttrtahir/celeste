@@ -5,8 +5,8 @@ import celeste.Simulator.SolarSystem;
 import celeste.Simulator.State;
 import celeste.Simulator.Vector3;
 
-public class GradientDescent {
-    private static double startX = 44.460563446092245;
+public class HillClimbing {
+    private static double startX = 44.46056868609268;
     private static double startY = -1.6266418240351048;
     private static double startZ = -3.294321300438615;
 
@@ -29,7 +29,7 @@ public class GradientDescent {
     }
 
     private static double findBestX() {
-        final double LEARNING_RATE = 0.00001;
+        final double LEARNING_RATE = 0.00000001;
         SolarSystem solarSystem = new SolarSystem();
 
         double oldX = startX - LEARNING_RATE;
@@ -51,7 +51,7 @@ public class GradientDescent {
         int i = 1000;
         while (i > 0) {
             double temp = currX;
-            currX -= LEARNING_RATE;
+            currX += LEARNING_RATE;
             oldX = temp;
 
             velocity.setX(currX);
@@ -98,7 +98,7 @@ public class GradientDescent {
         int i = 1000;
         while (i > 0) {
             double temp = currY;
-            currY -= LEARNING_RATE;
+            currY += LEARNING_RATE;
             oldY = temp;
 
             velocity.setY(currY);
@@ -144,7 +144,7 @@ public class GradientDescent {
         int i = 1000;
         while (i > 0) {
             double temp = currZ;
-            currZ += LEARNING_RATE;
+            currZ -= LEARNING_RATE;
             oldZ = temp;
 
             velocity.setZ(currZ);
@@ -171,7 +171,7 @@ public class GradientDescent {
         double minDistanceBetweenTitanAndSpaceProbe = 1e30;
         double distanceEuclideanOld = 1e29;
         double distanceEuclideanNew = 1e30;
-        int i = 1500;
+        int i = 0;
         while (i < states.length) {
             IVector3 posTitan = (IVector3) states[i].state[8][0];
             IVector3 posProbe = (IVector3) states[i].state[11][0];
@@ -185,11 +185,7 @@ public class GradientDescent {
             }
             distanceEuclideanOld = distanceEuclideanNew;
 
-            if (distanceEuclideanNew > 100_000_000) {
-                i += 50;
-            } else {
-                i += 1;
-            }
+            i += 1;
         }
 
         return minDistanceBetweenTitanAndSpaceProbe;
