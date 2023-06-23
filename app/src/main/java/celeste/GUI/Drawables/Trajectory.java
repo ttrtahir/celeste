@@ -52,9 +52,9 @@ public class Trajectory extends Drawable {
                 + GlobalState.getCenter()[1]
                 - GlobalState.getFocusShiftY();
 
-        int increment = 10;
+        int increment = (int) (5 / (GlobalState.STEP_MULTIPLIER));
         if (spaceProbe) {
-            increment = 1;
+            increment = (int) (0.5 / (GlobalState.STEP_MULTIPLIER));
         }
         for (int i = 1; i < states.length; i += increment) {
             if (spaceProbe && i > currentStateIndex) {

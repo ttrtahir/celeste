@@ -19,11 +19,11 @@ import celeste.GUI.Drawables.Trajectory;
 import celeste.GUI.Events.KeyEvents;
 import celeste.GUI.Events.MouseEvents;
 import celeste.GUI.Resources.StyleValues;
+import celeste.Interface.IVector3;
 import celeste.Simulator.SolarSystem;
 import celeste.Simulator.CelestialBodies.CelestialBody;
 
 public class Main extends JPanel {
-    private static final int REACHED_EARTH = 7220;
 
     public static void main(String[] args) throws InterruptedException {
         new Style();
@@ -64,6 +64,16 @@ public class Main extends JPanel {
          * System.out.println("Distance between them: " +
          * missilePos.euclideanDist(earthPos));
          */
+
+        IVector3 missilePos = GlobalState.states[3493].state[11][0];
+        IVector3 titanPos = GlobalState.states[3493].state[8][0];
+
+        System.out.println(GlobalState.states[3493].state[8][0]);
+
+        System.out.println("Missile position: " + missilePos);
+        System.out.println("Titan position: " + titanPos);
+        System.out.println("Distance between them: " +
+                missilePos.euclideanDist(titanPos));
 
         /*
          * drawables represents any element, that will be drawed to the screen in each
@@ -171,9 +181,6 @@ public class Main extends JPanel {
             /* Determines the simulation speed */
             Thread.sleep(GlobalState.simulationSpeed);
 
-            if (currStateIndex == Main.REACHED_EARTH) {
-                break;
-            }
         }
     }
 

@@ -38,7 +38,6 @@ public class SolarSystem {
 
         // This updates the positions of the space probe
         IVector3 probeVelocity = CelestialBody.spaceProbe.veloVec;
-        probeVelocity.setX(44.56293344609362);
         states = (State[]) solver.solveProbe(new ODEFunction(), h, timeFinal, states, probeVelocity);
     }
 
