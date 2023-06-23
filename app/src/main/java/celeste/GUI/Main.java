@@ -123,8 +123,8 @@ public class Main extends JPanel {
          * Can change simulation starting point here. Max state can be calculated from
          * values in SolarSystem.java by (timeFinal / h) + 1
          */
-        int currStateIndex = 3494;
-        GlobalState.paused = true;
+        int currStateIndex = 0;
+        GlobalState.paused = false;
         /* Counts how many days passed */
         int daysSinceStart = (int) (GlobalState.STEP_MULTIPLIER * currStateIndex);
         /*
