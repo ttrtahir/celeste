@@ -29,9 +29,9 @@ public class HillClimbing {
 
     private static double climb() {
         /* We want to find the minimum in func */
-        double initialGuessX = 34.04488999999986;
-        double initialGuessY = -37.16743182403512;
-        double initialGuessZ = -3.7812213004386046;
+        double initialGuessX = startX;
+        double initialGuessY = startY;
+        double initialGuessZ = startZ;
 
         double oldFuncValue = 0;
         double funcValue = tryVelocity(initialGuessX, initialGuessY, initialGuessZ);
