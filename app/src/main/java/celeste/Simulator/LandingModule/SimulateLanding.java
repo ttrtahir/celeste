@@ -1,23 +1,20 @@
 package celeste.Simulator.LandingModule;
 
 /*
- * A class that is used to simulate the landing
+ * A class that is used to simulate the landing without the GUI
  */
 public class SimulateLanding {
 
     public static void main(String[] args) {
-    }
+    
 
-    public static void initiateLanding(double x, double y, double vX, double vY) {
-
-        System.out.println("x: " + x + "y:" + y + "vX:" + vX + "vY:" + vY);
         Engine2 engine = new Engine2(10 * Environment.GRAVITY, 1);
-        Spaceship spaceship = new Spaceship(x, y, 0, 0, 0, vX, vY, 0, engine);
+        Spaceship spaceship = new Spaceship(10000, 10000, 1, 0, 0, 30, 30, 0.3, engine);
 
         LandingModule landingModule = new LandingModule();
 
         double dt = 0.1;// Time step
-        double simulationTime = 20000000;// Total simulation time
+        double simulationTime = 20000;// Total simulation time
         int steps = (int) (simulationTime / dt);// Calculate the total number of steps for the simulation
 
         // Simulate each step
