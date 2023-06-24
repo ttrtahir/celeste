@@ -8,6 +8,7 @@ import celeste.Simulator.State;
 import celeste.Simulator.CelestialBodies.CelestialBody;
 import celeste.Simulator.CelestialBodies.Engine;
 import celeste.Simulator.LandingModule.LandingSimulatorGUI;
+import celeste.Simulator.LandingModule.SimulateLanding;
 
 public class ODESolver implements IODESolver {
     /* class implements EULER's method */

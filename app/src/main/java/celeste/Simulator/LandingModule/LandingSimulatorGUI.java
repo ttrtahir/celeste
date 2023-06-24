@@ -69,6 +69,7 @@ public class LandingSimulatorGUI extends JFrame {
             fin2.addPoint(drawX + 10, drawY + 40);  
             fin2.addPoint(drawX + 20, drawY + 30);  
             g2d.fillPolygon(fin2);
+
         
             g2d.dispose(); 
         }
@@ -76,7 +77,7 @@ public class LandingSimulatorGUI extends JFrame {
         
     public static void main(double x, double y, double vX, double vY) {
         
-        Spaceship spaceship = new Spaceship(x, y, 1, 0, 0, vX, vY, 3, new Engine2(10 * Environment.GRAVITY, 1));
+        Spaceship spaceship = new Spaceship(x, y, -1, 0, 0, vX, vY, 3, new Engine2(10 * Environment.GRAVITY, 1), new Wind());
 
         SwingUtilities.invokeLater(() -> {
             new LandingSimulatorGUI(spaceship);

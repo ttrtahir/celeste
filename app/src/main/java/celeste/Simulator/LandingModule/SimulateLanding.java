@@ -5,20 +5,22 @@ package celeste.Simulator.LandingModule;
  */
 public class SimulateLanding {
 
-    public static void main(String[] args) {
-    
-
+    public static void main(double x, double y, double vX, double vY) {
+        int safe = 0;
+        for (int j = 0; j <= 100; j++){
+        Wind wind = new Wind();
         Engine2 engine = new Engine2(10 * Environment.GRAVITY, 1);
-        Spaceship spaceship = new Spaceship(10000, 10000, 1, 0, 0, 30, 30, 0.3, engine);
+        Spaceship spaceship = new Spaceship(x, y, 0, 0, 0, vX, vY, 0, engine, wind);
 
         LandingModule landingModule = new LandingModule();
 
         double dt = 0.1;// Time step
-        double simulationTime = 20000;// Total simulation time
+        double simulationTime = 2000000;// Total simulation time
         int steps = (int) (simulationTime / dt);// Calculate the total number of steps for the simulation
-
+        
         // Simulate each step
-        for (int i = 0; i < steps; i++) {
+        
+            for (int i = 0; i < steps; i++) {
 
             // Control the engines
             spaceship.controlMainEngine();
@@ -35,6 +37,7 @@ public class SimulateLanding {
             if (spaceship.getY() <= 0) {
                 if (landingModule.isSafeLanding(spaceship)) {
                     System.out.println("Safe landing achieved at time " + i * dt + " seconds.");
+                    safe++;
                 } else {
                     System.out.println("Unsafe landing at time " + i * dt + " seconds.");
                 }
@@ -46,6 +49,8 @@ public class SimulateLanding {
 
             System.out.println("No landing achieved within simulation time.");
         }
-
+        System.out.println("Safe landings: " + safe);
+        System.out.println("Test ladnings: " + j);
     }
+}
 }
