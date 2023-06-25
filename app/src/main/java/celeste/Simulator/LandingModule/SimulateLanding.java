@@ -6,8 +6,8 @@ package celeste.Simulator.LandingModule;
 public class SimulateLanding {
 
     public static void main(double x, double y, double vX, double vY) {
-        int safe = 0;
-        for (int j = 0; j <= 100; j++){
+        int safe = 0;//Variable for the experiment
+        for (int j = 0; j <= 100; j++){//Loops 100 times in order to make the experiment and see how many safe landings out of 100 tries.
         Wind wind = new Wind();
         Engine2 engine = new Engine2(10 * Environment.GRAVITY, 1);
         Spaceship spaceship = new Spaceship(x, y, 0, 0, 0, vX, vY, 0, engine, wind);
@@ -49,6 +49,7 @@ public class SimulateLanding {
 
             System.out.println("No landing achieved within simulation time.");
         }
+        //Shows the results for the experiment
         System.out.println("Safe landings: " + safe);
         System.out.println("Test ladnings: " + j);
     }

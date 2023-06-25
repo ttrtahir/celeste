@@ -67,18 +67,18 @@ public class Spaceship {
         this.v = Kp * errorTheta + integralPartTheta + derivativePartTheta;
         this.v = Math.min(this.v, engine.getVMax());// Limit the torque to the engine's maximum
 
-        // Control the lateral position
+        //Control the lateral position
         double integralPartX = 0.01 * Ki * (errorX + errorVX);
         double derivativePartX = 0.01 * Kd * (errorX - errorVX);
         double controlX = Kp * errorX + integralPartX + derivativePartX; // PID control for lateral position
 
-        // Cross-Track Correction
+        //Cross-Track Correction
         double correction = -K_crossTrack * crossTrackError;
         controlX += correction;
 
         this.desiredAccelX = controlX;
 
-        // Modify control action based on proximity to target
+        //Modify control action based on proximity to target
         if (Math.abs(this.x - targetX) < 50) {
             controlX *= Math.pow(Math.abs(this.x - targetX) / 50, 2);
         }
@@ -86,7 +86,7 @@ public class Spaceship {
         this.vX = controlX;
     }
 
-    // Updates the spaceship's state based on the control inputs and elapsed time
+    //Updates the spaceship's state based on the control inputs and elapsed time
     public void updateState(double dt) {
         controlMainEngine();
         controlSideEngine();
@@ -96,7 +96,7 @@ public class Spaceship {
         this.vX += wind.getStrengthX() * dt;
         this.vY += wind.getStrengthY() * dt;
     
-        // Update state variables
+        //Update state variables
         this.vX += desiredAccelX * dt;
         this.vY = u * Math.cos(theta) - Environment.GRAVITY;
         this.vTheta = v;
@@ -104,7 +104,7 @@ public class Spaceship {
         this.y += (vY + wind.getStrengthY()) * dt;
         this.theta += vTheta * dt;
     
-        // Stop movement when hitting the ground
+        //Stop movement when hitting the ground
         if (this.y < 0) {
             this.y = 0;
             this.vY = 0;

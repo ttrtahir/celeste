@@ -1,5 +1,7 @@
 package celeste.Simulator.LandingModule;
-
+/*
+ * A class that contains a very basic 2D GUI representation of the spaceship's landing.
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -46,8 +48,9 @@ public class LandingSimulatorGUI extends JFrame {
                 drawY = height - (int)(spaceship.getY() / 20000 * height) - 40;
             }
 
+            //Create the spaceship image
             Graphics2D g2d = (Graphics2D) g.create();
-            g2d.rotate(-spaceship.getTheta(), drawX, drawY + 40);  //rotate around bottom center of the rocket
+            g2d.rotate(-spaceship.getTheta(), drawX, drawY + 40); //rotate around bottom center of the rocket
         
             g2d.setColor(Color.RED);
             g2d.fillRect(drawX - 10, drawY, 20, 40); 
