@@ -8,15 +8,19 @@ import celeste.Simulator.CelestialBodies.CelestialBody;
 
 public class HillClimbing {
     private final static int TITAN_RADIUS = 2575;
+    /* Max orbit height of the orbit around Titan */
     private final static int MAX_ORBIT_HEIGHT = 5000;
 
+    /* Marks the end for Hill Climbing calculations */
     private final static int MAX_TOLERANCE = TITAN_RADIUS + MAX_ORBIT_HEIGHT;
 
+    /* Starting guess velocities for the hill climbing algorithm */
     private static double startX;
     private static double startY;
     private static double startZ;
 
     public static void main(String[] args) {
+        /* This loads starting values from Values.txt file */
         new SolarSystem();
         startX = CelestialBody.spaceProbe.veloX;
         startY = CelestialBody.spaceProbe.veloY;
@@ -25,24 +29,26 @@ public class HillClimbing {
         climb();
     }
 
-    private static double climb() {
-        System.out.println(FuelConsumption.calculateFuelConsumed(new Vector3(0, 0, 0),
-                new Vector3(40.0, -34.54183475971889, -3.2951223808465544)));
-        /* We want to find the minimum in func */
-        double initialGuessX = startX;
-        double initialGuessY = startY;
-        double initialGuessZ = startZ;
+    /*
+     * This function is used to find the best velocity for the space probe. It uses
+     * the hill climbing algorithm to find the best velocity.
+     */
+    private static void climb() {
+        double funcValue = tryVelocity(startX, startY, startZ);
 
-        double funcValue = tryVelocity(initialGuessX, initialGuessY, initialGuessZ);
-
-        double currX = initialGuessX;
-        double currY = initialGuessY;
-        double currZ = initialGuessZ;
+        /*
+         * We don't ever change the X values, as it is set by us and we want to find the
+         * best corresponding Y and Z values
+         */
+        double currX = startX;
+        double currY = startY;
+        double currZ = startZ;
 
         double stepSizeY = 3;
         double stepSizeZ = 1;
 
         while (true) {
+            /* Adjust the y values */
             double right = tryVelocity(currX, currY + stepSizeY, currZ);
             double left = tryVelocity(currX, currY - stepSizeY, currZ);
             if (right < funcValue) {
@@ -59,6 +65,7 @@ public class HillClimbing {
                 break;
             }
 
+            /* Adjust the z values */
             right = tryVelocity(currX, currY, currZ + stepSizeZ);
             left = tryVelocity(currX, currY, currZ - stepSizeZ);
             if (right < funcValue) {
@@ -77,11 +84,21 @@ public class HillClimbing {
         System.out.println(currX + " " + currY + " " + currZ);
         System.out.println("Fuel consumed: "
                 + FuelConsumption.calculateFuelConsumed(new Vector3(0, 0, 0), new Vector3(currX, currY, currZ)));
-
-        return currX;
-
     }
 
+    /*
+     * @param x: the x component of the velocity
+     * 
+     * @param y: the y component of the velocity
+     * 
+     * @param z: the z component of the velocity
+     * 
+     * @return the closest distance between Titan and the space probe
+     * 
+     * This function is used to calculate the closest distance between Titan and the
+     * space probe with the given velocity. It is used to find the best velocity for
+     * the space probe.
+     */
     private static double tryVelocity(double x, double y, double z) {
         SolarSystem solarSystem = new SolarSystem();
 
@@ -91,11 +108,17 @@ public class HillClimbing {
         velocity.setZ(z);
         State[] states = solarSystem.initialProcessOptimization(velocity);
 
-        System.out.println("Closest point: " + findClosestPoint(states));
-
         return findClosestPoint(states);
     }
 
+    /*
+     * @param states: the states of the space probe
+     * 
+     * @return the closest distance between Titan and the space probe
+     * 
+     * This function is used to find the closest distance between Titan and the
+     * space probe.
+     */
     private static double findClosestPoint(State[] states) {
         double minDistanceBetweenTitanAndSpaceProbe = 1e30;
         double distanceEuclideanNew = 1e30;
