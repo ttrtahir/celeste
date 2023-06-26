@@ -6,9 +6,12 @@ import celeste.Interface.IVector3;
 import celeste.Simulator.CelestialBodies.AccelerationRate;
 import celeste.Simulator.CelestialBodies.CelestialBody;
 
+/**
+ * Represents the state of the simulation, including positions and velocities of celestial bodies.
+ */
 public class State implements IState {
-    public int size;
-    public IVector3[][] state;
+    public int size; // The size of the state array
+    public IVector3[][] state; // The state array containing positions and velocities of celestial bodies
 
     public State() {
         /* + 1 for space probe */
@@ -16,19 +19,23 @@ public class State implements IState {
         this.size = state.length;
     }
 
+    /**
+     * Sets the state array with initial positions and velocities of celestial bodies.
+     */
     public void inputState() {
         for (int i = 0; i < CelestialBody.celestialBodies.length; i++) {
             state[i][0] = CelestialBody.celestialBodies[i].posVec;
             state[i][1] = CelestialBody.celestialBodies[i].veloVec;
-
-            // System.out.println("Initial position of " +
-            // CelestialBody.celestialBodies[i].name + " " + state[i][0]);
-            // System.out.println("Initial velocity of " +
-            // CelestialBody.celestialBodies[i].name + " " + state[i][1]);
         }
     }
 
-    // update position and velocity
+    /**
+     * Adds the product of a step size and acceleration rate to the positions and velocities of celestial bodies and returns the resulting state.
+     *
+     * @param step     The step size.
+     * @param accRate  The acceleration rate.
+     * @return The resulting state after addition and multiplication.
+     */
     @Override
     public IState addmultiply(double step, IAccelerationRate accRate) {
         State newState = new State();
@@ -41,7 +48,13 @@ public class State implements IState {
         return newState;
     }
 
-    /* Only updates the position and velocity of the probe */
+    /**
+     * Adds the product of a step size and acceleration rate to the position and velocity of the probe and returns the resulting state.
+     *
+     * @param step     The step size.
+     * @param accRate  The acceleration rate.
+     * @return The resulting state after addition and multiplication for the probe.
+     */
     @Override
     public IVector3[] addmultiplyProbe(double step, IAccelerationRate accRate) {
         IVector3[] newState = new Vector3[2];
@@ -52,18 +65,30 @@ public class State implements IState {
         return newState;
     }
 
+    /**
+     * Sets the position of a celestial body.
+     */
     public void addPosition(int i, IVector3 position) {
         state[i][0] = position;
     }
 
+    /**
+     * Sets the velocity of a celestial body.
+     */
     public void addVelocity(int i, IVector3 velocity) {
         state[i][1] = velocity;
     }
 
+    /**
+     * Gets the position of a celestial body.
+     */
     public IVector3 getPosition(int i) {
         return state[i][0];
     }
 
+    /**
+     * Gets the velocity of a celestial body.
+     */
     public IVector3 getVelocity(int i) {
         return state[i][1];
     }
