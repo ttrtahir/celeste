@@ -10,6 +10,9 @@ import celeste.Simulator.Solvers.ODESolver;
 
 import java.io.OptionalDataException;
 
+/**
+ * Eepresents a simulation of a solar system.
+ */
 public class SolarSystem {
 
     public OptionalDataException celestialBody;
@@ -20,6 +23,10 @@ public class SolarSystem {
     public long timeFinal = 60 * 24 * 60 * 365 * 2; // 2 years
     private static double h = GlobalState.STEP_MULTIPLIER * daySec;
 
+    /**
+     * Constructs a SolarSystem object.
+     * Reads values from a file into celestial bodies and initializes the states array.
+     */
     public SolarSystem() {
         // Read values from file into celestial bodies
         ReadFile.updateCelestialBodyValues();
@@ -31,6 +38,11 @@ public class SolarSystem {
             states[i] = new State();
     }
 
+    /**
+     * Performs the initial processing of the simulation.
+     * It inputs the initial state, solves the ordinary differential equations (ODEs)
+     * for the celestial bodies, and updates the positions of the space probe.
+     */
     public void initialProcess() {
         states[0].inputState();
         IODESolver solver = new ODESolver();
@@ -41,6 +53,15 @@ public class SolarSystem {
         states = (State[]) solver.solveProbe(new ODEFunction(), h, timeFinal, states, probeVelocity);
     }
 
+    /**
+     * Performs the initial processing of the simulation with optimization.
+     * It inputs the initial state, solves the ordinary differential equations (ODEs)
+     * for the celestial bodies, and updates the positions of the space probe.
+     * used for optimization
+     *
+     * @param probeVelocity the velocity of the space probe as an IVector3 object.
+     * @return the array of states representing the simulation.
+     */
     public State[] initialProcessOptimization(IVector3 probeVelocity) {
         states[0].inputState();
         IODESolver solver = new ODESolver();
@@ -52,7 +73,14 @@ public class SolarSystem {
         return states;
     }
 
-    // For genetic algorithm
+    /**
+     * Performs the initial processing of the simulation with optimization.
+     * It inputs the initial state, solves the ordinary differential equations (ODEs)
+     * for the celestial bodies, and updates the positions of the space probe.
+     * used for genetic algorithm
+     *
+     * @param probeVelocity the velocity of the space probe as an IVector3 object.
+     */
     public void initialProcess(Vector3 velocity) {
         states[0].inputState();
         states[0].state[11][1] = velocity;
@@ -72,9 +100,13 @@ public class SolarSystem {
         return CelestialBody.celestialBodies;
     }
 
+    /**
+     * The main method of the SolarSystem class.
+     * It creates a SolarSystem object, performs the initial processing of the simulation,
+     * used in the earlier version to test, still kept for testing purposes
+     */
     public static void main(String[] args) {
         SolarSystem ss = new SolarSystem();
         ss.initialProcess();
-        System.out.println(ss.states[1].state[1][0]);
     }
 }

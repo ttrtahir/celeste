@@ -1,5 +1,9 @@
 package celeste.Simulator.CelestialBodies;
 
+/**
+* Earlier version, currently a redundant class
+* Contains initial celestial body values
+*/
 public class CelestialBodyValues {
     // public CelestialBody[] celestialBodies;
     public CelestialBodyValues() {

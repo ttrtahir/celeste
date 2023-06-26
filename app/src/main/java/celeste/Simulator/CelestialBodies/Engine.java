@@ -18,6 +18,14 @@ public class Engine {
 
     private int thrustCounter = 0;
 
+    /**
+    * Constructs an Engine object with the given parameters.
+    *
+    * @param sVelocity        the start velocity
+    * @param eVelocity        the end velocity
+    * @param dTime            the delta time
+    * @param specificImpulse  the specific impulse
+    */
     public Engine(double sVelocity, double eVelocity, double dTime, double specificImpulse) {
         this.startVelocity = sVelocity;
         this.endVelocity = eVelocity;
@@ -38,12 +46,24 @@ public class Engine {
         return thrust;
     }
 
+    /**
+    * Calculates the amount of fuel consumed.
+    *
+    * @return the amount of fuel consumed
+    */
     public double fuelConsumed() {
         double thrust = getThrust();
         double fuelConsumed = Math.abs(thrust) / (Gravity * specificImpulse) * dTime;
         return fuelConsumed;
     }
 
+    /**
+    * Calculates the velocity at a given time and delta time.
+    *
+    * @param t         the time
+    * @param deltaTime the time difference
+    * @return the velocity
+    */
     public double getVelocity(double t, double deltaTime) {
         double integral = 0.0;
         double time = t;
@@ -69,6 +89,12 @@ public class Engine {
         return oldV.subtract(newV).multiply(50000).euclideanDist(new Vector3(0, 0, 0));
     }
 
+    /**
+    * Initiates thrust with the input velocity.
+    *
+    * @param inputVelocity the input velocity
+    * @return the new velocity
+    */
     public Vector3 initiateThrust(IVector3 inputVelocity) {
         this.startVelocity = inputVelocity.euclideanDist(new Vector3(0, 0, 0));
 
