@@ -6,7 +6,16 @@ import celeste.Simulator.Vector3;
 
 import java.util.Random;
 
+/**
+ * The GeneticAlgorithm class represents a genetic algorithm used to find the best initial velocities
+ * for a simulation. It utilizes a population of individuals and evolves them over multiple generations
+ * to find the optimal solution.
+ */
 public class GeneticAlgorithm {
+
+    /**
+     * The main method of the GeneticAlgorithm class.
+     */
     public static void main(String[] args) {
         GeneticAlgorithm ga = new GeneticAlgorithm();
         ga.initPopulation();
@@ -15,9 +24,11 @@ public class GeneticAlgorithm {
         System.out.println(ga.found);
     }
 
-    // Coordinate of this vector: x = 46.523072208288795, y= -3.493557729103768, z=
-    // -2.3419267033312465
-
+    /**
+     * Finds the best initial velocities from the given population of individuals.
+     *
+     * @param population The array of individuals.
+     */
     public static void findBestInitialVelocities(Individual[] population) {
         System.out.println("");
         System.out.println("Best velocities are :");
@@ -37,27 +48,25 @@ public class GeneticAlgorithm {
     private double desiredDistanceMax = 300000; // 300k km
     private double velocityMax = 60;
 
+    /**
+     * Runs the genetic algorithm for the specified number of generations.
+     */
     public void run() {
         for (int gen = 0; gen < generation; gen++) {
             System.out.println("Generation : " + gen + " ---------------------------------- ");
             for (Individual individual : population) {
                 individual.sol.initialProcess(individual.getVelocity());
-                // Vector3 temp = (Vector3) individual.sol.getStates()[0].state[11][1];
-                // System.out.println(individual.id + " " + temp.getX() + " " + temp.getY() + "
-                // " + temp.getZ());
             }
             evaluateFitness();
             Individual[] offsprings = reproduce(population);
             mutate(offsprings);
             population = offsprings;
         }
-        // After all generations, print the final results
-        // System.out.println("Final population:");
-        // for (Individual individual : population) {
-        // System.out.println(individual.toString());
-        // }
     }
 
+    /**
+     * Initializes the population with random velocities.
+     */
     private void initPopulation() {
         this.population = new Individual[this.populationAmount];
         for (int i = 0; i < this.populationAmount; i++) {
@@ -73,12 +82,21 @@ public class GeneticAlgorithm {
         }
     }
 
+    /**
+     * Evaluates the fitness of each individual in the population.
+     */
     private void evaluateFitness() {
         for (Individual individual : population) {
             individual.evaluateFitness();
         }
     }
 
+    /**
+     * Selects parents from the population based on their fitness using roulette wheel selection.
+     *
+     * @param population The array of individuals.
+     * @return An array of selected parents.
+     */
     private Individual[] selectParents(Individual[] population) {
         // Perform roulette wheel selection to choose parents
         Individual[] parents = new Individual[populationAmount];
@@ -111,6 +129,12 @@ public class GeneticAlgorithm {
         return parents;
     }
 
+    /**
+     * Reproduces the population by performing single-point crossover between selected parents.
+     *
+     * @param population The array of individuals.
+     * @return An array of offspring individuals.
+     */
     private Individual[] reproduce(Individual[] population) {
         Individual[] offsprings = new Individual[populationAmount];
 
@@ -132,6 +156,11 @@ public class GeneticAlgorithm {
         return offsprings;
     }
 
+    /**
+     * Mutates the offspring individuals based on the mutation rate.
+     *
+     * @param offspring The array of offspring individuals.
+     */
     private void mutate(Individual[] offspring) {
         // Perform mutation on the offspring
         for (Individual individual : offspring) {
@@ -145,6 +174,9 @@ public class GeneticAlgorithm {
         }
     }
 
+    /**
+     * The Individual class represents an individual in the genetic algorithm.
+     */
     class Individual {
         private Vector3 velocity;
         private double fitness = 0;
@@ -169,6 +201,9 @@ public class GeneticAlgorithm {
             return fitness;
         }
 
+        /**
+         * Evaluates the fitness of the individual by calculating the minimum distance between Titan and the space probe.
+         */
         public void evaluateFitness() {
             getMinState();
             this.fitness = desiredDistanceMax / this.minDistanceBetweenTitanAndSpaceProbe;
@@ -178,6 +213,12 @@ public class GeneticAlgorithm {
             }
         }
 
+        /**
+         * Finds the state with the minimum distance between Titan and the space probe.
+         * The last state most of the time does not have the least distance.
+         *
+         * @return The state with the minimum distance.
+         */
         public State getMinState() {
             State[] states = sol.getStates();
             int lengthOfStates = states.length;

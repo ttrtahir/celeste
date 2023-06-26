@@ -3,14 +3,13 @@ package celeste.Simulator.LandingModule;
 /*
  * A class that contains a feedback controller with a MainEngine and SideEngine
  */
+
 public class Spaceship {
 
     private double x, y, theta, u, v, vX, vY, vTheta;// Position, orientation, and state variables
     private Engine2 engine;// Spaceship's engine
     private double targetX = 0, targetY = 0, targetVX = 0, targetVY = 0, targetTheta = 0, targetVTheta = 0;// Target
-                                                                                                           // landing
-                                                                                                           // coordinates
-                                                                                                           // and states
+    private Wind wind;
 
     // Desired acceleration in x-axis and Cross-Track correction constant
     private double desiredAccelX = 0;
@@ -20,7 +19,7 @@ public class Spaceship {
 
     // Spaceship constructor
     public Spaceship(double x, double y, double theta, double u, double v, double vX, double vY, double vTheta,
-            Engine2 engine) {
+            Engine2 engine, Wind wind) {
         this.x = x;
         this.y = y;
         this.theta = theta;
@@ -30,6 +29,7 @@ public class Spaceship {
         this.vY = vY;
         this.vTheta = vTheta;
         this.engine = engine;
+        this.wind = wind;
     }
 
     // Controls the thrust of the main engine using a PID controller
@@ -45,9 +45,9 @@ public class Spaceship {
         this.u = Math.min(this.u, engine.getUMax()); // Limit the thrust to the engine's maximum
 
         // Reduce thrust when aproaching to the ground
-        if (this.y < 30) {
-            this.u *= this.y;
-        }
+        // if (this.y < 30) {
+        //     this.u *= this.y;
+        // }
     }
 
     // Controls the side engine using a PID controller and cross-track correction
@@ -67,18 +67,18 @@ public class Spaceship {
         this.v = Kp * errorTheta + integralPartTheta + derivativePartTheta;
         this.v = Math.min(this.v, engine.getVMax());// Limit the torque to the engine's maximum
 
-        // Control the lateral position
+        //Control the lateral position
         double integralPartX = 0.01 * Ki * (errorX + errorVX);
         double derivativePartX = 0.01 * Kd * (errorX - errorVX);
         double controlX = Kp * errorX + integralPartX + derivativePartX; // PID control for lateral position
 
-        // Cross-Track Correction
+        //Cross-Track Correction
         double correction = -K_crossTrack * crossTrackError;
         controlX += correction;
 
         this.desiredAccelX = controlX;
 
-        // Modify control action based on proximity to target
+        //Modify control action based on proximity to target
         if (Math.abs(this.x - targetX) < 50) {
             controlX *= Math.pow(Math.abs(this.x - targetX) / 50, 2);
         }
@@ -86,25 +86,36 @@ public class Spaceship {
         this.vX = controlX;
     }
 
-    // Updates the spaceship's state based on the control inputs and elapsed time
+    //Updates the spaceship's state based on the control inputs and elapsed time
     public void updateState(double dt) {
         controlMainEngine();
         controlSideEngine();
-
-        // Update state variables
+        
+        // Add the wind's effects to the state update
+        wind.updateStrength();
+        this.vX += wind.getStrengthX() * dt;
+        this.vY += wind.getStrengthY() * dt;
+    
+        //Update state variables
         this.vX += desiredAccelX * dt;
         this.vY = u * Math.cos(theta) - Environment.GRAVITY;
         this.vTheta = v;
-        this.x += vX * dt;
-        this.y += vY * dt;
+        this.x += (vX + wind.getStrengthX()) * dt;
+        this.y += (vY + wind.getStrengthY()) * dt;
         this.theta += vTheta * dt;
-
-        // Stop movement when hitting the ground
+    
+        //Stop movement when hitting the ground
         if (this.y < 0) {
             this.y = 0;
             this.vY = 0;
+            
         }
+        if (this.x <= 0.01 && this.x >= 0-0.001) {
+            this.x = 0;
+            this.vX = 0;
     }
+}
+    
 
     // Getters
     public double getX() {

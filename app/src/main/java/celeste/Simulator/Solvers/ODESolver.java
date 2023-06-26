@@ -7,7 +7,7 @@ import celeste.Interface.IVector3;
 import celeste.Simulator.State;
 import celeste.Simulator.CelestialBodies.CelestialBody;
 import celeste.Simulator.CelestialBodies.Engine;
-import celeste.Simulator.LandingModule.SimulateLanding;
+import celeste.Simulator.LandingModule.LandingSimulatorGUI;
 
 public class ODESolver implements IODESolver {
     /* class implements EULER's method */
@@ -95,7 +95,8 @@ public class ODESolver implements IODESolver {
             boolean thrustNeeded = false;
             if (i == 3493 ) {//|| i == 4494
                 thrustNeeded = true;
-                SimulateLanding.initiateLanding(states[i-1].state[11][0].getX(), Math.abs(states[i-1].state[11][0].getY()), states[i-1].state[11][1].getX(), states[i-1].state[11][1].getY());
+                //Start's the GUI representation and passes the current  X,Y positions and velocities when enter the orbit to the spaceship.
+                LandingSimulatorGUI.main(states[i-1].state[11][0].getX(), Math.abs(states[i-1].state[11][0].getY()), states[i-1].state[11][1].getX(), states[i-1].state[11][1].getY());
             }
             states[i].state[11] = stepProbe(f, timeStep[i], states[i - 1], (timeStep[i] - timeStep[i - 1]),
                     thrustNeeded);
