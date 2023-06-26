@@ -1,0 +1,15 @@
+initial_guess = 0, 0, 0
+result = func(initial_guess)
+
+while not_finished:
+    left = func(initial_guess - LEARNING_RATE)
+    right = func(initial_guess + LEARNING_RATE)
+
+    if left < result:
+        initial_guess -= LEARNING_RATE
+        result = left
+    elif right < result:
+        initial_guess += LEARNING_RATE
+        result = right
+    else:
+        LEARNING_RATE /= 2
