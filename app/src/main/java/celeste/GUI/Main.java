@@ -23,57 +23,22 @@ import celeste.Interface.IVector3;
 import celeste.Simulator.SolarSystem;
 import celeste.Simulator.CelestialBodies.CelestialBody;
 
+/* The entry point to our application. Upon running calculates all the positions of celestial bodies and then runs GUI */
 public class Main extends JPanel {
 
     public static void main(String[] args) throws InterruptedException {
+        /* Load styles */
         new Style();
 
         JFrame frame = new JFrame("Solar System Simulation");
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        /* The PHYSICS part */
+        /* The PHYSICS part. Calculates planets' positions */
         SolarSystem solarSystem = new SolarSystem();
         solarSystem.initialProcess();
+
         GlobalState.states = solarSystem.getStates();
-
-        /* Some notes so I don't forget them: */
-        /* Space probe and Titan are closest at state 3492 or 3493 */
-        /* Distance at 3492: 315929.89353160484 */
-        /* Distance at 3493: 293897.19830514514 */
-
-        /* Let's start our return journey at state 4494 */
-        /* state 7219 is when we go near Earth */
-        /*
-         * IVector3 missilePos = GlobalState.states[3493].state[11][0];
-         * IVector3 titanPos = GlobalState.states[3493].state[8][0];
-         * 
-         * System.out.println("Missile position: " + missilePos);
-         * System.out.println("Titan position: " + titanPos);
-         * System.out.println("Distance between them: " +
-         * missilePos.euclideanDist(titanPos));
-         *
-         * IVector3 missilePos = GlobalState.states[6742].state[11][0];
-         * IVector3 earthPos = GlobalState.states[6742].state[4][0];
-         * System.out.println("Distance between them: " +
-         * missilePos.euclideanDist(earthPos));
-         */
-        /*
-         * IVector3 missilePos = GlobalState.states[7220].state[11][0];
-         * IVector3 earthPos = GlobalState.states[7220].state[4][0];
-         * System.out.println("Distance between them: " +
-         * missilePos.euclideanDist(earthPos));
-         */
-
-        IVector3 missilePos = GlobalState.states[3493].state[11][0];
-        IVector3 titanPos = GlobalState.states[3493].state[8][0];
-
-        System.out.println(GlobalState.states[3493].state[8][0]);
-
-        System.out.println("Missile position: " + missilePos);
-        System.out.println("Titan position: " + titanPos);
-        System.out.println("Distance between them: " +
-                missilePos.euclideanDist(titanPos));
 
         /*
          * drawables represents any element, that will be drawed to the screen in each
@@ -180,7 +145,6 @@ public class Main extends JPanel {
 
             /* Determines the simulation speed */
             Thread.sleep(GlobalState.simulationSpeed);
-
         }
     }
 

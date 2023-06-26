@@ -15,8 +15,11 @@ public class MouseEvents implements MouseWheelListener {
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = -e.getWheelRotation();
+        /*
+         * This and the if below determines how fast we zoom in based on how close we
+         * are already zoomed in
+         */
         int scaleIncrease = 300000;
-
         if (GlobalState.SCALE < 100001) {
             scaleIncrease = 1000;
         } else if (GlobalState.SCALE <= 900001) {
@@ -24,6 +27,7 @@ public class MouseEvents implements MouseWheelListener {
         } else {
             scaleIncrease = 300000;
         }
+
         if (notches < 0) {
             GlobalState.SCALE += scaleIncrease;
         } else {

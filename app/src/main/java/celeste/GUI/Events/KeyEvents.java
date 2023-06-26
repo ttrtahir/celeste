@@ -7,12 +7,13 @@ import celeste.GUI.GlobalState;
 import celeste.GUI.Drawables.PlanetStats;
 
 /*
- * Contains methods for the mouse events
+ * Contains methods for the keyboard events
  */
 
 public class KeyEvents implements KeyListener {
     private ArrayList<PlanetStats> planetStats;
     private int currentIndex = 0;
+    /* Sun, Earth, Titan, Space probe */
     private int[] focuseablePlanets = { 0, 3, 8, 11, };
 
     public KeyEvents(ArrayList<PlanetStats> planetStats) {
@@ -25,6 +26,7 @@ public class KeyEvents implements KeyListener {
 
     @Override
     public void keyPressed(java.awt.event.KeyEvent e) {
+        /* Left arrow = shift focus */
         if (e.getKeyCode() == java.awt.event.KeyEvent.VK_LEFT) {
             if (currentIndex == 0) {
                 return;
@@ -32,21 +34,31 @@ public class KeyEvents implements KeyListener {
 
             currentIndex--;
             GlobalState.planetFocused = planetStats.get(focuseablePlanets[currentIndex]);
-        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_RIGHT) {
+        }
+        /* Right arrow = shift focus */
+        else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_RIGHT) {
             if (currentIndex == focuseablePlanets.length - 1) {
                 return;
             }
 
             currentIndex++;
             GlobalState.planetFocused = planetStats.get(focuseablePlanets[currentIndex]);
-        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
+        }
+        /* Space = pause */
+        else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
             GlobalState.paused = !GlobalState.paused;
-        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+        }
+        /* Up arrow = speed up sim */
+        else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
             GlobalState.simulationSpeed -= GlobalState.simulationSpeedIncrement;
             GlobalState.simulationSpeed = Math.max(1, GlobalState.simulationSpeed);
-        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN) {
+        }
+        /* Down arrow = slow down sim */
+        else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN) {
             GlobalState.simulationSpeed += GlobalState.simulationSpeedIncrement;
-        } else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
+        }
+        /* Escape = close the sim */
+        else if (e.getKeyCode() == java.awt.event.KeyEvent.VK_ESCAPE) {
             System.exit(0);
         }
     }
