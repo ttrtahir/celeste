@@ -1,10 +1,12 @@
 # Mission to Titan (Group 04)
 
-Michal Pavlíček, Yusuf Aydin, Thu Vo, Paloma Joon, Marian Oboroceanu
+Michal Pavlíček, Yusuf Aydin, Paloma Joon, Marian Oboroceanu
 
 ## How to run
 
-Run GUI/Main.java to start the simulation.
+1. Open Terminal in the root directory of the project and run "java -jar .\app\build\libs\app.jar". This will start the GUI. (This version of the code does not contain orbitting around Titan and the return to Earth. This can be found in Phase II code)
+2. Run src/main/java/celeste/GUI/Main.java to start the simulation.
+   Requires correct Java and Gradle versions (tested on Gradle 8.1 and Java 18).
 
 ## Explanations
 
