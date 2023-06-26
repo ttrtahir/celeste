@@ -5,6 +5,9 @@ import celeste.Simulator.Vector3;
 
 import java.awt.*;
 
+/**
+* Represents the spacial objects in the space
+*/
 public class CelestialBody {
     public String name;
     public Color color;
