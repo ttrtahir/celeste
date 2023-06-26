@@ -2,7 +2,7 @@ package celeste.GUI.Drawables;
 
 import java.awt.Color;
 /*
- * Contains methods for creating and coloring the Planet
+ * Contains methods for drawing any type of text to the GUI
  */
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -36,6 +36,7 @@ public class Text extends Drawable {
         this.y = y;
     }
 
+    /* Sometimes it's better to specifiy where to place the text */
     public Text(int x, int y, String horizontalPosition) {
         this.x = x;
         this.y = y;
@@ -66,7 +67,6 @@ public class Text extends Drawable {
         }
     }
 
-    // Method for creating the specific planet on specific position
     public void draw(Graphics2D g2) {
         g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
                 java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
@@ -77,6 +77,7 @@ public class Text extends Drawable {
         }
         g2.setColor(Color.WHITE);
 
+        /* For placing the text if position is set as a text */
         int tempX = this.x;
         int tempY = this.y;
         if (center) {

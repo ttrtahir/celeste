@@ -2,6 +2,9 @@ package celeste.GUI.Drawables;
 
 import java.awt.Color;
 
+/* 
+ * A class holding the information for a planet
+ */
 public class PlanetStats {
     public String name;
     public int size;
@@ -19,7 +22,5 @@ public class PlanetStats {
     public void setPos(int x, int y) {
         this.positionX = x;
         this.positionY = y;
-
-        // System.out.println(name + " " + positionX + " " + positionY);
     }
 }

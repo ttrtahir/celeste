@@ -25,6 +25,9 @@ public class Background extends Drawable {
         }
     }
 
+    /*
+     * This function is called whenever the GUI is updated
+     */
     @Override
     public void paintComponent(Graphics g) {
         this.g2 = (Graphics2D) g;
@@ -46,7 +49,6 @@ public class Background extends Drawable {
 
     // Draws the stars in the bacground of the GUI
     public void drawStars() {
-        // set HEX color
         for (int i = 0; i < STAR_COUNT; i++) {
             g2.setColor(new Color(255, 255, 255, starPositions[i][2]));
             g2.fillOval(starPositions[i][0], starPositions[i][1], STAR_SIZES[i], STAR_SIZES[i]);

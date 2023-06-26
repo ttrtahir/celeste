@@ -11,7 +11,6 @@ import java.awt.geom.Ellipse2D;
 import celeste.GUI.GlobalState;
 
 public class Planet extends Drawable {
-
 	@Override
 	public void paintComponent(Graphics g) {
 		this.g2 = (Graphics2D) g;
@@ -19,13 +18,14 @@ public class Planet extends Drawable {
 		this.draw(g2);
 	}
 
+	/* This contains the planet's name, size... */
 	private PlanetStats planetStats;
 	private Graphics2D g2;
 
 	private int planetPositionX = 0;
 	private int planetPositionY = 0;
 
-	// Constructor for creating the planetStats
+	// Constructor for saving the planetStats
 	public Planet(PlanetStats planetStats) {
 		this.planetStats = planetStats;
 	}
@@ -40,6 +40,7 @@ public class Planet extends Drawable {
 
 		g2.setStroke(new java.awt.BasicStroke(5));
 		g2.setColor(planetStats.color);
+		/* For missile (space probe), we want to have different visuals */
 		if (planetStats.name == "Missile") {
 			g2.fill(getPlanet());
 			g2.setStroke(new java.awt.BasicStroke(4));
@@ -51,6 +52,7 @@ public class Planet extends Drawable {
 	}
 
 	// Calculates the position of the celestialBody
+	// Takes into consideration the zoom and the focus
 	private void calculatePosition() {
 		this.planetPositionX = (int) (planetStats.positionX / GlobalState.SCALE
 				+ GlobalState.getCenter()[0]
@@ -62,6 +64,7 @@ public class Planet extends Drawable {
 				- planetStats.size / 2);
 	}
 
+	/* Draws the planet's name */
 	private void drawPlanetName() {
 		g2.setColor(Style.fontColor);
 		g2.setFont(Style.fontSmall);

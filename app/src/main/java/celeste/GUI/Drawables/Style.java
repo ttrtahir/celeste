@@ -1,7 +1,7 @@
 package celeste.GUI.Drawables;
 
 /*
- * Contains a custom style
+ * Contains system wide style information
  */
 import java.awt.Color;
 import java.awt.Font;
@@ -17,6 +17,7 @@ public class Style {
     public static Font fontBig = new Font("Metropolis", Font.BOLD, 24);
 
     public Style() {
+        /* Loads the font */
         try {
             URL url = FontFamily.class.getResource("Metropolis-Bold.otf");
             Font font = Font.createFont(Font.TRUETYPE_FONT, url.openStream());
