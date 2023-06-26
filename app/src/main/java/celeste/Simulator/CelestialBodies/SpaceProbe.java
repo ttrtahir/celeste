@@ -7,6 +7,9 @@ import celeste.Simulator.Vector3;
 import celeste.Simulator.Solvers.EulerSolver;
 import celeste.Simulator.Solvers.RK4;
 
+/**
+* Represents a space probe
+*/
 public class SpaceProbe implements ISpaceProbe {
     public State y0;
     public Vector3[] trajectory;
@@ -32,7 +35,6 @@ public class SpaceProbe implements ISpaceProbe {
      * @param timeStep time steps at which position is being updated
      * @return positions of the probe over a given time period
      */
-
     @Override
     public IVector3[] trajectory(IVector3 p0, IVector3 v0, double[] timeStep) {
         CelestialBody.celestialBodies[11].posVec = p0;
@@ -59,6 +61,15 @@ public class SpaceProbe implements ISpaceProbe {
         return trajectory;
     }
 
+    /**
+    * Calculates the trajectory of a space probe.
+    *
+    * @param p0        the starting position
+    * @param v0        the starting velocity
+    * @param timeFinal the final time
+    * @param h         the time step
+    * @return the positions of the probe over the given time period
+    */
     @Override
     public IVector3[] trajectory(IVector3 p0, IVector3 v0, double timefinal, double h) {
         CelestialBody.celestialBodies[11].posVec = p0;
@@ -87,6 +98,9 @@ public class SpaceProbe implements ISpaceProbe {
         return trajectory;
     }
 
+    /**
+    * for testing purposes
+    */
     public static void main(String[] args) {
         SpaceProbe probe = new SpaceProbe();
 
