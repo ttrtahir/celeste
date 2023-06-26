@@ -77,7 +77,7 @@ public class Vector2 {
         return product;
     }
 
-	/**
+    /**
      * Divides this vector by a scalar value and returns the resulting vector.
      *
      * @param scalar The scalar value to divide the vector by.
@@ -90,7 +90,7 @@ public class Vector2 {
         return product;
     }
 
-	/**
+    /**
      * Creates a new Vector2 object with the same coordinates as this vector.
      *
      * @return A new Vector2 object with the same coordinates.
