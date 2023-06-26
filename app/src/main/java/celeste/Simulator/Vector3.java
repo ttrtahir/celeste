@@ -2,6 +2,9 @@ package celeste.Simulator;
 
 import celeste.Interface.IVector3;
 
+/**
+ * Represents a 3D vector that can represent the velocities or positions in 3D space 
+ */
 public class Vector3 implements IVector3 {
     /**
      * 3d Vector data structure
@@ -52,6 +55,12 @@ public class Vector3 implements IVector3 {
         this.z = z;
     }
 
+    /**
+     * Adds another vector to this vector and returns the resulting vector.
+     *
+     * @param another The vector to be added.
+     * @return The resulting vector after addition.
+     */
     @Override
     public IVector3 add(IVector3 another) {
         Vector3 sum = new Vector3();
@@ -61,6 +70,12 @@ public class Vector3 implements IVector3 {
         return sum;
     }
 
+    /**
+     * Subtracts another vector from this vector and returns the resulting vector.
+     *
+     * @param another The vector to be subtracted.
+     * @return The resulting vector after subtraction.
+     */
     @Override
     public IVector3 subtract(IVector3 another) {
         Vector3 sum = new Vector3();
@@ -70,6 +85,12 @@ public class Vector3 implements IVector3 {
         return sum;
     }
 
+    /**
+     * Multiplies this vector by a scalar value and returns the resulting vector.
+     *
+     * @param scalar The scalar value to multiply the vector by.
+     * @return The resulting vector after multiplication.
+     */
     @Override
     public IVector3 multiply(double scalar) {
         Vector3 product = new Vector3();
@@ -79,6 +100,12 @@ public class Vector3 implements IVector3 {
         return product;
     }
 
+    /**
+     * Calculates the Euclidean distance between this vector and another vector.
+     *
+     * @param another The vector to calculate the distance to.
+     * @return The Euclidean distance between this vector and the given  vector.
+     */
     @Override
     public double euclideanDist(IVector3 another) {
         double d = Math.sqrt((Math.pow((this.x - another.getX()), 2) + Math.pow((this.y - another.getY()), 2)
@@ -86,6 +113,13 @@ public class Vector3 implements IVector3 {
         return d;
     }
 
+    /**
+     * Adds the product of a scalar value and another vector to this vector and returns the resulting vector.
+     *
+     * @param scalar        The scalar value to multiply the other vector by.
+     * @param anotherVector The other vector to be added after multiplication.
+     * @return The resulting vector after addition and multiplication.
+     */
     @Override
     public IVector3 addmultiply(double scalar, IVector3 anotherVector) {
         double x = this.getX() + scalar * anotherVector.getX();
@@ -94,6 +128,11 @@ public class Vector3 implements IVector3 {
         return (IVector3) new Vector3(x, y, z);
     }
 
+    /**
+     * Returns the magnitude of the vector, which is the Euclidean distance between this vector and the origin.
+     *
+     * @return The magnitude of the vector.
+     */
     @Override
     public double getMagnitude() {
         return euclideanDist(new Vector3(0, 0, 0));
