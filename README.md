@@ -23,3 +23,7 @@ The key component of GUI is Drawables/Drawable.java, which is the interface for 
 ### Genetic Algorithm
 
 Run Simulator/Genetic/GeneticAlgorithm.java to start the genetic algorithm. Values can be tweaked to your liking.
+
+### Hill Climbing
+
+Run FuelOptimization/HillClimbing.java to start the hill climbing algorithm. Values can be tweaked to your liking.
